@@ -1,0 +1,33 @@
+const express = require('express');
+const router = express.Router();
+const UserController = require('../controllers/UserController');
+const multer = require('multer');
+const path = require('path');
+//appel à la protection des urls
+const auth = require('../middlewares/auth');
+
+// 📁 Multer config
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, path.join(__dirname, '..', 'upload', 'images'));
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+});
+const upload = multer({ storage });
+
+
+
+router.post('/login', UserController.login);
+router.post('/logout', UserController.logout);
+
+// 🔹 Routes utilisateurs
+router.get('/fetch_user', auth, UserController.fetchUsers); // protégé par token
+router.get('/fetch_single_user/:id', auth, UserController.fetchSingleUser);
+router.post('/post_user', auth, UserController.postUser);
+router.delete('/delete_user/:id', auth, UserController.deleteUser);
+router.post('/edit_password', auth, UserController.editPassword);
+router.post('/edit_avatar', auth, upload.single('avatar'), UserController.editAvatar);
+
+module.exports = router;
