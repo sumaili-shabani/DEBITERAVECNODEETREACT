@@ -1,0 +1,17 @@
+{
+    "watch": [
+        "index.js",
+        "config",
+        "routes",
+        "controllers",
+        "models",
+        "migrations",
+        "seeders",
+        "db.js"
+    ],
+    "ext": "js,json",
+    "ignore": [
+        "node_modules"
+    ],
+    "exec": "node index.js"
+}
