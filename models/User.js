@@ -18,6 +18,7 @@ const User = sequelize.define('User', {
     sexe: DataTypes.STRING,
     idRole: {
         type: DataTypes.INTEGER,
+        defaultValue: 2,
         allowNull: false,
         references: {
             model: 'roles',

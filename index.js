@@ -7,6 +7,7 @@ const sequelize = require('./config/sequelize');
 const userRoutes = require('./routes/userRoutes');
 const roleRoutes = require('./routes/roleRoutes');
 const dashboardRoutes = require('./routes/dashboard');
+const siteRoutes = require('./routes/SiteRoutes');
 
 // Middlewares
 app.use(cors());
@@ -20,6 +21,7 @@ app.use('/images', express.static('upload/images'));
 app.use('/api', userRoutes);
 app.use('/api', roleRoutes);
 app.use('/api', dashboardRoutes);
+app.use('/api', siteRoutes);
 
 sequelize.authenticate()
     .then(() => console.log('Connexion Sequelize OK'))
