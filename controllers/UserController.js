@@ -97,9 +97,45 @@ exports.postUser = async (req, res) => {
             res.json({ message: "Utilisateur modifié avec succès" });
         }
     } catch (err) {
-        res.status(500).json({ err: "Erreur interne" });
+        res.status(500).json({ err: "Erreur interne:"+err });
     }
 };
+
+// Création d’un compte utilisateur
+exports.registerUser = async (req, res) => {
+    const { id, name, email, telephone, avatar, passwords, idRole, sexe } = req.body;
+    try {
+        const hashedPassword = passwords ? await bcrypt.hash(passwords, 10) : null;
+
+        if (!id || id === "") {
+            const newUser = await User.create({
+                name,
+                email,
+                telephone,
+                avatar: avatar || "avatar.png",
+                passwords: hashedPassword,
+                idRole,
+                sexe,
+            });
+            res.status(201).json({ message: "Utilisateur ajouté avec succès", data: newUser });
+        } else {
+            await User.update({
+                name,
+                email,
+                telephone,
+                avatar,
+                idRole,
+                sexe,
+            }, {
+                where: { id },
+            });
+            res.json({ message: "Utilisateur modifié avec succès" });
+        }
+    } catch (err) {
+        res.status(500).json({ err: "Erreur interne:" + err });
+    }
+};
+
 
 // Suppression
 exports.deleteUser = async (req, res) => {
@@ -154,10 +190,10 @@ exports.login = async (req, res) => {
     try {
         const user = await User.findOne({ where: { email }, include: ['role'] });
 
-        if (!user) return res.status(404).json({ message: "Utilisateur non trouvé", wrong:true });
+        if (!user) return res.json({ message: "Utilisateur non trouvé", wrong: true });
 
         const passwordValid = await bcrypt.compare(passwords, user.passwords);
-        if (!passwordValid) return res.status(401).json({ message: "Mot de passe incorrect", wrong: true });
+        if (!passwordValid) return res.json({ message: "Mot de passe incorrect", wrong: true });
 
         // Créer un token
         const token = jwt.sign(
@@ -174,6 +210,10 @@ exports.login = async (req, res) => {
                 id: user.id,
                 name: user.name,
                 email: user.email,
+                idRole: user.idRole,
+                telephone: user.telephone,
+                avatar: user.avatar,
+                sexe: user.sexe,
                 role: user.role?.nom
             }
         });

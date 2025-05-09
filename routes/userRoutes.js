@@ -18,9 +18,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 
-
 router.post('/login', UserController.login);
 router.post('/logout', UserController.logout);
+router.post('/register_user', UserController.registerUser);
 
 // 🔹 Routes utilisateurs
 router.get('/fetch_user', auth, UserController.fetchUsers); // protégé par token

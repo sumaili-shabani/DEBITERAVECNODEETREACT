@@ -38,7 +38,7 @@ sequelize.sync({ alter: true }).then(() => {
 });
 
 // Démarrage serveur
-const PORT = 3000;
+const PORT = 5000;
 app.listen(PORT, () => {
     console.log(`Serveur lancé sur http://localhost:${PORT}`);
 });
