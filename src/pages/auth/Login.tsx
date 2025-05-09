@@ -1,15 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { login } from '../../api/auth';
 
 export default function Login() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleLogin = (e: React.FormEvent) => {
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simuler token
-    localStorage.setItem('token', 'mon-token-simulé');
-    navigate('/'); // redirection après login
+    const result = await login({ email: email, passwords: password });
+    
+    if (result.success) {
+      if (result.user?.idRole == 1) {
+        navigate('/');
+      }
+    
+    }
   };
+
+
   return (
     <div className="container">
 
@@ -22,21 +33,23 @@ export default function Login() {
             <div className="card-body p-0">
               {/* <!-- Nested Row within Card Body --> */}
               <div className="row">
-                
+
                 <div className="col-lg-12">
                   <div className="p-5">
                     <div className="text-center">
                       <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
                     </div>
-                    <form className="user">
+                    <form className="user" method='post' onSubmit={handleLogin}>
                       <div className="form-group">
                         <input type="email" className="form-control form-control-user"
                           id="exampleInputEmail" aria-describedby="emailHelp"
-                          placeholder="Enter Email Address..." />
+                          placeholder="Enter Email Address..." value={email}
+                          onChange={(e) => setEmail(e.target.value)} required />
                       </div>
                       <div className="form-group">
                         <input type="password" className="form-control form-control-user"
-                          id="exampleInputPassword" placeholder="Password" />
+                          id="exampleInputPassword" placeholder="Password" value={password}
+                          onChange={(e) => setPassword(e.target.value)} required />
                       </div>
                       <div className="form-group">
                         <div className="custom-control custom-checkbox small">
@@ -45,7 +58,7 @@ export default function Login() {
                             Me</label>
                         </div>
                       </div>
-                      <button onClick={handleLogin} className="btn btn-primary btn-user btn-block">
+                      <button type='submit' className="btn btn-primary btn-user btn-block">
                         Login
                       </button>
                       <hr />

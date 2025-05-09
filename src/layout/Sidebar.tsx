@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { logout } from '../api/storage';
 
 export default function Sidebar() {
     const [isToggled, setIsToggled] = useState(false);
@@ -10,8 +11,8 @@ export default function Sidebar() {
 
     const navigate = useNavigate();
 
-    const handleLogout = () => {
-        localStorage.removeItem('token');
+    const handleLogout = async () => {
+        await logout();
         navigate('/login');
     };
 

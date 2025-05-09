@@ -1,13 +1,16 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { logout, getUser } from '../api/storage';
+import { fileUrl } from '../api/config';
 
 export default function Topbar() {
   const navigate = useNavigate();
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
+  const user = getUser();
+  const handleLogout = async() => {
+    await logout();
     navigate('/login');
   };
+
   return (
     <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
       {/* Sidebar Toggle (Topbar) */}
@@ -172,9 +175,9 @@ export default function Topbar() {
         <li className="nav-item dropdown no-arrow">
           <a className="nav-link dropdown-toggle" href="#!" id="userDropdown" role="button"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span className="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+            <span className="mr-2 d-none d-lg-inline text-gray-600 small">{user?.name ?? ''}</span>
             <img className="img-profile rounded-circle"
-              src="dev/img/undraw_profile.svg" alt='img' />
+              src={fileUrl + "/images/" + (user?.avatar ?? 'avatar.png')} alt='img' />
           </a>
           {/* <!-- Dropdown - User Information --> */}
           <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"

@@ -12,6 +12,9 @@ import Home from './pages/Home';
 import PrivateRoute from './utils/PrivateRoute';
 import Forgot from './pages/auth/Forgot';
 
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+
 
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -41,6 +44,7 @@ function LayoutWrapper({ children }: { children: React.ReactNode }) {
 
 function App() {
   return (
+    
     <Router>
       <LayoutWrapper>
         <Routes>
@@ -86,6 +90,8 @@ function App() {
       <a className="scroll-to-top rounded" href="#page-top">
         <i className="fas fa-angle-up"></i>
       </a>
+      {/* ajout des notification */}
+      <ToastContainer />
     </Router>
   );
 }
