@@ -22,6 +22,11 @@ router.post('/login', UserController.login);
 router.post('/logout', UserController.logout);
 router.post('/register_user', UserController.registerUser);
 
+router.post('/forgot-password', UserController.forgotPassword);
+router.post('/reset-password', UserController.resetPassword);
+
+
+
 // 🔹 Routes utilisateurs
 router.get('/fetch_user', auth, UserController.fetchUsers); // protégé par token
 router.get('/fetch_single_user/:id', auth, UserController.fetchSingleUser);

@@ -1,11 +1,16 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 const path = require('path');
 
 const { Op } = require('sequelize');
 const { User, Role } = require('../models/associations');
+const PasswordReset = require('../models/PasswordReset');
+const { sendEmail } = require('../utils/mailer');
 const SECRET_KEY = process.env.JWT_SECRET; // stocker dans .env en production
+const BASE_URL = process.env.BASE_URL; // url de base stocker dans .env en production
+
 
 // Pagination des utilisateurs
 exports.fetchUsers = async (req, res) => {
@@ -97,7 +102,7 @@ exports.postUser = async (req, res) => {
             res.json({ message: "Utilisateur modifié avec succès" });
         }
     } catch (err) {
-        res.status(500).json({ err: "Erreur interne:"+err });
+        res.status(500).json({ err: "Erreur interne:" + err });
     }
 };
 
@@ -228,3 +233,87 @@ exports.logout = (req, res) => {
     // Le logout se gère surtout côté client (supprimer le token du stockage local)
     res.json({ message: "Déconnexion réussie" });
 };
+
+// 🟩 Demande de réinitialisation
+exports.resetPassword = async (req, res) => {
+    const { token, newPassword } = req.body;
+    try {
+        // Hashernpx sequelize-cli db:migrate le token reçu pour comparaison
+        const tokenHash = crypto.createHash('sha256').update(token).digest('hex');
+
+        // Rechercher l'entrée correspondante et non expirée
+        const resetEntry = await PasswordReset.findOne({
+            where: {
+                token: tokenHash,
+                expiresAt: { [Op.gt]: new Date() },
+            },
+        });
+
+        if (!resetEntry) {
+            return res.status(400).json({ message: 'Token invalide ou expiré', wrong: true });
+        }
+
+        // Récupérer l'utilisateur
+        const user = await User.findByPk(resetEntry.userId);
+        if (!user) {
+            return res.status(404).json({ message: "Utilisateur introuvable. Ce compte n'existe pas", wrong: true });
+        }
+
+        // Hasher et mettre à jour le nouveau mot de passe
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        user.passwords = hashedPassword;
+        await user.save();
+
+        // Supprimer le token de réinitialisation
+        await PasswordReset.destroy({ where: { id: resetEntry.id } });
+
+        return res.json({ message: 'Mot de passe réinitialisé avec succès', wrong: false });
+
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ err: "Erreur lors de la réinitialisation", err });
+    }
+};
+// 🟩 Demande de mot de passe ublié
+exports.forgotPassword = async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        // 1. Vérifie si l'utilisateur existe
+        const user = await User.findOne({ where: { email } });
+        if (!user) {
+            return res.status(404).json({ message: "Aucun compte associé à cet email", wrong: true });
+        }
+
+        // 2. Génère un token sécurisé
+        const token = crypto.randomBytes(32).toString('hex');
+        const tokenHash = crypto.createHash('sha256').update(token).digest('hex');
+
+        // 3. Stocke le token haché avec date d’expiration
+        await PasswordReset.create({
+            userId: user.id,
+            token: tokenHash,
+            expiresAt: Date.now() + 1000 * 60 * 15, // 15 minutes
+        });
+
+        // 4. Envoie du lien de réinitialisation par email
+        const link = `${BASE_URL}/reset-password/${token}`;
+        const html = `
+        <h3>Réinitialisation de mot de passe</h3>
+        <p>Bonjour ${user.name},</p>
+        <p>Cliquez sur ce lien pour réinitialiser votre mot de passe : </p>
+        <a href="${link}" target="_blank">${link}</a>
+        <p>Ce lien est valable pendant 15 minutes.</p>
+      `;
+
+        await sendEmail(user.email, 'Réinitialisation du mot de passe', html);
+
+        return res.json({ message: 'Un lien de réinitialisation a été envoyé par email.', wrong: false });
+
+    } catch (error) {
+        console.error(error);
+        return res.json({ message: "Erreur lors de la demande", error });
+    }
+};
+
+
