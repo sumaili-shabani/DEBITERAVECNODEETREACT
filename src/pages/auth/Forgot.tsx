@@ -1,7 +1,21 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { forgotPassword } from '../../api/auth';
 
 export default function Forgot() {
+    const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    
+    const handleLogin = async (e: React.FormEvent) => {
+        e.preventDefault();
+        const result = await forgotPassword({ email: email });
+
+        if (result.success) {
+            // navigate('/');
+
+        }
+    };
+
   return (
       <div className="container">
 
@@ -22,15 +36,16 @@ export default function Forgot() {
                                           <p className="mb-4">We get it, stuff happens. Just enter your email address below
                                               and we'll send you a link to reset your password!</p>
                                       </div>
-                                      <form className="user">
+                                      <form className="user" method='post' onSubmit={handleLogin}>
                                           <div className="form-group">
                                               <input type="email" className="form-control form-control-user"
                                                   id="exampleInputEmail" aria-describedby="emailHelp"
-                                                  placeholder="Enter Email Address..." />
+                                                  placeholder="Enter Email Address..." value={email}
+                                                  onChange={(e) => setEmail(e.target.value)} required />
                                           </div>
                                         
                                           
-                                          <button className="btn btn-primary btn-user btn-block">
+                                          <button type='submit' className="btn btn-primary btn-user btn-block">
                                               Reset Password
                                           </button>
                                         

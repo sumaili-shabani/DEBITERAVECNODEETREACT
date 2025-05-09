@@ -7,6 +7,15 @@ interface LoginData {
     passwords: string;
 }
 
+export interface forgotPasswordData {
+    email: string;
+}
+
+export interface resetPasswordData {
+    token: String | undefined | any,
+    newPassword: String
+}
+
 export interface RegisterData {
     id: any,
     name: string;
@@ -53,10 +62,51 @@ export const registerAnCount = async (svData: RegisterData) => {
             return { success: true, data };
         }
         else {
-           showError(err!);
+            showError(err!);
             return { success: false };
         }
 
+
+    } catch (err: any) {
+        showError(err.response?.data?.message || "Erreur de connexion");
+        return { success: false };
+    }
+};
+
+export const forgotPassword = async (svData: forgotPasswordData) => {
+    try {
+        const res = await api.post('/forgot-password', svData);
+        const { wrong, message, err } = res.data;
+
+        if (!wrong) {
+            showMessage(message);
+            return { success: true };
+        }
+        else {
+            showError(err!);
+            return { success: false };
+        }
+
+
+    } catch (err: any) {
+        showError(err.response?.data?.message || "Erreur de connexion");
+        return { success: false };
+    }
+};
+
+export const resetPassword = async (svData: resetPasswordData) => {
+    try {
+        const res = await api.post('/reset-password', svData);
+        const { wrong, message, err } = res.data;
+
+        if (!wrong) {
+            showMessage(message);
+            return { success: true, message };
+        }
+        else {
+            showError(err!);
+            return { success: false };
+        }
 
     } catch (err: any) {
         showError(err.response?.data?.message || "Erreur de connexion");

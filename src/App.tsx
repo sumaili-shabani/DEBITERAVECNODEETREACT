@@ -14,19 +14,25 @@ import Forgot from './pages/auth/Forgot';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import ResetPassword from './pages/auth/ResetPassword';
+// import '../public/dev/css/sb-admin-2.css'; // vérifie ce chemin
 
 
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const location = useLocation();
-  const noLayoutRoutes = ['/login', '/register', '/forgot', '*'];
+  const noLayoutRoutes = ['/login', '/register', '/forgot'];
 
-  const isAuthPage = noLayoutRoutes.includes(location.pathname);
+  const isAuthPage =
+    noLayoutRoutes.includes(location.pathname) ||
+    location.pathname.startsWith('/reset-password') ||
+    location.pathname === '*';
 
   if (isAuthPage) {
     return <>{children}</>;
   }
 
   return (
+    
     <div id="wrapper">
       <Sidebar />
 
@@ -44,7 +50,7 @@ function LayoutWrapper({ children }: { children: React.ReactNode }) {
 
 function App() {
   return (
-    
+
     <Router>
       <LayoutWrapper>
         <Routes>
@@ -53,6 +59,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot" element={<Forgot />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           
           {/* Fin Authentification (pas besoin de protection) */}
 
