@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { logout, getUser } from '../api/storage';
 import { fileUrl } from '../api/config';
+import { useTheme } from '../context/ThemeContext';
 
 export default function Topbar() {
   const navigate = useNavigate();
@@ -11,8 +12,10 @@ export default function Topbar() {
     navigate('/login');
   };
 
+  const { theme, toggleTheme } = useTheme();
+
   return (
-    <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+    <nav className="navbar navbar-expand navbar-light topbar mb-4 static-top shadow">
       {/* Sidebar Toggle (Topbar) */}
       <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3">
         <i className="fa fa-bars"></i>
@@ -36,8 +39,17 @@ export default function Topbar() {
         </div>
       </form>
 
+
       {/* <!-- Topbar Navbar --> */}
       <ul className="navbar-nav ml-auto">
+
+        {/* bouttons themes */}
+        <li className="nav-item dropdown no-arrow mx-1">
+          <a className="nav-link" href="#!" role="button" onClick={toggleTheme}>
+            <i className={`fas ${theme === 'light' ? 'fa-moon' : 'fa-sun'} fa-fw`}></i>
+          </a>
+        </li>
+        {/* fin bouttons themes */}
 
         {/* <!-- Nav Item - Search Dropdown (Visible Only XS) --> */}
         <li className="nav-item dropdown no-arrow d-sm-none">

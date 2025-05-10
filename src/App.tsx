@@ -15,7 +15,10 @@ import Forgot from './pages/auth/Forgot';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import ResetPassword from './pages/auth/ResetPassword';
-// import '../public/dev/css/sb-admin-2.css'; // vérifie ce chemin
+//utilisation des pages de configuration
+import RolePage from './pages/admin/pages/roles/rolePage';
+import './theme.css';
+
 
 
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
@@ -86,6 +89,17 @@ function App() {
               </PrivateRoute>
             }
           />
+
+          {/* pages de chargement admin */}
+          <Route path="/rules"
+            element={
+              <PrivateRoute>
+                <RolePage />
+              </PrivateRoute>
+            }
+          />
+          
+          {/* fin pages de chargement */}
 
           {/* 404 */}
           <Route path="*" element={<NotFoundPage />} />

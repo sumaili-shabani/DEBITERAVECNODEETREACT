@@ -1,0 +1,129 @@
+/* ========= DARK MODE ========= */
+body.dark {
+    background-color: #1e1e2f !important;
+    color: #f0f0f0 !important;
+}
+
+body.dark .bg-white,
+body.dark .card,
+body.dark .modal-content,
+body.dark .dropdown-menu {
+    background-color: #2b2b3c !important;
+    color: #ffffff !important;
+}
+
+body.dark .navbar,
+body.dark .sidebar {
+    background-color: #23232f !important;
+    color: #ffffff !important;
+}
+
+body.dark input,
+body.dark select,
+body.dark textarea {
+    background-color: #3a3a4f !important;
+    color: #ffffff !important;
+    border-color: #555 !important;
+}
+
+body.dark .btn-primary {
+    background-color: #4e4eaa !important;
+    border-color: #4e4eaa !important;
+}
+
+/* Optionnel : icônes */
+body.dark i.fa-sun {
+    color: #ffc107;
+}
+
+body.dark i.fa-moon {
+    color: #ffffff;
+}
+
+/* pour le text grey */
+/* Corriger le texte gris en mode sombre */
+body.dark .text-gray-100,
+body.dark .text-gray-200,
+body.dark .text-gray-300,
+body.dark .text-gray-400,
+body.dark .text-gray-500,
+body.dark .text-muted,
+body.dark .text-secondary {
+    color: #ccc !important;
+}
+
+/* Optionnel : plus de contraste sur les titres */
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark h5,
+body.dark h6 {
+    color: #ffffff !important;
+}
+
+/* Dropdown items en mode sombre */
+body.dark .dropdown-menu {
+    background-color: #2c2c2c !important;
+    border-color: #444 !important;
+}
+
+body.dark .dropdown-item {
+    color: #ddd !important;
+}
+
+body.dark .dropdown-item:hover,
+body.dark .dropdown-item:focus {
+    background-color: #3a3a3a !important;
+    color: #fff !important;
+}
+
+body.dark .text-truncate {
+    color: #ddd !important;
+}
+
+body.dark .dropdown-divider {
+    border-top: 1px solid #555;
+}
+
+/* ========= LIGHT MODE ========= */
+body.light {
+    background-color: #f8f9fc !important;
+    color: #000000 !important;
+}
+
+body.light .bg-white,
+body.light .card,
+body.light .modal-content,
+body.light .dropdown-menu {
+    background-color: #ffffff !important;
+    color: #212529 !important;
+}
+
+body.light .navbar,
+body.light .sidebar {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+body.light input,
+body.light select,
+body.light textarea {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #ced4da !important;
+}
+
+body.light .btn-primary {
+    background-color: #4e73df !important;
+    border-color: #4e73df !important;
+}
+
+/* Optionnel : icônes */
+body.light i.fa-sun {
+    color: #ffc107;
+}
+
+body.light i.fa-moon {
+    color: #6c757d;
+}
