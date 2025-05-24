@@ -127,3 +127,261 @@ body.light i.fa-sun {
 body.light i.fa-moon {
     color: #6c757d;
 }
+
+
+/* Styles pour le sidebar */
+.sidebar-container {
+    position: fixed;
+    top: 0;
+    right: -50%;
+    width: 50%;
+    height: 100vh;
+    z-index: 1000;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Thème clair */
+body.light .sidebar-container {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Thème sombre */
+body.dark .sidebar-container {
+    background-color: #23232f;
+    color: #ffffff;
+}
+
+/* Overlay */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Overlay pour le thème sombre */
+body.dark .overlay.show {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Overlay pour le thème clair */
+body.light .overlay.show {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Animation du sidebar */
+.sidebar-container.show {
+    right: 0;
+}
+
+/* Boutons pour le thème sombre */
+body.dark .sidebar-container .btn {
+    color: #ffffff;
+}
+
+body.dark .sidebar-container .btn-outline-light {
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #ffffff;
+}
+
+body.dark .sidebar-container .btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.7);
+    color: #ffffff;
+}
+
+body.dark .sidebar-container .btn-outline-dark {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+body.dark .sidebar-container .btn-outline-dark:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+}
+
+/* Formulaires pour le thème sombre */
+body.dark .sidebar-container input,
+body.dark .sidebar-container select,
+body.dark .sidebar-container textarea {
+    background-color: #3a3a4f;
+    color: #ffffff;
+    border-color: #555;
+}
+
+body.dark .sidebar-container .form-control {
+    background-color: #3a3a4f;
+    color: #ffffff;
+    border-color: #555;
+}
+
+body.dark .sidebar-container .form-control:focus {
+    background-color: #3a3a4f;
+    color: #ffffff;
+    border-color: #555;
+    box-shadow: 0 0 0 0.2rem rgba(78, 78, 170, 0.25);
+}
+
+/* Titres */
+body.dark .sidebar-container h1,
+body.dark .sidebar-container h2,
+body.dark .sidebar-container h3,
+body.dark .sidebar-container h4,
+body.dark .sidebar-container h5,
+body.dark .sidebar-container h6 {
+    color: #ffffff;
+}
+
+/* Texte gris */
+body.dark .sidebar-container .text-gray-100,
+body.dark .sidebar-container .text-gray-200,
+body.dark .sidebar-container .text-gray-300,
+body.dark .sidebar-container .text-gray-400,
+body.dark .sidebar-container .text-gray-500,
+body.dark .sidebar-container .text-muted,
+body.dark .sidebar-container .text-secondary {
+    color: #ccc;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar-container {
+        width: 100%;
+    }
+}
+
+/* Styles pour SweetAlert */
+body.dark .swal2-container {
+    background-color: #23232f;
+    padding: 0;
+}
+
+body.dark .swal2-modal {
+    background-color: #23232f;
+    color: #ffffff;
+    width: 32em !important;
+    max-width: 95% !important;
+    padding: 1.25em;
+    border-radius: 0.375rem;
+}
+
+body.dark .swal2-title {
+    color: #ffffff;
+    font-size: 1.5rem;
+}
+
+body.dark .swal2-html-container {
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+body.dark .swal2-confirm {
+    background-color: #4e6edf;
+    border-color: #4e6edf;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+body.dark .swal2-cancel {
+    background-color: #df4e4e;
+    border-color: #df4e4e;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+body.dark .swal2-confirm:hover {
+    background-color: #4e6edf;
+    border-color: #4e6edf;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+body.dark .swal2-cancel:hover {
+    background-color: #df4e4e;
+    border-color: #df4e4e;
+}
+
+/* Styles pour le light mode */
+body.light .swal2-container {
+    background-color: #ffffff;
+    padding: 0;
+}
+
+body.light .swal2-modal {
+    background-color: #ffffff;
+    color: #000000;
+    width: 32em !important;
+    max-width: 95% !important;
+    padding: 1.25em;
+    border-radius: 0.375rem;
+}
+
+body.light .swal2-title {
+    color: #000000;
+    font-size: 1.5rem;
+}
+
+body.light .swal2-html-container {
+    color: #000000;
+    font-size: 1rem;
+}
+
+body.light .swal2-confirm {
+    background-color: #4e6edf;
+    border-color: #4e6edf;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+body.light .swal2-cancel {
+    background-color: #df4e4e;
+    border-color: #df4e4e;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+body.light .swal2-confirm:hover {
+    background-color: #01811f;
+    border-color: #01811f;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+body.light .swal2-cancel:hover {
+    background-color: #df4e4e;
+    border-color: #df4e4e;
+}
+
+/* Réduire la taille des icônes */
+.swal2-icon {
+    width: 5rem;
+    height: 5rem;
+    margin: 0 auto 1rem;
+}
+
+.swal2-icon svg {
+    width: 5rem;
+    height: 5rem;
+}
+
+/* Réduire la taille des boutons */
+.swal2-actions {
+    padding: 0.5rem;
+}
+
+/* Réduire la taille du contenu */
+.swal2-content {
+    padding: 0.5rem;
+}

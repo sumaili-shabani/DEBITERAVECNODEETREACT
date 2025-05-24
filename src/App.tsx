@@ -17,6 +17,7 @@ import { ToastContainer } from 'react-toastify';
 import ResetPassword from './pages/auth/ResetPassword';
 //utilisation des pages de configuration
 import RolePage from './pages/admin/pages/roles/rolePage';
+import './App.css';
 import './theme.css';
 
 

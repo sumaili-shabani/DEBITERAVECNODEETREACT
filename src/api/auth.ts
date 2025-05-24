@@ -47,7 +47,8 @@ export const login = async (data: LoginData) => {
 
 
     } catch (err: any) {
-        showError(err.response?.data?.message || "Erreur de connexion");
+        console.log("Erreur de login "+err);
+        // showError(err.response?.data?.message || "Erreur de connexion");
         return { success: false };
     }
 };
