@@ -59,15 +59,31 @@ exports.fetchUsers = async (req, res) => {
     }
 };
 
-// Récupération d’un seul utilisateur
+// Récupération d’un seul utilisateur avec jointure sur la table Role
 exports.fetchSingleUser = async (req, res) => {
     const id = req.params.id;
+
     try {
-        const user = await User.findByPk(id);
-        if (!user) return res.status(404).json({ message: 'Utilisateur non trouvé' });
+        const user = await User.findByPk(id, {
+            attributes: { exclude: ['passwords'] },
+            include: [
+                {
+                    model: Role,
+                    as: 'role', // Assure-toi que ce alias correspond bien à ta relation
+                    attributes: ['nom']
+                }
+            ]
+        });
+
+        if (!user) {
+            return res.status(404).json({ message: 'Utilisateur non trouvé' });
+        }
+
         res.json({ data: user });
+
     } catch (err) {
-        res.status(500).json({ err });
+        console.error('Erreur lors de la récupération de l’utilisateur :', err);
+        res.status(500).json({ message: 'Erreur serveur', err });
     }
 };
 
@@ -103,6 +119,49 @@ exports.postUser = async (req, res) => {
         }
     } catch (err) {
         res.status(500).json({ err: "Erreur interne:" + err });
+    }
+};
+
+//modification de profil
+exports.editUserProfil = async (req, res) => {
+    const { id, name, email, telephone, sexe } = req.body;
+    try {
+        
+        if (id !="") {
+            await User.update({
+                name,
+                email,
+                telephone,
+                sexe,
+            }, {
+                where: { id },
+            });
+            res.json({ message: "Utilisateur modifié avec succès" });
+        }else{
+            res.json({ message: "Veillez vérifier tous les champs!" });
+        }
+    } catch (err) {
+        res.status(500).json({ err: "Erreur interne:" + err });
+    }
+};
+
+//modifier le mot de passe de la personne
+exports.editPasswordProfil = async (req, res) => {
+    const { id, passwords, idRole, newspasswords } = req.body;
+    try {
+
+        // vérification 
+        const user = await User.findOne({ where: { id }, include: ['role'] });
+        if (!user) return res.json({ message: "Utilisateur non trouvé", wrong: true });
+        const passwordValid = await bcrypt.compare(passwords, user.passwords);
+        if (!passwordValid) return res.json({ message: "Mot de passe incorrect", wrong: true });
+        // fin vérification
+
+        const hashedPassword = await bcrypt.hash(newspasswords, 10);
+        await User.update({ passwords: hashedPassword }, { where: { id } });
+        res.json({ message: "Mot de passe modifié avec succès !" });
+    } catch (err) {
+        res.status(500).json({ err: "Erreur interne de hachage" });
     }
 };
 

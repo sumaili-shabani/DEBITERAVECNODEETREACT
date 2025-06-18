@@ -1,5 +1,7 @@
 const Site = require('../models/Site');
 const { Op } = require('sequelize');
+const fs = require('fs');
+const path = require('path');
 
 
 
@@ -130,6 +132,20 @@ exports.deleteSite = async (req, res) => {
 };
 
 // Modification de logo
+// exports.editLogo = async (req, res) => {
+//     const id = req.body.id;
+//     const logo = req.file ? req.file.filename : null;
+
+//     if (!logo) return res.status(400).json({ message: "Aucune image envoyée" });
+
+//     try {
+//         await Site.update({ logo }, { where: { id } });
+//         res.json({ message: "Image de profil mise à jour avec succès", filename: logo });
+//     } catch (err) {
+//         res.status(500).json({ err });
+//     }
+// };
+
 exports.editLogo = async (req, res) => {
     const id = req.body.id;
     const logo = req.file ? req.file.filename : null;
@@ -137,10 +153,28 @@ exports.editLogo = async (req, res) => {
     if (!logo) return res.status(400).json({ message: "Aucune image envoyée" });
 
     try {
+        // 1. Récupérer les infos actuelles du site
+        const site = await Site.findByPk(id);
+        if (!site) {
+            return res.status(404).json({ message: "Site non trouvé" });
+        }
+
+        // 2. Supprimer l'ancien fichier logo s'il existe
+        if (site.logo) {
+            const oldLogoPath = path.join(__dirname, '../upload/images', site.logo);
+            if (fs.existsSync(oldLogoPath)) {
+                fs.unlinkSync(oldLogoPath); // Supprime l'ancien fichier
+            }
+        }
+
+        // 3. Mettre à jour avec le nouveau logo
         await Site.update({ logo }, { where: { id } });
+
         res.json({ message: "Image de profil mise à jour avec succès", filename: logo });
     } catch (err) {
+        console.error(err);
         res.status(500).json({ err });
     }
 };
+  
 

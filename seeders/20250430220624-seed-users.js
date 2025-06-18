@@ -39,6 +39,17 @@ module.exports = {
         sexe: 'M',
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        name: 'Julie poma',
+        email: 'julieboma@demo.com',
+        telephone: '0987654321',
+        avatar: 'avatar.png',
+        passwords: hashedPassword,
+        idRole: 2, // Utilisateur
+        sexe: 'F',
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ], {});
   },

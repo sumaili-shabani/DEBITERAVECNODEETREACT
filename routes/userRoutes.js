@@ -31,6 +31,9 @@ router.post('/reset-password', UserController.resetPassword);
 router.get('/fetch_user', auth, UserController.fetchUsers); // protégé par token
 router.get('/fetch_single_user/:id', auth, UserController.fetchSingleUser);
 router.post('/post_user', auth, UserController.postUser);
+router.post('/editUserProfil', auth, UserController.editUserProfil);
+router.post('/editUserPassword', auth, UserController.editPasswordProfil);
+
 router.delete('/delete_user/:id', auth, UserController.deleteUser);
 router.post('/edit_password', auth, UserController.editPassword);
 router.post('/edit_avatar', auth, upload.single('avatar'), UserController.editAvatar);
