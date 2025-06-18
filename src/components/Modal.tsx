@@ -38,7 +38,8 @@ const Modal: React.FC<ModalProps> = ({ title, show, onClose, onSave, children, d
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">{title}</h5>
-                        <button type="button" className="btn-close btn-sm" onClick={onClose} >
+                        
+                        <button type="button" className="btn-close btn-sm text-muted" onClick={onClose} >
                             X
                         </button>
                     </div>

@@ -7,7 +7,7 @@ export const fetchAll = async (endpoint: string, params = {}) => {
         const res = await api.get(endpoint, { params });
         return res.data;
     } catch (err: any) {
-        showError("Erreur de chargement "+err);
+        showError("Erreur de chargement " + err);
         throw err;
     }
 };
@@ -25,6 +25,23 @@ export const getOne = async (endpoint: string, id: number) => {
 export const createItem = async (endpoint: string, data: any) => {
     try {
         const res = await api.post(endpoint, data);
+        const response = res.data;
+        showMessage(`${response.message}`);
+        // showMessage("Ajout réussi");
+        return res.data;
+    } catch (err: any) {
+        showError("Échec de l'ajout " + err);
+        throw err;
+    }
+};
+
+export const createItemImageForm = async (
+    endpoint: string,
+    data: any,
+    config: object = {}
+) => {
+    try {
+        const res = await api.post(endpoint, data, config);
         showMessage("Ajout réussi");
         return res.data;
     } catch (err: any) {
@@ -120,12 +137,33 @@ export const showConfirmationDialog = async (options?: ConfirmationOptions) => {
         customClass: {
             popup: isDarkMode ? 'swal-dark' : '',
             title: isDarkMode ? 'swal-title-dark' : '',
-          },
-        
-    });
+        },
 
-   
+    });
 
     return result.isConfirmed;
 };
-  
+
+//par rapport
+export function formatDateFR(dateStr: string): string {
+    const date = new Date(dateStr);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
+export function extractTime(dateStr: string): string {
+    const date = new Date(dateStr);
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
+}
+
+export function truncateText(text: string, maxLength = 10): string {
+    if (text.length <= maxLength) return text;
+    return text.slice(0, maxLength) + '...';
+}
+
+

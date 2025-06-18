@@ -4,13 +4,22 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from './context/ThemeContext';
 
+// pour le text editor
+import 'primereact/resources/themes/lara-light-blue/theme.css'; // ou un autre thème
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+
+// fontawason icon
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
+import './i18n'; // Import obligatoire
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
     <ThemeProvider>
-
       <App />
     </ThemeProvider>
   </React.StrictMode>

@@ -4,6 +4,8 @@ import { logout, getUser } from '../api/storage';
 import { fileUrl } from '../api/config';
 import { useTheme } from '../context/ThemeContext';
 
+import { useTranslation } from 'react-i18next';
+
 export default function Topbar() {
   const navigate = useNavigate();
   const user = getUser();
@@ -11,6 +13,14 @@ export default function Topbar() {
     await logout();
     navigate('/login');
   };
+
+  // pour la langue
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (lang: 'fr' | 'en') => {
+    i18n.changeLanguage(lang);
+  };
+  // fin langue
 
   const { theme, toggleTheme } = useTheme();
 
@@ -20,6 +30,7 @@ export default function Topbar() {
       <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3">
         <i className="fa fa-bars"></i>
       </button>
+
 
       {/* Topbar Search */}
       <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -196,20 +207,41 @@ export default function Topbar() {
             aria-labelledby="userDropdown">
             <Link className="dropdown-item" to="/profile">
               <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-              Profile
+              {t('menu_profil') ?? ''}
             </Link>
-            <Link className="dropdown-item" to="/settings">
+            <Link className="dropdown-item" to="/profile">
               <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-              Settings
+              {t('menu_setting') ?? ''}
             </Link>
             <Link className="dropdown-item" to="/activity-log">
               <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-              Activity Log
+              {t('menu_activite') ?? ''}
             </Link>
+            <div className="dropdown-divider"></div>
+            {/* --- Language Switcher --- */}
+            <div className="dropdown-item d-flex justify-content-between align-items-center">
+              <span className="text-muted">🌐{t('language') ?? 'Language'}</span>
+              <div>
+                <button
+                  className="btn btn-sm btn-outline-primary me-1"
+                  onClick={() => changeLanguage('fr')}
+                >
+                  FR
+                </button>
+                <button
+                  className="btn btn-sm btn-outline-secondary"
+                  onClick={() => changeLanguage('en')}
+                >
+                  En
+                </button>
+              </div>
+            </div>
+            {/* --- Fin Language Switcher --- */}
+
             <div className="dropdown-divider"></div>
             <button className="dropdown-item" onClick={handleLogout}>
               <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-              Logout
+              {t('menu_deconnexion') ?? ''}
             </button>
           </div>
         </li>

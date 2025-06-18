@@ -1,9 +1,10 @@
 import axios from 'axios';
-const baseURL = "http://localhost:5000/api";
+export const apiURL = "http://localhost:5000/api";
+export const baseURL = "http://localhost:5000";
 export const fileUrl = "http://localhost:5000";
 
 const api = axios.create({
-    baseURL: baseURL, // 📝 Change selon ton backend
+    baseURL: apiURL, // 📝 Change selon ton backend
     headers: {
         'Content-Type': 'application/json',
     },

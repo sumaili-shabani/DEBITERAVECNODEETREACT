@@ -3,7 +3,7 @@ import Sidebar from './layout/Sidebar';
 import Topbar from './layout/Topbar';
 import Footer from './layout/Footer';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import ProfilPage from './pages/ProfilPage';
+// import ProfilPage from './pages/ProfilPage';
 import SettingPage from './pages/SettingPage';
 import NotFoundPage from './pages/NotFoundPage';
 import Login from './pages/auth/Login';
@@ -19,6 +19,9 @@ import ResetPassword from './pages/auth/ResetPassword';
 import RolePage from './pages/admin/pages/roles/rolePage';
 import './App.css';
 import './theme.css';
+import UserPage from './pages/admin/pages/users/UserPage';
+import SitePage from './pages/admin/pages/sites/SitePage';
+import UserProfile from './pages/admin/pages/InfoUser/UserProfile';
 
 
 
@@ -36,7 +39,7 @@ function LayoutWrapper({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    
+
     <div id="wrapper">
       <Sidebar />
 
@@ -64,7 +67,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/forgot" element={<Forgot />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
-          
+
           {/* Fin Authentification (pas besoin de protection) */}
 
           {/* Routes privées */}
@@ -79,7 +82,7 @@ function App() {
           <Route path="/profile"
             element={
               <PrivateRoute>
-                <ProfilPage />
+                <UserProfile />
               </PrivateRoute>
             }
           />
@@ -99,7 +102,26 @@ function App() {
               </PrivateRoute>
             }
           />
-          
+
+          {/* page de configuration de compte */}
+          <Route
+            path="/counts"
+            element={
+              <PrivateRoute>
+                <UserPage />
+              </PrivateRoute>
+            }
+          />
+          {/* page de configuration de sit */}
+          <Route
+            path="/application"
+            element={
+              <PrivateRoute>
+                <SitePage />
+              </PrivateRoute>
+            }
+          />
+
           {/* fin pages de chargement */}
 
           {/* 404 */}
