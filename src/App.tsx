@@ -22,6 +22,8 @@ import './theme.css';
 import UserPage from './pages/admin/pages/users/UserPage';
 import SitePage from './pages/admin/pages/sites/SitePage';
 import UserProfile from './pages/admin/pages/InfoUser/UserProfile';
+import BackupPage from './pages/admin/pages/Backup/BackupPage';
+import Dashboard from './pages/admin/pages/Dashboard/Dashboard';
 
 
 
@@ -75,7 +77,7 @@ function App() {
             path="/"
             element={
               <PrivateRoute>
-                <Home />
+                <Dashboard />
               </PrivateRoute>
             }
           />
@@ -121,6 +123,18 @@ function App() {
               </PrivateRoute>
             }
           />
+
+          {/* page de configuration de sit */}
+          <Route
+            path="/backup"
+            element={
+              <PrivateRoute>
+                <BackupPage />
+              </PrivateRoute>
+            }
+          />
+
+          
 
           {/* fin pages de chargement */}
 

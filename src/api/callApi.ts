@@ -165,5 +165,18 @@ export function truncateText(text: string, maxLength = 10): string {
     if (text.length <= maxLength) return text;
     return text.slice(0, maxLength) + '...';
 }
+interface ChartData {
+    category: string[];
+    value: number[];
+}
+export function formatChartData(chartData?: Partial<ChartData>): { name: string; value: number }[] {
+    if (chartData?.category && chartData?.value) {
+        return chartData.category.map((name, index) => ({
+            name,
+            value: chartData.value?.[index] ?? 0
+        }));
+    }
+    return [];
+}
 
 

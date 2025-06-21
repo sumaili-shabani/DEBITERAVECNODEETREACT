@@ -116,7 +116,7 @@
   opacity: 1;
 }
 
-#btn-search{
+#btn-search {
   margin-left: -10px;
 }
 
@@ -132,3 +132,8 @@
   background-color: transparent;
 }
 
+.canvaschat {
+  display: block;
+  height: 320px;
+  width: 501px;
+}

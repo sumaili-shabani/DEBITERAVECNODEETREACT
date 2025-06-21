@@ -33,5 +33,7 @@
     "categoryblogPage_title": "Gestion des catégories",
     "blogPage_title": "Gestion des blogs",
     "blogTugPage_title": "Gestion des mots-clés de blogs ",
-    "blogSettingPage_title": "Gestion des paramètres du blog"
+    "blogSettingPage_title": "Gestion des paramètres du blog",
+    "dashboardPage_title": "Tableau de bors"
+    
 }

@@ -412,6 +412,17 @@ body.dark .react-select__menu {
     color: #ffffff;
 }
 
+body.dark .list-group {
+    background-color: #2e2e42;
+    color: #ffffff;
+} 
+body.dark .card-header {
+    background-color: #2e2e42;
+    color: #ffffff;
+}
+
+
+
 body.dark .react-select__option {
     background-color: #2e2e42;
     color: #ffffff;

@@ -2,7 +2,7 @@ import React from 'react';
 
 interface ComboBoxFieldProps {
     name: string;
-    value: string;
+    value: string | number;
     onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
     placeholder?: string;
     icon?: string;
@@ -37,7 +37,7 @@ export default function ComboBoxField({
                     className="form-select form-control"
                     required={required}
                 >
-                    <option value="">{placeholder}</option>
+                    <option value="" disabled>{placeholder}</option>
                     {options.map((opt, index) => (
                         <option key={index} value={opt.value}>
                             {opt.label}

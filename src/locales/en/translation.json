@@ -35,5 +35,6 @@
     "categoryblogPage_title": "Category Management",
     "blogPage_title": "Blog Management",
     "blogTugPage_title": "Blog Keywords Management",
-    "blogSettingPage_title": "Blog Settings Management"
+    "blogSettingPage_title": "Blog Settings Management",
+    "dashboardPage_title": "Dashboard"
 }

@@ -23,6 +23,16 @@ export const fetchItems = async <T>(endpoint: string, params: ApiListParams) => 
     }
 };
 
+export const fetchListItems = async <T>(endpoint: string) => {
+    try {
+        const res = await fetchAll(endpoint);
+        return res;
+    } catch (err) {
+        showError("Erreur lors du chargement " + err);
+        throw err;
+    }
+};
+
 export const fetchItem = async <T>(endpoint: string, id: number): Promise<T> => {
     try {
         const res = await getOne(endpoint, id);
@@ -53,7 +63,7 @@ export const saveItemImageForm = async <T>(endpoint: string, data: FormData) => 
         showError("Erreur lors de l'enregistrement");
         throw new Error();
     }
-  };
+};
 
 export const removeItem = async (endpoint: string, id: number) => {
     try {
@@ -63,4 +73,3 @@ export const removeItem = async (endpoint: string, id: number) => {
         throw new Error();
     }
 };
-  
