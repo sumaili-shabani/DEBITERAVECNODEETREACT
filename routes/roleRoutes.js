@@ -9,5 +9,8 @@ router.get('/fetch_role',auth, RoleController.fetchRoles);
 router.get('/fetch_single_role/:id',auth, RoleController.fetchSigleRoles);
 router.post('/insert_role',auth, RoleController.postRole);
 router.delete('/delete_role/:id',auth, RoleController.deleteRole);
+router.get('/fetch_all_role', auth, RoleController.fetchAllRoles);
+
+
 
 module.exports = router;

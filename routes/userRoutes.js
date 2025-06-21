@@ -24,6 +24,9 @@ router.post('/register_user', UserController.registerUser);
 
 router.post('/forgot-password', UserController.forgotPassword);
 router.post('/reset-password', UserController.resetPassword);
+//refresh-token
+router.post('/refresh-token', UserController.refreshToken);
+
 
 
 

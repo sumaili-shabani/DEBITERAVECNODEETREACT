@@ -7,11 +7,18 @@
         "models",
         "migrations",
         "seeders",
+        "backup",
         "db.js"
     ],
-    "ext": "js,json",
+    "ext": "js,json,env",
     "ignore": [
-        "node_modules"
+        "node_modules",
+        "logs",
+        "public",
+        "uploads"
     ],
-    "exec": "node index.js"
+    "exec": "node index.js",
+    "env": {
+        "NODE_ENV": "development"
+    }
 }

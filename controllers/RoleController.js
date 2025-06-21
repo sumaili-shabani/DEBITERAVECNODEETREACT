@@ -36,6 +36,26 @@ exports.fetchRoles = async (req, res) => {
     }
 };
 
+// 🔹 Récupérer tous les rôles avec alias : nom → label, id → value
+exports.fetchAllRoles = async (req, res) => {
+    try {
+        const roles = await Role.findAll({
+            attributes: [
+                ['id', 'value'],     // alias de id => value
+                ['nom', 'label']     // alias de nom => label
+            ]
+        });
+
+        if (!roles || roles.length === 0) {
+            return res.status(404).json({ data: [] });
+        }
+
+        res.status(200).json({ data: roles });
+    } catch (err) {
+        console.error("Erreur lors de la récupération des rôles :", err);
+        res.status(500).json({ message: "Erreur serveur" });
+    }
+};
 
 // 🔹 Récupérer un seul rôle par ID
 exports.fetchSigleRoles = async (req, res) => {

@@ -34,6 +34,7 @@ exports.fetchUsers = async (req, res) => {
         // 🔁 Exécuter la requête avec JOIN + WHERE + PAGINATION
         const { count, rows } = await User.findAndCountAll({
             where: searchFilter,
+            attributes: { exclude: ['passwords'] },
             include: [
                 {
                     model: Role,
@@ -42,7 +43,8 @@ exports.fetchUsers = async (req, res) => {
                 }
             ],
             limit,
-            offset
+            offset,
+            order: [['id', 'DESC']]
         });
 
         const totalPages = Math.ceil(count / limit);
@@ -100,7 +102,7 @@ exports.postUser = async (req, res) => {
                 telephone,
                 avatar: avatar || "avatar.png",
                 passwords: hashedPassword,
-                idRole,
+                idRole:2,
                 sexe,
             });
             res.status(201).json({ message: "Utilisateur ajouté avec succès", data: newUser });
@@ -126,8 +128,8 @@ exports.postUser = async (req, res) => {
 exports.editUserProfil = async (req, res) => {
     const { id, name, email, telephone, sexe } = req.body;
     try {
-        
-        if (id !="") {
+
+        if (id != "") {
             await User.update({
                 name,
                 email,
@@ -137,7 +139,7 @@ exports.editUserProfil = async (req, res) => {
                 where: { id },
             });
             res.json({ message: "Utilisateur modifié avec succès" });
-        }else{
+        } else {
             res.json({ message: "Veillez vérifier tous les champs!" });
         }
     } catch (err) {
@@ -247,8 +249,79 @@ exports.editAvatar = async (req, res) => {
 *
 */
 
+//refresh token
+exports.refreshToken = (req, res) => {
+    const { refreshToken } = req.body;
+
+    if (!refreshToken) return res.status(401).json({ message: 'Refresh token requis' });
+
+    jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET, (err, decoded) => {
+        if (err) return res.status(403).json({ message: 'Refresh token invalide ou expiré' });
+
+        // Générer un nouveau access token
+        const newAccessToken = jwt.sign(
+            { id: decoded.id },
+            process.env.JWT_SECRET,
+            { expiresIn: process.env.JWT_EXPIRES_IN }
+        );
+
+        res.json({ token: newAccessToken });
+    });
+};
+
 // 🔐 Login
 exports.login = async (req, res) => {
+    const { email, passwords } = req.body;
+
+    try {
+        const user = await User.findOne({ where: { email }, include: ['role'] });
+        if (!user) return res.status(401).json({ message: "Utilisateur non trouvé", wrong: true });
+
+        const passwordValid = await bcrypt.compare(passwords, user.passwords);
+        if (!passwordValid) return res.status(401).json({ message: "Mot de passe incorrect", wrong: true });
+
+        // Access token
+        const accessToken = jwt.sign(
+            { id: user.id, role: user.idRole },
+            process.env.JWT_SECRET,
+            { expiresIn: process.env.JWT_EXPIRES_IN }
+        );
+
+        // Refresh token
+        const refreshToken = jwt.sign(
+            { id: user.id },
+            process.env.JWT_REFRESH_SECRET,
+            { expiresIn: process.env.JWT_REFRESH_EXPIRES_IN }
+        );
+
+        // Stocker ce refresh token dans la base ou mémoire selon ton système
+        // Ex: await Token.create({ userId: user.id, token: refreshToken })
+
+        res.json({
+            message: "Connexion réussie",
+            wrong: false,
+            token: accessToken,
+            refreshToken,
+            user: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                idRole: user.idRole,
+                telephone: user.telephone,
+                avatar: user.avatar,
+                sexe: user.sexe,
+                role: user.role?.nom
+            }
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Erreur serveur", err });
+    }
+};
+
+//login test
+exports.login2 = async (req, res) => {
     const { email, passwords } = req.body;
 
     try {

@@ -10,6 +10,10 @@ const roleRoutes = require('./routes/roleRoutes');
 const dashboardRoutes = require('./routes/dashboard');
 const siteRoutes = require('./routes/SiteRoutes');
 
+const backupRoutes = require('./backup/backupRoutes');
+const exportRoutes = require('./backup/exportDatabaseToExcel'); // 👈 chemin correct ici
+
+
 // Middlewares
 app.use(cors());
 app.use(express.json());
@@ -23,6 +27,9 @@ app.use('/api', userRoutes);
 app.use('/api', roleRoutes);
 app.use('/api', dashboardRoutes);
 app.use('/api', siteRoutes);
+app.use('/api/backup', backupRoutes);
+app.use('/api', exportRoutes);
+
 
 sequelize.authenticate()
     .then(() => console.log('Connexion Sequelize OK'))
