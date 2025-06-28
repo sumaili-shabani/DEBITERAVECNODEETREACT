@@ -13,6 +13,10 @@ const siteRoutes = require('./routes/SiteRoutes');
 const backupRoutes = require('./backup/backupRoutes');
 const exportRoutes = require('./backup/exportDatabaseToExcel'); // 👈 chemin correct ici
 
+const valeurRoute = require('./routes/ValeurRoute');
+const ChoixRoute = require('./routes/ChoixRoute');
+const ServiceRoute = require('./routes/ServiceRoute');
+const GaleryRoute = require('./routes/GaleryRoute');
 
 // Middlewares
 app.use(cors());
@@ -29,6 +33,16 @@ app.use('/api', dashboardRoutes);
 app.use('/api', siteRoutes);
 app.use('/api/backup', backupRoutes);
 app.use('/api', exportRoutes);
+
+//suite de blog
+app.use('/api', valeurRoute);
+app.use('/api', ChoixRoute);
+app.use('/api', ServiceRoute);
+app.use('/api', GaleryRoute);
+
+
+
+
 
 
 sequelize.authenticate()
