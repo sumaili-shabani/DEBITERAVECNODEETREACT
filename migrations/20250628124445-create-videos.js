@@ -10,7 +10,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-
+      titre: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       urlYoutube: {
         type: Sequelize.STRING,
         allowNull: true

@@ -1,4 +1,4 @@
-const ServiceModel = require('../models/ServiceModel');
+const OffreModel = require('../models/OffreModel');
 const { Op } = require('sequelize');
 
 // 🔹 Récupérer tous les rôles
@@ -16,7 +16,7 @@ exports.fetchDatas = async (req, res) => {
         : {};
 
     try {
-        const { count, rows } = await ServiceModel.findAndCountAll({
+        const { count, rows } = await OffreModel.findAndCountAll({
             where: searchFilter,
             limit,
             offset,
@@ -38,7 +38,7 @@ exports.fetchDatas = async (req, res) => {
 // 🔹 Récupérer tous les rôles avec alias : nom → label, id → value
 exports.fetchAllDatas = async (req, res) => {
     try {
-        const datas = await ServiceModel.findAll({
+        const datas = await OffreModel.findAll({
             attributes: [
                 ['id', 'value'],     // alias de id => value
                 ['titre', 'label']     // alias de nom => label
@@ -59,7 +59,7 @@ exports.fetchAllDatas = async (req, res) => {
 // 🔹 Récupérer une seule donnée par ID
 exports.fetchSigleData = async (req, res) => {
     try {
-        const datas = await ServiceModel.findByPk(req.params.id);
+        const datas = await OffreModel.findByPk(req.params.id);
         if (!datas) return res.status(404).json({ message: "Donnée introuvable" });
         res.status(200).json({ data: datas });
     } catch (err) {
@@ -69,15 +69,15 @@ exports.fetchSigleData = async (req, res) => {
 
 // 🔹 Ajouter ou modifier un élément
 exports.postData = async (req, res) => {
-    const { id, titre, description, icone, nom } = req.body;
+    const { id, dates, lieu, organisation, lien, titre, description } = req.body;
     try {
         if (!id || id === "") {
             // 🔸 Insertion
-            await ServiceModel.create({ titre, description, icone, nom});
+            await OffreModel.create({ dates, lieu, organisation, lien, titre, description });
             res.status(200).json({ message: "Insertion avec succès !!!" });
         } else {
             // 🔸 Mise à jour
-            const [updated] = await ServiceModel.update({ titre, description, icone, nom }, { where: { id } });
+            const [updated] = await OffreModel.update({ dates, lieu, organisation, lien, titre, description }, { where: { id } });
             if (updated) {
                 res.status(200).json({ message: "Modification avec succès !!!" });
             } else {
@@ -89,10 +89,35 @@ exports.postData = async (req, res) => {
     }
 };
 
+// 🔹 Modifier la photo
+exports.editLogo = async (req, res) => {
+    const id = req.body.id;
+    const logo = req.file ? req.file.filename : null;
+
+    if (!logo) return res.status(400).json({ message: "Aucune image envoyée" });
+
+    try {
+        //appel de la fonction de suppression de l'ancien fichier
+        await deleteFileForRecord(
+            OffreModel,          // Ton modèle Sequelize
+            id,                // L'ID
+            'fichier',           // La colonne qui contient le nom du fichier
+            path.join(__dirname, '../upload/images') // Ton dossier uploads
+        );
+        // 3. Mettre à jour avec le nouveau logo
+        await OffreModel.update({ fichier: logo }, { where: { id } });
+
+        res.json({ message: "Image de profil mise à jour avec succès", filename: logo });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ err });
+    }
+};
+
 // 🔹 Supprimer un élément
 exports.deleteData = async (req, res) => {
     try {
-        const deleted = await ServiceModel.destroy({ where: { id: req.params.id } });
+        const deleted = await OffreModel.destroy({ where: { id: req.params.id } });
         if (deleted) {
             res.status(200).json({ message: "Suppression réussie" });
         } else {

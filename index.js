@@ -13,10 +13,24 @@ const siteRoutes = require('./routes/SiteRoutes');
 const backupRoutes = require('./backup/backupRoutes');
 const exportRoutes = require('./backup/exportDatabaseToExcel'); // 👈 chemin correct ici
 
+//suite de blog
 const valeurRoute = require('./routes/ValeurRoute');
 const ChoixRoute = require('./routes/ChoixRoute');
 const ServiceRoute = require('./routes/ServiceRoute');
 const GaleryRoute = require('./routes/GaleryRoute');
+const VideoRoute = require('./routes/VideoRoute');
+const PartenaireRoute = require('./routes/PartenaireRoute');
+const TugRoute = require('./routes/TugRoute');
+const CategoryBlogRoute = require('./routes/CategoryBlogRoute');
+const TeamRoute = require('./routes/TeamRoute');
+const OffreRoute = require('./routes/OffreRoute');
+const RealisationRoute = require('./routes/RealisationRoute');
+const BlogRoute = require('./routes/BlogRoute');
+const SecteurRoute = require('./routes/SecteurRoute');
+const BasicRoute = require('./routes/BasicRoute');
+const CarouselRoute = require('./routes/CarouselRoute');
+const ProjetRoute = require('./routes/ProjetRoute');
+
 
 // Middlewares
 app.use(cors());
@@ -39,6 +53,26 @@ app.use('/api', valeurRoute);
 app.use('/api', ChoixRoute);
 app.use('/api', ServiceRoute);
 app.use('/api', GaleryRoute);
+app.use('/api', VideoRoute);
+app.use('/api', PartenaireRoute);
+app.use('/api', TugRoute);
+app.use('/api', CategoryBlogRoute);
+app.use('/api', TeamRoute);
+app.use('/api', OffreRoute);
+app.use('/api', RealisationRoute);
+app.use('/api', BlogRoute);
+app.use('/api', SecteurRoute);
+app.use('/api', BasicRoute);
+app.use('/api', ProjetRoute);
+
+
+
+
+
+
+
+
+
 
 
 

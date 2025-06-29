@@ -1,4 +1,4 @@
-const ServiceModel = require('../models/ServiceModel');
+const VideoModel = require('../models/VideoModel');
 const { Op } = require('sequelize');
 
 // 🔹 Récupérer tous les rôles
@@ -16,7 +16,7 @@ exports.fetchDatas = async (req, res) => {
         : {};
 
     try {
-        const { count, rows } = await ServiceModel.findAndCountAll({
+        const { count, rows } = await VideoModel.findAndCountAll({
             where: searchFilter,
             limit,
             offset,
@@ -38,7 +38,7 @@ exports.fetchDatas = async (req, res) => {
 // 🔹 Récupérer tous les rôles avec alias : nom → label, id → value
 exports.fetchAllDatas = async (req, res) => {
     try {
-        const datas = await ServiceModel.findAll({
+        const datas = await VideoModel.findAll({
             attributes: [
                 ['id', 'value'],     // alias de id => value
                 ['titre', 'label']     // alias de nom => label
@@ -59,7 +59,7 @@ exports.fetchAllDatas = async (req, res) => {
 // 🔹 Récupérer une seule donnée par ID
 exports.fetchSigleData = async (req, res) => {
     try {
-        const datas = await ServiceModel.findByPk(req.params.id);
+        const datas = await VideoModel.findByPk(req.params.id);
         if (!datas) return res.status(404).json({ message: "Donnée introuvable" });
         res.status(200).json({ data: datas });
     } catch (err) {
@@ -69,15 +69,15 @@ exports.fetchSigleData = async (req, res) => {
 
 // 🔹 Ajouter ou modifier un élément
 exports.postData = async (req, res) => {
-    const { id, titre, description, icone, nom } = req.body;
+    const { id, titre, urlYoutube, description } = req.body;
     try {
         if (!id || id === "") {
             // 🔸 Insertion
-            await ServiceModel.create({ titre, description, icone, nom});
+            await VideoModel.create({ titre, urlYoutube, description });
             res.status(200).json({ message: "Insertion avec succès !!!" });
         } else {
             // 🔸 Mise à jour
-            const [updated] = await ServiceModel.update({ titre, description, icone, nom }, { where: { id } });
+            const [updated] = await VideoModel.update({ titre, urlYoutube, description }, { where: { id } });
             if (updated) {
                 res.status(200).json({ message: "Modification avec succès !!!" });
             } else {
@@ -92,7 +92,7 @@ exports.postData = async (req, res) => {
 // 🔹 Supprimer un élément
 exports.deleteData = async (req, res) => {
     try {
-        const deleted = await ServiceModel.destroy({ where: { id: req.params.id } });
+        const deleted = await VideoModel.destroy({ where: { id: req.params.id } });
         if (deleted) {
             res.status(200).json({ message: "Suppression réussie" });
         } else {

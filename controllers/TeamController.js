@@ -1,4 +1,4 @@
-const ServiceModel = require('../models/ServiceModel');
+const TeamModel = require('../models/TeamModel');
 const { Op } = require('sequelize');
 
 // 🔹 Récupérer tous les rôles
@@ -11,12 +11,12 @@ exports.fetchDatas = async (req, res) => {
     // 🔍 Construction du filtre de recherche
     const searchFilter = search
         ? {
-            titre: { [Op.like]: `%${search}%` }
+            nom: { [Op.like]: `%${search}%` }
         }
         : {};
 
     try {
-        const { count, rows } = await ServiceModel.findAndCountAll({
+        const { count, rows } = await TeamModel.findAndCountAll({
             where: searchFilter,
             limit,
             offset,
@@ -38,10 +38,10 @@ exports.fetchDatas = async (req, res) => {
 // 🔹 Récupérer tous les rôles avec alias : nom → label, id → value
 exports.fetchAllDatas = async (req, res) => {
     try {
-        const datas = await ServiceModel.findAll({
+        const datas = await TeamModel.findAll({
             attributes: [
                 ['id', 'value'],     // alias de id => value
-                ['titre', 'label']     // alias de nom => label
+                ['nom', 'label']     // alias de nom => label
             ]
         });
 
@@ -59,7 +59,7 @@ exports.fetchAllDatas = async (req, res) => {
 // 🔹 Récupérer une seule donnée par ID
 exports.fetchSigleData = async (req, res) => {
     try {
-        const datas = await ServiceModel.findByPk(req.params.id);
+        const datas = await TeamModel.findByPk(req.params.id);
         if (!datas) return res.status(404).json({ message: "Donnée introuvable" });
         res.status(200).json({ data: datas });
     } catch (err) {
@@ -69,15 +69,15 @@ exports.fetchSigleData = async (req, res) => {
 
 // 🔹 Ajouter ou modifier un élément
 exports.postData = async (req, res) => {
-    const { id, titre, description, icone, nom } = req.body;
+    const { id, nom,fonction,email,telephone,facebook,twitter,linkedin } = req.body;
     try {
         if (!id || id === "") {
             // 🔸 Insertion
-            await ServiceModel.create({ titre, description, icone, nom});
+            await TeamModel.create({ nom,fonction,email,telephone,facebook,twitter,linkedin});
             res.status(200).json({ message: "Insertion avec succès !!!" });
         } else {
             // 🔸 Mise à jour
-            const [updated] = await ServiceModel.update({ titre, description, icone, nom }, { where: { id } });
+            const [updated] = await TeamModel.update({ nom,fonction,email,telephone,facebook,twitter,linkedin }, { where: { id } });
             if (updated) {
                 res.status(200).json({ message: "Modification avec succès !!!" });
             } else {
@@ -89,10 +89,35 @@ exports.postData = async (req, res) => {
     }
 };
 
+// 🔹 Modifier la photo
+exports.editLogo = async (req, res) => {
+    const id = req.body.id;
+    const logo = req.file ? req.file.filename : null;
+
+    if (!logo) return res.status(400).json({ message: "Aucune image envoyée" });
+
+    try {
+        //appel de la fonction de suppression de l'ancien fichier
+        await deleteFileForRecord(
+            TeamModel,          // Ton modèle Sequelize
+            id,                // L'ID
+            'logo',           // La colonne qui contient le nom du fichier
+            path.join(__dirname, '../upload/images') // Ton dossier uploads
+        );
+        // 3. Mettre à jour avec le nouveau logo
+        await TeamModel.update({ logo }, { where: { id } });
+
+        res.json({ message: "Image de profil mise à jour avec succès", filename: logo });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ err });
+    }
+};
+
 // 🔹 Supprimer un élément
 exports.deleteData = async (req, res) => {
     try {
-        const deleted = await ServiceModel.destroy({ where: { id: req.params.id } });
+        const deleted = await TeamModel.destroy({ where: { id: req.params.id } });
         if (deleted) {
             res.status(200).json({ message: "Suppression réussie" });
         } else {
