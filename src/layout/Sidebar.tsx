@@ -35,7 +35,7 @@ export default function Sidebar() {
                     <div className="sidebar-brand-icon rotate-n-15">
                         <i className="fas fa-graduation-cap"></i>
                     </div>
-                    <div className="sidebar-brand-text mx-3">Elimu <sup>1</sup></div>
+                    <div className="sidebar-brand-text mx-3">Ui-Admin <sup>1</sup></div>
                 </a>
 
                 <hr className="sidebar-divider my-0" />
@@ -65,30 +65,16 @@ export default function Sidebar() {
                                 </Link>
                             </li>
                             <li>
-                                <Link className="nav-link py-1" to="/category">
+                                <Link className="nav-link py-1" to="/category-blog">
                                     <i className="fas fa-tags"></i> {t('sideBar_categories') ?? ''}
                                 </Link>
                             </li>
                             <li>
-                                <a className="nav-link" href="#!" onClick={() => toggleMenu('blogConfig')}>
-                                    <i className="fas fa-layer-group"></i> {t('sideBar_blog_config') ?? ''} 
-                                    <i className={`fas fa-angle-${openMenus.blogConfig ? 'down' : 'right'} float-right`}></i>
-                                </a>
-                                {openMenus.blogConfig && (
-                                    <ul className="pl-4 list-unstyled">
-                                        <li>
-                                            <Link className="nav-link py-1" to="/blog-tags">
-                                                <i className="fas fa-tag"></i> {t('sideBar_blog') ?? ''} 
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link className="nav-link py-1" to="/blog-settings">
-                                                <i className="fas fa-sliders-h"></i> {t('sideBar_blogSettings') ?? ''} 
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                )}
+                                <Link className="nav-link py-1" to="/blog-tags">
+                                    <i className="fas fa-tag"></i> {t('sideBar_blog') ?? ''}
+                                </Link>
                             </li>
+                            
                         </ul>
                     )}
                 </li>
@@ -101,13 +87,82 @@ export default function Sidebar() {
                     </a>
                     {openMenus.utilities && (
                         <ul className="pl-3 list-unstyled">
-                            <li><Link className="nav-link py-1" to="/color"><i className="fas fa-palette"></i> Colors</Link></li>
-                            <li><Link className="nav-link py-1" to="/border"><i className="fas fa-border-style"></i> Borders</Link></li>
-                            <li><Link className="nav-link py-1" to="/animation"><i className="fas fa-magic"></i> Animations</Link></li>
-                            <li><Link className="nav-link py-1" to="/other"><i className="fas fa-ellipsis-h"></i> Other</Link></li>
+                            <li><Link className="nav-link py-1" to="/service"><i className="fas fa-palette"></i> Service</Link></li>
+                            <li><Link className="nav-link py-1" to="/choice"><i className="fas fa-border-style"></i> Choix</Link></li>
+                            <li><Link className="nav-link py-1" to="/carousel"><i className="fas fa-magic"></i> Carousel</Link></li>
+                            
+                            {/* configuration */}
+                            <li>
+                                <a className="nav-link" href="#!" onClick={() => toggleMenu('basicConfig')}>
+                                    <i className="fas fa-layer-group"></i> Informations
+                                    <i className={`fas fa-angle-${openMenus.basicConfig ? 'down' : 'right'} float-right`}></i>
+                                </a>
+                                {openMenus.basicConfig && (
+                                    <ul className="pl-4 list-unstyled">
+                                        <li>
+                                            <Link className="nav-link py-1" to="/conf_basic">
+                                                <i className="fas fa-tag"></i>Conf basique
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link className="nav-link py-1" to="/projet">
+                                                <i className="fas fa-tag"></i> Projet
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link className="nav-link py-1" to="/galery">
+                                                <i className="fas fa-tag"></i> Galérie
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link className="nav-link py-1" to="/video">
+                                                <i className="fas fa-tag"></i> Video
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link className="nav-link py-1" to="/partenaire">
+                                                <i className="fas fa-tag"></i> Partenaire
+                                            </Link>
+                                        </li>
+                                       
+                                        <li>
+                                            <Link className="nav-link py-1" to="/secteur">
+                                                <i className="fas fa-tag"></i> Secteur
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                )}
+                            </li>
+
+                            <li>
+                                <a className="nav-link" href="#!" onClick={() => toggleMenu('infoPageConfig')}>
+                                    <i className="fas fa-layer-group"></i> Gestion des Pages
+                                    <i className={`fas fa-angle-${openMenus.infoPageConfig ? 'down' : 'right'} float-right`}></i>
+                                </a>
+                                {openMenus.infoPageConfig && (
+                                    <ul className="pl-4 list-unstyled">
+                                       
+                                        <li>
+                                            <Link className="nav-link py-1" to="/other-services">
+                                                <i className="fas fa-sliders-h"></i> Autre services
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                )}
+                            </li>
+
+
+                            <li><Link className="nav-link py-1" to="/team"><i className="fas fa-user"></i> Equipe</Link></li>
+                            <li><Link className="nav-link py-1" to="/offer"><i className="fas fa-file"></i> Offre d'emploi</Link></li>
+
+
+
+
+
                         </ul>
                     )}
                 </li>
+                
 
                 <li className={`nav-item ${openMenus.settings ? 'active' : ''}`}>
                     <a className="nav-link" href="#!" onClick={() => toggleMenu('settings')}>

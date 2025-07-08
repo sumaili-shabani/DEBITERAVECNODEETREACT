@@ -43,6 +43,16 @@ export const fetchItem = async <T>(endpoint: string, id: number): Promise<T> => 
     }
 };
 
+export const gethItem = async (endpoint: string, id: number) => {
+    try {
+        const res = await getOne(endpoint, id);
+        return res;
+    } catch (err) {
+        showError("Erreur lors du chargement de l'élément");
+        throw err;
+    }
+};
+
 export const saveItem = async <T>(endpoint: string, data: Partial<T>) => {
     try {
         await createItem(endpoint, data);

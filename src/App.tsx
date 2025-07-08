@@ -24,6 +24,9 @@ import SitePage from './pages/admin/pages/sites/SitePage';
 import UserProfile from './pages/admin/pages/InfoUser/UserProfile';
 import BackupPage from './pages/admin/pages/Backup/BackupPage';
 import Dashboard from './pages/admin/pages/Dashboard/Dashboard';
+import TugBlog from './pages/Site/Articles/TugBlog';
+import CategoryBlog from './pages/Site/Articles/CategoryBlog';
+import Blog from './pages/Site/Articles/Article';
 
 
 
@@ -71,6 +74,36 @@ function App() {
           <Route path="/reset-password/:token" element={<ResetPassword />} />
 
           {/* Fin Authentification (pas besoin de protection) */}
+
+          {/* Routes privées bloc */}
+          <Route
+            path="/blog-tags"
+            element={
+              <PrivateRoute>
+                <TugBlog />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/category-blog"
+            element={
+              <PrivateRoute>
+                <CategoryBlog />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/article"
+            element={
+              <PrivateRoute>
+                <Blog />
+              </PrivateRoute>
+            }
+          />
+
+
+
+
 
           {/* Routes privées */}
           <Route
