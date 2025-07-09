@@ -1,5 +1,8 @@
 const OffreModel = require('../models/OffreModel');
 const { Op } = require('sequelize');
+const path = require('path');
+const { deleteFileForRecord } = require('../utils/deleteFileForRecord');
+const { generateSlug } = require('../utils/trait');
 
 // 🔹 Récupérer tous les rôles
 exports.fetchDatas = async (req, res) => {
@@ -70,10 +73,11 @@ exports.fetchSigleData = async (req, res) => {
 // 🔹 Ajouter ou modifier un élément
 exports.postData = async (req, res) => {
     const { id, dates, lieu, organisation, lien, titre, description } = req.body;
+    const mySlug = generateSlug(titre);
     try {
         if (!id || id === "") {
             // 🔸 Insertion
-            await OffreModel.create({ dates, lieu, organisation, lien, titre, description });
+            await OffreModel.create({ dates, lieu, organisation, lien, titre, description, slug: mySlug });
             res.status(200).json({ message: "Insertion avec succès !!!" });
         } else {
             // 🔸 Mise à jour
@@ -97,12 +101,15 @@ exports.editLogo = async (req, res) => {
     if (!logo) return res.status(400).json({ message: "Aucune image envoyée" });
 
     try {
+
         //appel de la fonction de suppression de l'ancien fichier
+        // ✅ Supprimer l'ancien fichier avant la modification
         await deleteFileForRecord(
-            OffreModel,          // Ton modèle Sequelize
-            id,                // L'ID
-            'fichier',           // La colonne qui contient le nom du fichier
-            path.join(__dirname, '../upload/images') // Ton dossier uploads
+            OffreModel,
+            id,
+            'fichier', // colonne
+            path.join(__dirname, '../upload/images'),
+            ['logo.png', 'avatar.png'] // fichiers protégés
         );
         // 3. Mettre à jour avec le nouveau logo
         await OffreModel.update({ fichier: logo }, { where: { id } });

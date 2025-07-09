@@ -23,6 +23,7 @@ const BlogModel = sequelize.define('BlogModel', {
     },
     icone: {
         type: DataTypes.STRING,
+        defaultValue:'logo.png',
         allowNull: true
     },
 
@@ -34,10 +35,20 @@ const BlogModel = sequelize.define('BlogModel', {
             key: 'id'
         }
     },
+    tug: {
+        type: DataTypes.STRING,
+        allowNull: true
+
+    },
     status: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
         allowNull: false
+    },
+    slug: {
+        type: DataTypes.STRING,
+        allowNull: false
+
     },
 
 

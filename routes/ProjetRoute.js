@@ -33,11 +33,11 @@ const upload = multer({ storage });
 */
 
 // 🔹 Routes utilisateurs
-router.get('/fetch_blog',auth, ProjetController.fetchDatas);
-router.get('/fetch_single_blog/:id',auth, ProjetController.fetchSigleData);
-router.post('/insert_blog',auth, ProjetController.postData);
-router.delete('/delete_blog/:id',auth, ProjetController.deleteData);
-router.get('/fetch_all_blog', auth, ProjetController.fetchAllDatas);
-router.post('/edit_blog_logo', auth, upload.single('logo'), ProjetController.editLogo);
+router.get('/fetch_projet',auth, ProjetController.fetchDatas);
+router.get('/fetch_single_projet/:id',auth, ProjetController.fetchSigleData);
+router.post('/insert_projet',auth, ProjetController.postData);
+router.delete('/delete_projet/:id',auth, ProjetController.deleteData);
+router.get('/fetch_all_projet', auth, ProjetController.fetchAllDatas);
+router.post('/edit_projet_logo', auth, upload.single('logo'), ProjetController.editLogo);
 
 module.exports = router;

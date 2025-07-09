@@ -20,16 +20,17 @@ const ServiceRoute = require('./routes/ServiceRoute');
 const GaleryRoute = require('./routes/GaleryRoute');
 const VideoRoute = require('./routes/VideoRoute');
 const PartenaireRoute = require('./routes/PartenaireRoute');
-const TugRoute = require('./routes/TugRoute');
-const CategoryBlogRoute = require('./routes/CategoryBlogRoute');
-const TeamRoute = require('./routes/TeamRoute');
-const OffreRoute = require('./routes/OffreRoute');
-const RealisationRoute = require('./routes/RealisationRoute');
-const BlogRoute = require('./routes/BlogRoute');
-const SecteurRoute = require('./routes/SecteurRoute');
-const BasicRoute = require('./routes/BasicRoute');
-const CarouselRoute = require('./routes/CarouselRoute');
-const ProjetRoute = require('./routes/ProjetRoute');
+const TugRoute = require('./routes/TugRoute');//✅ 
+const CategoryBlogRoute = require('./routes/CategoryBlogRoute');//✅ 
+const BlogRoute = require('./routes/BlogRoute'); //✅ 
+const TeamRoute = require('./routes/TeamRoute');//✅
+const OffreRoute = require('./routes/OffreRoute');//✅
+const RealisationRoute = require('./routes/RealisationRoute');//✅
+const SecteurRoute = require('./routes/SecteurRoute');//✅ 
+const BasicRoute = require('./routes/BasicRoute');//✅
+const CarouselRoute = require('./routes/CarouselRoute');//✅ 
+const ProjetRoute = require('./routes/ProjetRoute');//✅ 
+const RapportRoute = require('./routes/RapportRoute');//✅
 
 
 // Middlewares
@@ -64,6 +65,10 @@ app.use('/api', BlogRoute);
 app.use('/api', SecteurRoute);
 app.use('/api', BasicRoute);
 app.use('/api', ProjetRoute);
+app.use('/api', CarouselRoute);
+app.use('/api', RapportRoute);
+
+
 
 
 

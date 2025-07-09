@@ -15,6 +15,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true
       },
+      slug: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
 
       createdAt: {
         allowNull: false,

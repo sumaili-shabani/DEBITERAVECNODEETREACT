@@ -42,7 +42,7 @@ const BasicModel = sequelize.define('BasicModel', {
 
 
 }, {
-    tableName: 'basics',
+    tableName: 'basic_info',
     timestamps: true
 });
 

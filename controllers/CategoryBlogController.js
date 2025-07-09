@@ -1,5 +1,6 @@
 const CategoryBlogModel = require('../models/CategoryBlogModel');
 const { Op } = require('sequelize');
+const { generateSlug } = require('../utils/trait');
 
 // 🔹 Récupérer tous les éléments
 exports.fetchDatas = async (req, res) => {
@@ -70,14 +71,15 @@ exports.fetchSigleData = async (req, res) => {
 // 🔹 Ajouter ou modifier un élément
 exports.postData = async (req, res) => {
     const { id, titre } = req.body;
+    const mySlug = generateSlug(titre);
     try {
         if (!id || id === "") {
             // 🔸 Insertion
-            await CategoryBlogModel.create({ titre});
+            await CategoryBlogModel.create({ titre, slug: mySlug });
             res.status(200).json({ message: "Insertion avec succès !!!" });
         } else {
             // 🔸 Mise à jour
-            const [updated] = await CategoryBlogModel.update({ titre}, { where: { id } });
+            const [updated] = await CategoryBlogModel.update({ titre }, { where: { id } });
             if (updated) {
                 res.status(200).json({ message: "Modification avec succès !!!" });
             } else {

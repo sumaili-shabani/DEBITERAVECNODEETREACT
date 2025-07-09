@@ -31,7 +31,7 @@ exports.fetchDatas = async (req, res) => {
             data: rows
         });
     } catch (err) {
-        res.status(500).json({ err: "Erreur lors de la récupération des données avec recherche et pagination" });
+        res.status(500).json({ err: "Erreur lors de la récupération des données avec recherche et pagination: " + err });
     }
 };
 

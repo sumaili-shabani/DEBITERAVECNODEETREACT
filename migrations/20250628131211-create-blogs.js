@@ -50,6 +50,11 @@ module.exports = {
         defaultValue:0,
         allowNull: false
       },
+      slug:{
+        type: Sequelize.STRING,
+        allowNull: false
+
+      },
 
       createdAt: {
         allowNull: false,

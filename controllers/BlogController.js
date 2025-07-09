@@ -1,5 +1,8 @@
 const { BlogModel, CategoryBlogModel } = require('../models/associations');
 const { Op } = require('sequelize');
+const { generateSlug } = require('../utils/trait');
+const { deleteFileForRecord } = require('../utils/deleteFileForRecord');
+const path = require('path');
 
 // 🔹 Récupérer tous les rôles
 exports.fetchDatas = async (req, res) => {
@@ -74,17 +77,19 @@ exports.fetchSigleData = async (req, res) => {
     }
 };
 
+
 // 🔹 Ajouter ou modifier un élément
 exports.postData = async (req, res) => {
-    const { id, idCategory, titre, sousTitre, description } = req.body;
+    const { id, idCategory, titre, sousTitre, description, tug, slug } = req.body;
+    const mySlug = generateSlug(titre);
     try {
         if (!id || id === "") {
             // 🔸 Insertion
-            await BlogModel.create({ idCategory, titre, sousTitre, description });
+            await BlogModel.create({ idCategory, titre, sousTitre, description, tug, slug: mySlug });
             res.status(200).json({ message: "Insertion avec succès !!!" });
         } else {
             // 🔸 Mise à jour
-            const [updated] = await BlogModel.update({ idCategory, titre, sousTitre, description }, { where: { id } });
+            const [updated] = await BlogModel.update({ idCategory, titre, sousTitre, description, tug }, { where: { id } });
             if (updated) {
                 res.status(200).json({ message: "Modification avec succès !!!" });
             } else {
@@ -98,7 +103,7 @@ exports.postData = async (req, res) => {
 
 // 🔹 Status blog
 exports.editStatus = async (req, res) => {
-    const { id } = req.body;
+    const  id  = req.params.id;
 
     const site = await BlogModel.findByPk(id);
     if (!site) {
@@ -137,13 +142,19 @@ exports.editLogo = async (req, res) => {
     if (!logo) return res.status(400).json({ message: "Aucune image envoyée" });
 
     try {
+       
+       
+
         //appel de la fonction de suppression de l'ancien fichier
+        // ✅ Supprimer l'ancien fichier avant la modification
         await deleteFileForRecord(
-            BlogModel,          // Ton modèle Sequelize
-            id,                // L'ID
-            'icone',           // La colonne qui contient le nom du fichier
-            path.join(__dirname, '../upload/images') // Ton dossier uploads
+            BlogModel,
+            id,
+            'icone', // colonne
+            path.join(__dirname, '../upload/images'),
+            ['logo.png', 'avatar.png'] // fichiers protégés
         );
+  
         // 3. Mettre à jour avec le nouveau logo
         await BlogModel.update({ icone: logo }, { where: { id } });
 

@@ -29,6 +29,10 @@ const RapportModel = sequelize.define('RapportModel', {
         type: DataTypes.STRING,
         allowNull: true
     },
+    slug:{
+        type: DataTypes.STRING,
+        allowNull: true
+    }
 
 
 

@@ -12,6 +12,10 @@ const CategoryBlogModel = sequelize.define('CategoryBlogModel', {
     titre: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    slug: {
+        type: DataTypes.STRING,
+        allowNull: true
     }
 
 

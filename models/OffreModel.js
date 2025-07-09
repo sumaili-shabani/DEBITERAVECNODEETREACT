@@ -38,6 +38,10 @@ const OffreModel = sequelize.define('OffreModel', {
         type: DataTypes.STRING,
         allowNull: true
     },
+    slug: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
 
 
 

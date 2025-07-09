@@ -29,6 +29,10 @@ const RealisationModel = sequelize.define('RealisationModel', {
         type: DataTypes.STRING,
         allowNull: true
     },
+    slug: {
+        type: DataTypes.STRING,
+        allowNull: true
+    }
 
 
 

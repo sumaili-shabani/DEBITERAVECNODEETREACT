@@ -40,7 +40,7 @@ exports.fetchAllDatas = async (req, res) => {
     try {
         const datas = await TugModel.findAll({
             attributes: [
-                ['id', 'value'],     // alias de id => value
+                ['titre', 'value'],     // alias de id => value
                 ['titre', 'label']     // alias de nom => label
             ]
         });

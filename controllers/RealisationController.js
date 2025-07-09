@@ -1,5 +1,8 @@
 const RealisationModel = require('../models/RealisationModel');
 const { Op } = require('sequelize');
+const path = require('path');
+const { deleteFileForRecord } = require('../utils/deleteFileForRecord');
+const { generateSlug } = require('../utils/trait');
 
 // 🔹 Récupérer tous les rôles
 exports.fetchDatas = async (req, res) => {
@@ -69,11 +72,12 @@ exports.fetchSigleData = async (req, res) => {
 
 // 🔹 Ajouter ou modifier un élément
 exports.postData = async (req, res) => {
-    const { id, annee, titre, sousTitre, description } = req.body;
+    const { id, annee, titre, sousTitre, description, slug } = req.body;
+    const mySlug = generateSlug(titre);
     try {
         if (!id || id === "") {
             // 🔸 Insertion
-            await RealisationModel.create({ annee, titre, sousTitre, description });
+            await RealisationModel.create({ annee, titre, sousTitre, description, icone:'logo.png', slug: mySlug });
             res.status(200).json({ message: "Insertion avec succès !!!" });
         } else {
             // 🔸 Mise à jour
@@ -97,12 +101,15 @@ exports.editLogo = async (req, res) => {
     if (!logo) return res.status(400).json({ message: "Aucune image envoyée" });
 
     try {
+       
         //appel de la fonction de suppression de l'ancien fichier
+        // ✅ Supprimer l'ancien fichier avant la modification
         await deleteFileForRecord(
-            RealisationModel,          // Ton modèle Sequelize
-            id,                // L'ID
-            'icone',           // La colonne qui contient le nom du fichier
-            path.join(__dirname, '../upload/images') // Ton dossier uploads
+            RealisationModel,
+            id,
+            'icone', // colonne
+            path.join(__dirname, '../upload/images'),
+            ['logo.png', 'avatar.png'] // fichiers protégés
         );
         // 3. Mettre à jour avec le nouveau logo
         await RealisationModel.update({ icone: logo }, { where: { id } });

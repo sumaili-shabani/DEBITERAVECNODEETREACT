@@ -50,6 +50,12 @@ const ProjetModel = sequelize.define('ProjetModel', {
         allowNull: true
     },
 
+    slug: {
+        type: DataTypes.STRING,
+        allowNull: false
+
+    },
+
 
 
 

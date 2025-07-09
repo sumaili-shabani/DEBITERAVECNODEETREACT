@@ -1,5 +1,8 @@
 const { ProjetModel, SecteurModel } = require('../models/associations');
 const { Op } = require('sequelize');
+const path = require('path');
+const { deleteFileForRecord } = require('../utils/deleteFileForRecord');
+const { generateSlug } = require('../utils/trait');
 
 // 🔹 Récupérer tous les rôles
 exports.fetchDatas = async (req, res) => {
@@ -76,15 +79,16 @@ exports.fetchSigleData = async (req, res) => {
 
 // 🔹 Ajouter ou modifier un élément
 exports.postData = async (req, res) => {
-    const { id, idSecteur, titre, sousTitre, description, annee, budget, organisation } = req.body;
+    const { id, idSecteur, titre, soustitre, description, annee, budget, organisation } = req.body;
+    const mySlug = generateSlug(titre);
     try {
         if (!id || id === "") {
             // 🔸 Insertion
-            await ProjetModel.create({ idSecteur, titre, sousTitre, description, annee, budget, organisation });
+            await ProjetModel.create({ idSecteur, titre, soustitre, description, annee, budget, organisation, slug: mySlug, icone: 'logo.png' });
             res.status(200).json({ message: "Insertion avec succès !!!" });
         } else {
             // 🔸 Mise à jour
-            const [updated] = await ProjetModel.update({ idSecteur, titre, sousTitre, description, annee, budget, organisation }, { where: { id } });
+            const [updated] = await ProjetModel.update({ idSecteur, titre, soustitre, description, annee, budget, organisation }, { where: { id } });
             if (updated) {
                 res.status(200).json({ message: "Modification avec succès !!!" });
             } else {
@@ -104,12 +108,15 @@ exports.editLogo = async (req, res) => {
     if (!logo) return res.status(400).json({ message: "Aucune image envoyée" });
 
     try {
+
         //appel de la fonction de suppression de l'ancien fichier
+        // ✅ Supprimer l'ancien fichier avant la modification
         await deleteFileForRecord(
-            ProjetModel,          // Ton modèle Sequelize
-            id,                // L'ID
-            'icone',           // La colonne qui contient le nom du fichier
-            path.join(__dirname, '../upload/images') // Ton dossier uploads
+            ProjetModel,
+            id,
+            'icone', // colonne
+            path.join(__dirname, '../upload/images'),
+            ['logo.png', 'avatar.png'] // fichiers protégés
         );
         // 3. Mettre à jour avec le nouveau logo
         await ProjetModel.update({ icone: logo }, { where: { id } });
