@@ -26,6 +26,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-i18next": "^15.5.2",
+    "react-multi-select-component": "^4.3.4",
     "react-router-dom": "^7.6.0",
     "react-scripts": "5.0.1",
     "react-select": "^5.10.1",

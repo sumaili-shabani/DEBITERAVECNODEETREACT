@@ -8,17 +8,24 @@ import Pagination from '../../../components/Pagination';
 import TextField from '../../../components/TextField';
 import Modal from '../../../components/Modal';
 import LoaderAndError from '../../../components/LoaderAndError';
+import RichTextField from '../../../components/RichTextField';
 
-interface TugBloc {
+interface UiBasic {
     id?: number;
-    titre?: string;
+    apropos?: string;
+    travail?: string;
+    don?: string;
+    structuregestion?: string;
+    financement?: string;
+    carriere?: string;
+    partenariat?: string;
     createdAt?: string;
     updatedAt?: string;
 }
-export default function TugBlog() {
+export default function BasicPage() {
     // declaration de variables
-    const [listData, setDataList] = useState<TugBloc[]>([]);
-    const [formData, setFormData] = useState<Partial<TugBloc>>({});
+    const [listData, setDataList] = useState<UiBasic[]>([]);
+    const [formData, setFormData] = useState<Partial<UiBasic>>({});
     const [isEditing, setIsEditing] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -44,7 +51,7 @@ export default function TugBlog() {
     const loadlistData = async () => {
         setLoading(true);
         try {
-            const res = await fetchItems<TugBloc>('/fetch_tug', {
+            const res = await fetchItems<UiBasic>('/fetch_basic', {
                 q: search,
                 page: currentPage,
                 limit,
@@ -68,7 +75,7 @@ export default function TugBlog() {
     * 
     */
     const handleEdit = async (id: number) => {
-        const role = await fetchItem<TugBloc>('/fetch_single_tug', id);
+        const role = await fetchItem<UiBasic>('/fetch_single_basic', id);
         // console.log("role:" + role);
         setFormData(role);
         setIsEditing(true);
@@ -85,7 +92,7 @@ export default function TugBlog() {
 
         if (confirmed) {
             try {
-                await removeItem('/delete_tug', id);
+                await removeItem('/delete_basic', id);
                 loadlistData();
                 Swal.fire('Supprimé', '', 'success');
             } catch (error) {
@@ -98,7 +105,7 @@ export default function TugBlog() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        await saveItem('/insert_tug', formData);
+        await saveItem('/insert_basic', formData);
         loadlistData();
         handleCloseModal();
     };
@@ -123,7 +130,7 @@ export default function TugBlog() {
 
     return (
         <div className="container mt-4">
-            <h4 className="mb-3">Liste des tugs</h4>
+            <h4 className="mb-3">Liste des Infos basiques du site</h4>
             {/* loading component */}
             <LoaderAndError
                 loading={loading}
@@ -138,18 +145,106 @@ export default function TugBlog() {
                 title={isEditing ? 'Modifier une donnée' : 'Ajouter une donnée'}
                 show={showModal}
                 onClose={handleCloseModal}
-                dimension="modal-sm"
+                dimension="modal-lg"
             >
                 <form onSubmit={handleSubmit}>
-                    <TextField
-                        name="titre"
-                        value={formData.titre || ''}
-                        onChange={handleInputChange}
-                        placeholder="Nom du tug"
-                        label="Nom du tug"
-                        icon="fas fa-heading"
-                        required
-                    />
+                    <div className="col-md-12">
+                        <div className="row">
+                            <div className="col-md-12">
+
+                                <RichTextField
+                                    name="apropos"
+                                    value={formData.apropos || ''}
+                                    onChange={handleInputChange}
+                                    placeholder="A propos du site"
+                                    label="A propos du site"
+                                    icon="fas fa-text-width"
+                                    required
+                                />
+
+                            </div>
+                            <div className="col-md-12">
+
+                                <RichTextField
+                                    name="travail"
+                                    value={formData.travail || ''}
+                                    onChange={handleInputChange}
+                                    placeholder="Ce que nous faisons"
+                                    label="Ce que nous faisons"
+                                    icon="fas fa-text-width"
+                                    
+                                />
+
+                            </div>
+                            <div className="col-md-12">
+
+                                <RichTextField
+                                    name="don"
+                                    value={formData.don || ''}
+                                    onChange={handleInputChange}
+                                    placeholder="Nous faire un don"
+                                    label="Nous faire un don"
+                                    icon="fas fa-text-width"
+                                    
+                                />
+
+                            </div>
+                            <div className="col-md-12">
+
+                                <RichTextField
+                                    name="structuregestion"
+                                    value={formData.structuregestion || ''}
+                                    onChange={handleInputChange}
+                                    placeholder="Stricture de gestion"
+                                    label="Stricture de gestion"
+                                    icon="fas fa-text-width"
+                                    
+                                />
+
+                            </div>
+                            <div className="col-md-12">
+
+                                <RichTextField
+                                    name="financement"
+                                    value={formData.financement || ''}
+                                    onChange={handleInputChange}
+                                    placeholder="Financement"
+                                    label="Financement"
+                                    icon="fas fa-text-width"
+                                    
+                                />
+
+                            </div>
+                            <div className="col-md-12">
+
+                                <RichTextField
+                                    name="carriere"
+                                    value={formData.carriere || ''}
+                                    onChange={handleInputChange}
+                                    placeholder="Nom du secteur"
+                                    label="Nom du secteur"
+                                    icon="fas fa-text-width"
+                                    
+                                />
+
+                            </div>
+                            <div className="col-md-12">
+
+                                <RichTextField
+                                    name="partenariat"
+                                    value={formData.partenariat || ''}
+                                    onChange={handleInputChange}
+                                    placeholder="Partenariat"
+                                    label="Partenariat"
+                                    icon="fas fa-text-width"
+                                    
+                                />
+
+                            </div>
+                           
+                        </div>
+                    </div>
+                    
                     <div className="d-flex justify-content-end">
                         <button type="submit" className="btn btn-primary">
                             {isEditing ? 'Modifier' : 'Ajouter'}
@@ -198,7 +293,9 @@ export default function TugBlog() {
                     <thead className="table-dark">
                         <tr>
 
-                            <th>Titre</th>
+                            <th>Apropos</th>
+                            <th>Ce que Nous faisons</th>
+                            <th>Nous faire un don</th>
                             <th>Date de création</th>
                             <th>Actions</th>
                         </tr>
@@ -206,7 +303,7 @@ export default function TugBlog() {
                     <tbody>
                         {listData.length === 0 ? (
                             <tr>
-                                <td colSpan={3} className="text-center">
+                                <td colSpan={5} className="text-center">
                                     Aucune donnée trouvée
                                 </td>
                             </tr>
@@ -214,7 +311,10 @@ export default function TugBlog() {
                             listData.map((item) => (
                                 <tr key={item.id}>
 
-                                    <td>{truncateText(item.titre!, 20)}</td>
+                                    <td>{truncateText(item.apropos!, 20)}</td>
+                                    <td>{truncateText(item.travail!, 20)}</td>
+                                    <td>{truncateText(item.don!, 20)}</td>
+                                  
                                     <td>{formatDateFR(item.createdAt ?? '')} {extractTime(item.createdAt ?? '')}</td>
                                     <td>
                                         <button

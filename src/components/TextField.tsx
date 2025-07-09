@@ -31,7 +31,7 @@ export default function TextField({
                     </span>
                 </div>
                 <input
-                    type="text"
+                    type={type}
                     className="form-control"
                     aria-label={label || 'input'}
                     aria-describedby="basic-addon1"

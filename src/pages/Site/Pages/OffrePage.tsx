@@ -9,43 +9,35 @@ import TextField from '../../../components/TextField';
 import Modal from '../../../components/Modal';
 import LoaderAndError from '../../../components/LoaderAndError';
 import { fileUrl } from '../../../api/config';
-import ComboBoxField from '../../../components/ComboBox';
 import TextAreaFild from '../../../components/TextAreaField';
 import RichTextField from '../../../components/RichTextField';
 
-import MultiSelectField from '../../../components/MultiSelectField';
-interface catBlog {
-    id?: number;
-    titre?: string;
-}
 
-interface Option {
-    label: string; // pas string | undefined
-    value: string;
-}
-interface UiBlog {
+interface UiOffre {
     id?: number;
     titre?: string;
     sousTitre?: string;
     description?: string;
-    idCategory?: number;
-    status?: number;
-    icone?: string;
+    annee?: string;
+
+    dates?: string;
+    lieu?: string;
+    organisation?: string;
+    lien?: string;
+
+    fichier?: string;
     logoFile?: File;
-    tug?: any;
     slug?: String;
     createdAt?: string;
     updatedAt?: string;
-    // jointire
-    category_blog?: catBlog;
-    selected?: Option[];
+
 }
 
 
-export default function Blog() {
+export default function OffrePage() {
     // declaration de variables
-    const [listData, setDataList] = useState<UiBlog[]>([]);
-    const [formData, setFormData] = useState<Partial<UiBlog>>({});
+    const [listData, setDataList] = useState<UiOffre[]>([]);
+    const [formData, setFormData] = useState<Partial<UiOffre>>({});
     const [isEditing, setIsEditing] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -56,63 +48,6 @@ export default function Blog() {
     const [limit, setLimit] = useState(10);
     const [totalPages, setTotalPages] = useState(1);
     //fin declaration
-
-    /*
-    *
-    *========================================
-    * Chargement des combobox
-    *========================================
-    */
-    const [categoryBlog, setCategoryBlog] = useState([]);
-    const [tugBlog, setTugBlog] = useState([]);
-
-    // chargement de la table
-    const loadCategoryBlogList = async () => {
-        setLoading(true);
-        try {
-            const res = await fetchListItems('/fetch_all_category_blog');
-            // console.log(JSON.stringify(res.data));
-            setCategoryBlog(res.data);
-
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    // chargement de la table
-    const loadTugBlogList = async () => {
-        setLoading(true);
-        try {
-            const res = await fetchListItems('/fetch_all_tug');
-            // console.log(JSON.stringify(res.data));
-            setTugBlog(res.data);
-
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    /*
-   *
-   *========================================
-   * Fin Chargement des combobox
-   *========================================
-   */
-
-    const checkStatusBlog = async (id: number) => {
-        setLoading(true);
-        try {
-            const res = await gethItem('/check_status_blog', id);
-            const message = res.message;
-            showMessage(message);
-            loadlistData();
-
-        } finally {
-            setLoading(false);
-        }
-
-
-    }
 
 
     // pour la langue
@@ -130,7 +65,7 @@ export default function Blog() {
         setLoading(true);
 
         try {
-            const res = await fetchItems<UiBlog>('/fetch_blog', {
+            const res = await fetchItems<UiOffre>('/fetch_offre', {
                 q: search,
                 page: currentPage,
                 limit,
@@ -146,8 +81,7 @@ export default function Blog() {
 
     useEffect(() => {
         loadlistData();
-        loadCategoryBlogList();
-        loadTugBlogList();
+
     }, [search, currentPage, limit]);
 
     /*
@@ -158,40 +92,11 @@ export default function Blog() {
     * 
     */
     const handleEdit = async (id: number) => {
-        const role = await fetchItem<UiBlog>('/fetch_single_blog', id);
+        const role = await fetchItem<UiOffre>('/fetch_single_offre', id);
         // console.log("role:" + role);
-        // setFormData(role);
+        setFormData(role);
         setIsEditing(true);
         setShowModal(true);
-
-        /*
-        *
-        *===============================
-        * Pour les composants multiples
-        *===============================
-        * 
-        */
-        // 🗂️ Si role.tug est une string CSV : "dev,ai,react"
-        const tugArray = role.tug ? role.tug.split(',') : [];
-        const selected = tugArray.map((t:any) => ({
-            label: t.trim(),
-            value: t.trim(),
-        }));
-
-        // ✅ Mets à jour formData avec la version SELECTED
-        setFormData({
-            ...role,
-            selected, // prêt pour MultiSelectField
-        });
-
-        /*
-       *
-       *===============================
-       * Fin les composants multiples
-       *===============================
-       * 
-       */
-
 
     };
 
@@ -205,7 +110,7 @@ export default function Blog() {
 
         if (confirmed) {
             try {
-                await removeItem('/delete_blog', id);
+                await removeItem('/delete_offre', id);
                 loadlistData();
                 Swal.fire('Supprimé', '', 'success');
             } catch (error) {
@@ -218,7 +123,7 @@ export default function Blog() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        await saveItem('/insert_blog', formData);
+        await saveItem('/insert_offre', formData);
         loadlistData();
         handleCloseModal();
     };
@@ -250,7 +155,7 @@ export default function Blog() {
 
     const [showModalSiteLogo, setShowModalSiteLogo] = useState(false);
     const handlEditImage = async (id: number) => {
-        const data = await fetchItem<UiBlog>('/fetch_single_blog', id);
+        const data = await fetchItem<UiOffre>('/fetch_single_offre', id);
         // console.log("Site:" + role);
         setPreview('');
         setFormData(data);
@@ -266,6 +171,7 @@ export default function Blog() {
     // fin modal image
 
     const [preview, setPreview] = useState<string | null>(null);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
     const handleInputChangeImage = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -273,14 +179,22 @@ export default function Blog() {
         const { name, value, files } = e.target as HTMLInputElement;
 
         if (name === 'logo' && files && files[0]) {
-            const file = files[0]; // ✅ Déclaration correcte
+            const file = files[0];
 
             setFormData((prev) => ({
                 ...prev,
                 logoFile: file,
             }));
 
-            setPreview(URL.createObjectURL(file)); // ✅ Utilisation correcte de `file`
+            // ✅ Mémoriser le fichier pour afficher son nom
+            setSelectedFile(file);
+
+            // ✅ Si c'est une image, créer un preview
+            if (file.type.startsWith('image/')) {
+                setPreview(URL.createObjectURL(file));
+            } else {
+                setPreview(null); // Pas d'image preview pour PDF/Word
+            }
         } else {
             setFormData((prev) => ({
                 ...prev,
@@ -288,9 +202,6 @@ export default function Blog() {
             }));
         }
     };
-
-
-
 
 
     const handleSubmitImage = async (e: React.FormEvent) => {
@@ -302,7 +213,7 @@ export default function Blog() {
             formDataToSend.append('logo', formData.logoFile);
         }
 
-        await saveItemImageForm('/edit_blog_logo', formDataToSend);
+        await saveItemImageForm('/edit_offre_logo', formDataToSend);
         loadlistData();
         handleCloseModalImage();
     };
@@ -318,7 +229,7 @@ export default function Blog() {
 
     return (
         <div className="mt-4">
-            <h4 className="mb-3">Liste des blogs</h4>
+            <h4 className="mb-3">Liste des offres</h4>
             {/* loading component */}
             <LoaderAndError
                 loading={loading}
@@ -342,87 +253,75 @@ export default function Blog() {
                                 name="titre"
                                 value={formData.titre || ''}
                                 onChange={handleInputChange}
-                                placeholder="Titre de blog"
-                                label="Titre de blog"
+                                placeholder="Titre de l'offre"
+                                label="Titre de l'offre"
                                 icon="fas fa-text-width"
                                 required
                             />
                         </div>
+                        
                         <div className="col-md-6">
-                            <ComboBoxField
-                                name="idCategory"
-                                value={formData.idCategory || 0}
+                            <TextField
+                                type='date'
+                                name="dates"
+                                value={formData.dates || ''}
                                 onChange={handleInputChange}
-                                placeholder="Catégorie"
-                                label="Catégorie"
-                                icon="fab fa-accusoft"
-                                options={categoryBlog}
+                                placeholder="Date limite de postulation"
+                                label="Date limite de postulation"
+                                icon="fas fa-calendar"
                                 required
                             />
                         </div>
                         <div className="col-md-6">
-
-                            {/* <ComboBoxField
-                                name="tug"
-                                value={formData.tug || ''}
+                            <TextField
+                                name="lieu"
+                                value={formData.lieu || ''}
                                 onChange={handleInputChange}
-                                placeholder="Tug"
-                                label="Tug"
-                                icon="fas fa-tags"
-                                options={tugBlog}
-
-                                required
-                            /> */}
-
-                            <MultiSelectField
-                                name="tug"
-                                label="Mots-clés du blog"
-                                value={formData.selected || []}
-                                onChange={(selected) => {
-                                    setFormData((prev) => ({
-                                        ...prev,
-                                        selected,                             // tableau pour l'UI
-                                        tug: selected.map(opt => opt.value).join(',') // CSV pour la DB
-                                    }));
-                                }}
-                                options={tugBlog}
-                                placeholder="Choisis tes fruits"
-                                icon="fas fa-list"
-                                required
-
-                            />
-
-
-
-                        </div>
-                        <div className="col-md-12">
-                            <TextAreaFild
-                                name="sousTitre"
-                                value={formData.sousTitre || ''}
-                                onChange={handleInputChange}
-                                placeholder="Sous titre de blog"
-                                label="Sous titre de blog"
-                                icon="fas fa-text-height"
-                                rows={2}
+                                placeholder="Lieu d'affectation"
+                                label="Lieu d'affectation"
+                                icon="fas fa-map"
                                 required
                             />
-
                         </div>
+
+                        <div className="col-md-6">
+                            <TextField
+                                name="organisation"
+                                value={formData.organisation || ''}
+                                onChange={handleInputChange}
+                                placeholder="Non de l'organisation"
+                                label="Non de l'organisation"
+                                icon="fas fa-home"
+                                required
+                            />
+                        </div>
+
+                        <div className="col-md-6">
+                            <TextField
+                                name="lien"
+                                value={formData.lien || ''}
+                                onChange={handleInputChange}
+                                placeholder="Lien pour postuler"
+                                label="Lien pour postuler"
+                                icon="fas fa-link"
+                                required
+                            />
+                        </div>
+
+                        
                         <div className="col-md-12">
                             <RichTextField
                                 name="description"
                                 value={formData.description || ''}
                                 onChange={handleInputChange}
-                                placeholder="Description de blog"
-                                label="Description de blog"
+                                placeholder="Description de l'offre"
+                                label="Description de l'offre"
                                 icon="fas fa-text-width"
                                 required
                             />
                         </div>
 
-                        <div className="col-md-6">
 
-                        </div>
                     </div>
 
 
@@ -453,16 +352,33 @@ export default function Blog() {
                                     type="file"
                                     name="logo"
                                     id="logo"
-                                    className='form-control'
+                                    className="form-control"
                                     onChange={handleInputChangeImage}
                                     required
+                                    accept=".pdf,.doc,.docx,.txt,.xls,.xlsx,.ppt,.pptx"
+
                                 />
                             </div>
 
                             <div className="col-md-12">
-                                {/* affichage de l'image selectionnée */}
-                                <img src={preview || fileUrl + '/images/' + formData.icone!} alt="image sélectionnée"
-                                    className='img img-thumbnail col-md-6' width={50} height={50} />
+
+                                {/* ✅ Affiche l'image si c'est une image */}
+                                {preview && (
+                                    <img
+                                        src={preview || fileUrl + '/images/' + formData.fichier!}
+                                        alt="Aperçu"
+                                        className="img img-thumbnail col-md-6"
+                                        width={50}
+                                        height={50}
+                                    />
+                                )}
+
+                                {/* ✅ Affiche le nom du fichier si non image */}
+                                {selectedFile && !preview && (
+                                    <div className="mt-2">
+                                        <strong>Fichier sélectionné :</strong> {selectedFile.name}
+                                    </div>
+                                )}
 
                             </div>
                         </div>
@@ -521,12 +437,13 @@ export default function Blog() {
                 <table className="table">
                     <thead className="table-dark">
                         <tr>
-                            <th>Avatar</th>
+                            <th>Fichier PDF</th>
                             <th>Titre</th>
-                            <th>Sous titre</th>
-                            <th>Catégorie</th>
-                            <th>Tug</th>
-                            <th>Statut</th>
+                           
+                            <th>Date limite</th>
+                            <th>Lien</th>
+                            <th>Organisation</th>
+
                             <th>Date de création</th>
                             <th>Actions</th>
                         </tr>
@@ -541,25 +458,30 @@ export default function Blog() {
                         ) : (
                             listData.map((item) => (
                                 <tr key={item.id}>
-                                    <td><img src={fileUrl + '/images/' + item.icone} alt={item.icone} width={40} height={40} className='img rounded-circle' /></td>
-
-                                    <td>{truncateText(item.titre!, 20)}</td>
-                                    <td>{truncateText(item.sousTitre!, 20)}</td>
-                                    <td>{truncateText(item.category_blog?.titre!, 20)}</td>
-                                    <td>{truncateText(item.tug ?? '', 20)}</td>
                                     <td>
-                                        <span onClick={() => checkStatusBlog(item.id!)} style={{ cursor: 'pointer' }} className={`${item.status! == 1 ? 'badge rounded-pill bg-success text-white' : 'badge rounded-pill bg-danger text-white'}`}>
-                                            {item.status! === 1 ? 'actif' : 'inactif'}
-                                        </span>
+
+                                        <a href={fileUrl + '/images/' + item.fichier} download={true}>
+                                            <i className='fas fa-file'></i> téléchanger
+                                        </a>
                                     </td>
 
+                                    <td>{truncateText(item.titre!, 20)}</td>
+                                    
+                                    <td>{formatDateFR(item.dates!)}</td>
+                                    <td>
+                                        <a href={item.lien} target='_blank'>
+                                            {truncateText(item.lien ?? '', 20)}
+                                        </a>
+                                    </td>
+                                    <td>{truncateText(item.organisation ?? '', 20)}</td>
+                                   
                                     <td>{formatDateFR(item.createdAt ?? '')} {extractTime(item.createdAt ?? '')}</td>
                                     <td>
                                         <button
                                             className="btn btn-secondary btn-circle btn-sm me-1"
                                             onClick={() => handlEditImage(item.id!)}
                                         >
-                                            <i className="fas fa-camera"></i>
+                                            <i className="fas fa-file"></i>
                                         </button>
                                         <button
                                             className="btn btn-warning btn-circle btn-sm me-1"

@@ -14,35 +14,35 @@ import TextAreaFild from '../../../components/TextAreaField';
 import RichTextField from '../../../components/RichTextField';
 
 import MultiSelectField from '../../../components/MultiSelectField';
-interface catBlog {
+interface UiSecteur {
     id?: number;
-    titre?: string;
+    nomSecteur?: string;
 }
 
-interface Option {
-    label: string; // pas string | undefined
-    value: string;
-}
+
 interface UiBlog {
     id?: number;
     titre?: string;
-    sousTitre?: string;
+    soustitre?: string;
     description?: string;
-    idCategory?: number;
-    status?: number;
+    idSecteur?: number;
     icone?: string;
     logoFile?: File;
-    tug?: any;
     slug?: String;
+
+    annee?: string;
+    budget?: string;
+    organisation?: string;
+
     createdAt?: string;
     updatedAt?: string;
     // jointire
-    category_blog?: catBlog;
-    selected?: Option[];
+    secteur_projet?: UiSecteur;
+
 }
 
 
-export default function Blog() {
+export default function ProjetPage() {
     // declaration de variables
     const [listData, setDataList] = useState<UiBlog[]>([]);
     const [formData, setFormData] = useState<Partial<UiBlog>>({});
@@ -63,35 +63,22 @@ export default function Blog() {
     * Chargement des combobox
     *========================================
     */
-    const [categoryBlog, setCategoryBlog] = useState([]);
-    const [tugBlog, setTugBlog] = useState([]);
+    const [secteurList, setSceteurList] = useState([]);
 
     // chargement de la table
-    const loadCategoryBlogList = async () => {
+    const loadSecteurList = async () => {
         setLoading(true);
         try {
-            const res = await fetchListItems('/fetch_all_category_blog');
+            const res = await fetchListItems('/fetch_all_secteur');
             // console.log(JSON.stringify(res.data));
-            setCategoryBlog(res.data);
+            setSceteurList(res.data);
 
         } finally {
             setLoading(false);
         }
     };
 
-    // chargement de la table
-    const loadTugBlogList = async () => {
-        setLoading(true);
-        try {
-            const res = await fetchListItems('/fetch_all_tug');
-            // console.log(JSON.stringify(res.data));
-            setTugBlog(res.data);
-
-        } finally {
-            setLoading(false);
-        }
-    };
-
+   
     /*
    *
    *========================================
@@ -99,20 +86,7 @@ export default function Blog() {
    *========================================
    */
 
-    const checkStatusBlog = async (id: number) => {
-        setLoading(true);
-        try {
-            const res = await gethItem('/check_status_blog', id);
-            const message = res.message;
-            showMessage(message);
-            loadlistData();
-
-        } finally {
-            setLoading(false);
-        }
-
-
-    }
+   
 
 
     // pour la langue
@@ -130,7 +104,7 @@ export default function Blog() {
         setLoading(true);
 
         try {
-            const res = await fetchItems<UiBlog>('/fetch_blog', {
+            const res = await fetchItems<UiBlog>('/fetch_projet', {
                 q: search,
                 page: currentPage,
                 limit,
@@ -146,8 +120,7 @@ export default function Blog() {
 
     useEffect(() => {
         loadlistData();
-        loadCategoryBlogList();
-        loadTugBlogList();
+        loadSecteurList();
     }, [search, currentPage, limit]);
 
     /*
@@ -158,39 +131,13 @@ export default function Blog() {
     * 
     */
     const handleEdit = async (id: number) => {
-        const role = await fetchItem<UiBlog>('/fetch_single_blog', id);
+        const role = await fetchItem<UiBlog>('/fetch_single_projet', id);
         // console.log("role:" + role);
-        // setFormData(role);
+        setFormData(role);
         setIsEditing(true);
         setShowModal(true);
 
-        /*
-        *
-        *===============================
-        * Pour les composants multiples
-        *===============================
-        * 
-        */
-        // 🗂️ Si role.tug est une string CSV : "dev,ai,react"
-        const tugArray = role.tug ? role.tug.split(',') : [];
-        const selected = tugArray.map((t:any) => ({
-            label: t.trim(),
-            value: t.trim(),
-        }));
-
-        // ✅ Mets à jour formData avec la version SELECTED
-        setFormData({
-            ...role,
-            selected, // prêt pour MultiSelectField
-        });
-
-        /*
-       *
-       *===============================
-       * Fin les composants multiples
-       *===============================
-       * 
-       */
+       
 
 
     };
@@ -205,7 +152,7 @@ export default function Blog() {
 
         if (confirmed) {
             try {
-                await removeItem('/delete_blog', id);
+                await removeItem('/delete_projet', id);
                 loadlistData();
                 Swal.fire('Supprimé', '', 'success');
             } catch (error) {
@@ -218,7 +165,7 @@ export default function Blog() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        await saveItem('/insert_blog', formData);
+        await saveItem('/insert_projet', formData);
         loadlistData();
         handleCloseModal();
     };
@@ -250,7 +197,7 @@ export default function Blog() {
 
     const [showModalSiteLogo, setShowModalSiteLogo] = useState(false);
     const handlEditImage = async (id: number) => {
-        const data = await fetchItem<UiBlog>('/fetch_single_blog', id);
+        const data = await fetchItem<UiBlog>('/fetch_single_projet', id);
         // console.log("Site:" + role);
         setPreview('');
         setFormData(data);
@@ -290,9 +237,6 @@ export default function Blog() {
     };
 
 
-
-
-
     const handleSubmitImage = async (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -302,7 +246,7 @@ export default function Blog() {
             formDataToSend.append('logo', formData.logoFile);
         }
 
-        await saveItemImageForm('/edit_blog_logo', formDataToSend);
+        await saveItemImageForm('/edit_projet_logo', formDataToSend);
         loadlistData();
         handleCloseModalImage();
     };
@@ -318,7 +262,7 @@ export default function Blog() {
 
     return (
         <div className="mt-4">
-            <h4 className="mb-3">Liste des blogs</h4>
+            <h4 className="mb-3">Liste des projets</h4>
             {/* loading component */}
             <LoaderAndError
                 loading={loading}
@@ -342,66 +286,70 @@ export default function Blog() {
                                 name="titre"
                                 value={formData.titre || ''}
                                 onChange={handleInputChange}
-                                placeholder="Titre de blog"
-                                label="Titre de blog"
+                                placeholder="Titre de projet"
+                                label="Titre de projet"
                                 icon="fas fa-text-width"
                                 required
                             />
                         </div>
                         <div className="col-md-6">
                             <ComboBoxField
-                                name="idCategory"
-                                value={formData.idCategory || 0}
+                                name="idSecteur"
+                                value={formData.idSecteur || 0}
                                 onChange={handleInputChange}
-                                placeholder="Catégorie"
-                                label="Catégorie"
+                                placeholder="Secteur"
+                                label="Secteur"
                                 icon="fab fa-accusoft"
-                                options={categoryBlog}
+                                options={secteurList}
                                 required
+                            />
+                        </div>
+
+                        <div className="col-md-6">
+                            <TextField
+                                name="annee"
+                                value={formData.annee || ''}
+                                onChange={handleInputChange}
+                                placeholder="Année de réalisation"
+                                label="Année de réalisation"
+                                icon="fas fa-calendar"
+                                required
+                            />
+                        </div>
+
+
+                        <div className="col-md-6">
+                            <TextField
+                                name="budget"
+                                value={formData.budget || ''}
+                                onChange={handleInputChange}
+                                placeholder="Budget"
+                                label="Budget"
+                                icon="fas fa-wallet"
+                               
                             />
                         </div>
                         <div className="col-md-6">
-
-                            {/* <ComboBoxField
-                                name="tug"
-                                value={formData.tug || ''}
+                            <TextField
+                                name="organisation"
+                                value={formData.organisation || ''}
                                 onChange={handleInputChange}
-                                placeholder="Tug"
-                                label="Tug"
-                                icon="fas fa-tags"
-                                options={tugBlog}
-
+                                placeholder="Nom de l'organisation"
+                                label="Nom de l'organisation"
+                                icon="fas fa-house-user"
                                 required
-                            /> */}
-
-                            <MultiSelectField
-                                name="tug"
-                                label="Mots-clés du blog"
-                                value={formData.selected || []}
-                                onChange={(selected) => {
-                                    setFormData((prev) => ({
-                                        ...prev,
-                                        selected,                             // tableau pour l'UI
-                                        tug: selected.map(opt => opt.value).join(',') // CSV pour la DB
-                                    }));
-                                }}
-                                options={tugBlog}
-                                placeholder="Choisis tes fruits"
-                                icon="fas fa-list"
-                                required
-
                             />
-
-
-
                         </div>
+
+
+                      
                         <div className="col-md-12">
                             <TextAreaFild
-                                name="sousTitre"
-                                value={formData.sousTitre || ''}
+                                name="soustitre"
+                                value={formData.soustitre || ''}
                                 onChange={handleInputChange}
-                                placeholder="Sous titre de blog"
-                                label="Sous titre de blog"
+                                placeholder="Sous titre de projet"
+                                label="Sous titre de projet"
                                 icon="fas fa-text-height"
                                 rows={2}
                                 required
@@ -413,8 +361,8 @@ export default function Blog() {
                                 name="description"
                                 value={formData.description || ''}
                                 onChange={handleInputChange}
-                                placeholder="Description de blog"
-                                label="Description de blog"
+                                placeholder="Description de projet"
+                                label="Description de projet"
                                 icon="fas fa-text-width"
                                 required
                             />
@@ -524,9 +472,8 @@ export default function Blog() {
                             <th>Avatar</th>
                             <th>Titre</th>
                             <th>Sous titre</th>
-                            <th>Catégorie</th>
-                            <th>Tug</th>
-                            <th>Statut</th>
+                            <th>Secteur</th>
+                            <th>Organisation</th>
                             <th>Date de création</th>
                             <th>Actions</th>
                         </tr>
@@ -534,7 +481,7 @@ export default function Blog() {
                     <tbody>
                         {listData.length === 0 ? (
                             <tr>
-                                <td colSpan={8} className="text-center">
+                                <td colSpan={7} className="text-center">
                                     Aucune donnée trouvée
                                 </td>
                             </tr>
@@ -544,14 +491,10 @@ export default function Blog() {
                                     <td><img src={fileUrl + '/images/' + item.icone} alt={item.icone} width={40} height={40} className='img rounded-circle' /></td>
 
                                     <td>{truncateText(item.titre!, 20)}</td>
-                                    <td>{truncateText(item.sousTitre!, 20)}</td>
-                                    <td>{truncateText(item.category_blog?.titre!, 20)}</td>
-                                    <td>{truncateText(item.tug ?? '', 20)}</td>
-                                    <td>
-                                        <span onClick={() => checkStatusBlog(item.id!)} style={{ cursor: 'pointer' }} className={`${item.status! == 1 ? 'badge rounded-pill bg-success text-white' : 'badge rounded-pill bg-danger text-white'}`}>
-                                            {item.status! === 1 ? 'actif' : 'inactif'}
-                                        </span>
-                                    </td>
+                                    <td>{truncateText(item.soustitre!, 20)}</td>
+                                    <td>{truncateText(item.secteur_projet?.nomSecteur!, 20)}</td>
+                                    <td>{truncateText(item.organisation ?? '', 20)}</td>
+                                   
 
                                     <td>{formatDateFR(item.createdAt ?? '')} {extractTime(item.createdAt ?? '')}</td>
                                     <td>

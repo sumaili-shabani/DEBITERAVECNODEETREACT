@@ -36,10 +36,10 @@ const Modal: React.FC<ModalProps> = ({ title, show, onClose, onSave, children, d
         <div className="modal fade" tabIndex={-1} role="dialog" ref={modalRef} style={{ display: 'none' }} id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className={'modal-dialog '+dimension} role="document">
                 <div className="modal-content">
-                    <div className="modal-header">
+                    <div className="modal-header bg-dark text-white">
                         <h5 className="modal-title">{title}</h5>
                         
-                        <button type="button" className="btn-close btn-sm text-muted" onClick={onClose} >
+                        <button type="button" className="btn-close btn-sm text-white " onClick={onClose} >
                             X
                         </button>
                     </div>

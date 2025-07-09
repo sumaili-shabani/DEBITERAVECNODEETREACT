@@ -9,16 +9,16 @@ import TextField from '../../../components/TextField';
 import Modal from '../../../components/Modal';
 import LoaderAndError from '../../../components/LoaderAndError';
 
-interface TugBloc {
+interface UiSecteur {
     id?: number;
-    titre?: string;
+    nomSecteur?: string;
     createdAt?: string;
     updatedAt?: string;
 }
-export default function TugBlog() {
+export default function SecteurPage() {
     // declaration de variables
-    const [listData, setDataList] = useState<TugBloc[]>([]);
-    const [formData, setFormData] = useState<Partial<TugBloc>>({});
+    const [listData, setDataList] = useState<UiSecteur[]>([]);
+    const [formData, setFormData] = useState<Partial<UiSecteur>>({});
     const [isEditing, setIsEditing] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -44,7 +44,7 @@ export default function TugBlog() {
     const loadlistData = async () => {
         setLoading(true);
         try {
-            const res = await fetchItems<TugBloc>('/fetch_tug', {
+            const res = await fetchItems<UiSecteur>('/fetch_secteur', {
                 q: search,
                 page: currentPage,
                 limit,
@@ -68,7 +68,7 @@ export default function TugBlog() {
     * 
     */
     const handleEdit = async (id: number) => {
-        const role = await fetchItem<TugBloc>('/fetch_single_tug', id);
+        const role = await fetchItem<UiSecteur>('/fetch_single_secteur', id);
         // console.log("role:" + role);
         setFormData(role);
         setIsEditing(true);
@@ -85,7 +85,7 @@ export default function TugBlog() {
 
         if (confirmed) {
             try {
-                await removeItem('/delete_tug', id);
+                await removeItem('/delete_secteur', id);
                 loadlistData();
                 Swal.fire('Supprimé', '', 'success');
             } catch (error) {
@@ -98,7 +98,7 @@ export default function TugBlog() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        await saveItem('/insert_tug', formData);
+        await saveItem('/insert_secteur', formData);
         loadlistData();
         handleCloseModal();
     };
@@ -123,7 +123,7 @@ export default function TugBlog() {
 
     return (
         <div className="container mt-4">
-            <h4 className="mb-3">Liste des tugs</h4>
+            <h4 className="mb-3">Liste des secteurs</h4>
             {/* loading component */}
             <LoaderAndError
                 loading={loading}
@@ -142,12 +142,12 @@ export default function TugBlog() {
             >
                 <form onSubmit={handleSubmit}>
                     <TextField
-                        name="titre"
-                        value={formData.titre || ''}
+                        name="nomSecteur"
+                        value={formData.nomSecteur || ''}
                         onChange={handleInputChange}
-                        placeholder="Nom du tug"
-                        label="Nom du tug"
-                        icon="fas fa-heading"
+                        placeholder="Nom du secteur"
+                        label="Nom du secteur"
+                        icon="fas fa-text-width"
                         required
                     />
                     <div className="d-flex justify-content-end">
@@ -198,7 +198,7 @@ export default function TugBlog() {
                     <thead className="table-dark">
                         <tr>
 
-                            <th>Titre</th>
+                            <th>nomSecteur</th>
                             <th>Date de création</th>
                             <th>Actions</th>
                         </tr>
@@ -214,7 +214,7 @@ export default function TugBlog() {
                             listData.map((item) => (
                                 <tr key={item.id}>
 
-                                    <td>{truncateText(item.titre!, 20)}</td>
+                                    <td>{truncateText(item.nomSecteur!, 20)}</td>
                                     <td>{formatDateFR(item.createdAt ?? '')} {extractTime(item.createdAt ?? '')}</td>
                                     <td>
                                         <button

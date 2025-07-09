@@ -415,7 +415,8 @@ body.dark .react-select__menu {
 body.dark .list-group {
     background-color: #2e2e42;
     color: #ffffff;
-} 
+}
+
 body.dark .card-header {
     background-color: #2e2e42;
     color: #ffffff;
@@ -441,4 +442,9 @@ body.dark .react-select__single-value {
     color: #ffffff !important;
     margin-inline-start: 0.5rem;
     /* équivaut à Bootstrap's me-1 */
+}
+
+body.dark .bg-secondary .bg-dark {
+    background-color: #2e2e42;
+    color: #ffffff;
 }

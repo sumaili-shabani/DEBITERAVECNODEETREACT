@@ -27,6 +27,14 @@ import Dashboard from './pages/admin/pages/Dashboard/Dashboard';
 import TugBlog from './pages/Site/Articles/TugBlog';
 import CategoryBlog from './pages/Site/Articles/CategoryBlog';
 import Blog from './pages/Site/Articles/Article';
+import RealisationPage from './pages/Site/Pages/Realisation';
+import RapportPage from './pages/Site/Pages/Rapport';
+import TeamPage from './pages/Site/Pages/TeamPage';
+import SecteurPage from './pages/Site/Pages/Secteur';
+import CarouselPage from './pages/Site/Pages/Carousel';
+import ProjetPage from './pages/Site/Pages/ProjetPage';
+import OffrePage from './pages/Site/Pages/OffrePage';
+import BasicPage from './pages/Site/Pages/BasicPage';
 
 
 
@@ -101,6 +109,88 @@ function App() {
             }
           />
 
+          <Route
+            path="/realisation"
+            element={
+              <PrivateRoute>
+                <RealisationPage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/rapport"
+            element={
+              <PrivateRoute>
+                <RapportPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/team"
+            element={
+              <PrivateRoute>
+                <TeamPage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/secteur"
+            element={
+              <PrivateRoute>
+                <SecteurPage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/carousel"
+            element={
+              <PrivateRoute>
+                <CarouselPage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/project"
+            element={
+              <PrivateRoute>
+                <ProjetPage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/offer"
+            element={
+              <PrivateRoute>
+                <OffrePage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/conf_basic"
+            element={
+              <PrivateRoute>
+                <BasicPage />
+              </PrivateRoute>
+            }
+          />
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -167,7 +257,7 @@ function App() {
             }
           />
 
-          
+
 
           {/* fin pages de chargement */}
 

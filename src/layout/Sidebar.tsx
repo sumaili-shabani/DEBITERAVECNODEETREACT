@@ -105,7 +105,7 @@ export default function Sidebar() {
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link className="nav-link py-1" to="/projet">
+                                            <Link className="nav-link py-1" to="/project">
                                                 <i className="fas fa-tag"></i> Projet
                                             </Link>
                                         </li>
@@ -128,6 +128,16 @@ export default function Sidebar() {
                                         <li>
                                             <Link className="nav-link py-1" to="/secteur">
                                                 <i className="fas fa-tag"></i> Secteur
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link className="nav-link py-1" to="/realisation">
+                                                <i className="fas fa-blog"></i> Réalisation
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link className="nav-link py-1" to="/rapport">
+                                                <i className="fas fa-file"></i> Rapport
                                             </Link>
                                         </li>
                                     </ul>

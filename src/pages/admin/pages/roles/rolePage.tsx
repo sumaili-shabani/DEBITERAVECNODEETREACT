@@ -184,7 +184,7 @@ export default function RolePageComplet() {
             <button
               type="button"
               className="btn btn-sm btn-primary me-1"
-              onClick={() => setSearch(search)} // recharge
+              onClick={() => loadRoles()} // recharge
               id='btn-search'
             >
               <i className="fas fa-sync"></i>

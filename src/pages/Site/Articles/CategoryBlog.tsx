@@ -168,7 +168,7 @@ export default function CategoryBlog() {
                         <button
                             type="button"
                             className="btn btn-sm btn-primary me-1"
-                            onClick={() => setSearch(search)} // recharge
+                            onClick={() => loadlistData()} // recharge
                             id='btn-search'
                         >
                             <i className="fas fa-sync"></i>

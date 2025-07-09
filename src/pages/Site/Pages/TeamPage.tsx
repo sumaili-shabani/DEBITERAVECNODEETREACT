@@ -9,43 +9,36 @@ import TextField from '../../../components/TextField';
 import Modal from '../../../components/Modal';
 import LoaderAndError from '../../../components/LoaderAndError';
 import { fileUrl } from '../../../api/config';
-import ComboBoxField from '../../../components/ComboBox';
+
 import TextAreaFild from '../../../components/TextAreaField';
 import RichTextField from '../../../components/RichTextField';
 
-import MultiSelectField from '../../../components/MultiSelectField';
-interface catBlog {
-    id?: number;
-    titre?: string;
-}
 
-interface Option {
-    label: string; // pas string | undefined
-    value: string;
-}
-interface UiBlog {
+
+interface UiTeam {
     id?: number;
-    titre?: string;
-    sousTitre?: string;
-    description?: string;
-    idCategory?: number;
-    status?: number;
-    icone?: string;
+    nom?: string;
+    fonction?: string;
+    email?: string;
+    logo?: string;
+    telephone?: string;
+    facebook?: string;
+    twitter?: string;
+    linkedin?: string;
     logoFile?: File;
-    tug?: any;
-    slug?: String;
+
     createdAt?: string;
     updatedAt?: string;
-    // jointire
-    category_blog?: catBlog;
-    selected?: Option[];
+
+
+
 }
 
 
-export default function Blog() {
+export default function TeamPage() {
     // declaration de variables
-    const [listData, setDataList] = useState<UiBlog[]>([]);
-    const [formData, setFormData] = useState<Partial<UiBlog>>({});
+    const [listData, setDataList] = useState<UiTeam[]>([]);
+    const [formData, setFormData] = useState<Partial<UiTeam>>({});
     const [isEditing, setIsEditing] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -56,63 +49,6 @@ export default function Blog() {
     const [limit, setLimit] = useState(10);
     const [totalPages, setTotalPages] = useState(1);
     //fin declaration
-
-    /*
-    *
-    *========================================
-    * Chargement des combobox
-    *========================================
-    */
-    const [categoryBlog, setCategoryBlog] = useState([]);
-    const [tugBlog, setTugBlog] = useState([]);
-
-    // chargement de la table
-    const loadCategoryBlogList = async () => {
-        setLoading(true);
-        try {
-            const res = await fetchListItems('/fetch_all_category_blog');
-            // console.log(JSON.stringify(res.data));
-            setCategoryBlog(res.data);
-
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    // chargement de la table
-    const loadTugBlogList = async () => {
-        setLoading(true);
-        try {
-            const res = await fetchListItems('/fetch_all_tug');
-            // console.log(JSON.stringify(res.data));
-            setTugBlog(res.data);
-
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    /*
-   *
-   *========================================
-   * Fin Chargement des combobox
-   *========================================
-   */
-
-    const checkStatusBlog = async (id: number) => {
-        setLoading(true);
-        try {
-            const res = await gethItem('/check_status_blog', id);
-            const message = res.message;
-            showMessage(message);
-            loadlistData();
-
-        } finally {
-            setLoading(false);
-        }
-
-
-    }
 
 
     // pour la langue
@@ -130,7 +66,7 @@ export default function Blog() {
         setLoading(true);
 
         try {
-            const res = await fetchItems<UiBlog>('/fetch_blog', {
+            const res = await fetchItems<UiTeam>('/fetch_team', {
                 q: search,
                 page: currentPage,
                 limit,
@@ -146,8 +82,7 @@ export default function Blog() {
 
     useEffect(() => {
         loadlistData();
-        loadCategoryBlogList();
-        loadTugBlogList();
+
     }, [search, currentPage, limit]);
 
     /*
@@ -158,39 +93,12 @@ export default function Blog() {
     * 
     */
     const handleEdit = async (id: number) => {
-        const role = await fetchItem<UiBlog>('/fetch_single_blog', id);
+        const role = await fetchItem<UiTeam>('/fetch_single_team', id);
         // console.log("role:" + role);
-        // setFormData(role);
+        setFormData(role);
         setIsEditing(true);
         setShowModal(true);
 
-        /*
-        *
-        *===============================
-        * Pour les composants multiples
-        *===============================
-        * 
-        */
-        // 🗂️ Si role.tug est une string CSV : "dev,ai,react"
-        const tugArray = role.tug ? role.tug.split(',') : [];
-        const selected = tugArray.map((t:any) => ({
-            label: t.trim(),
-            value: t.trim(),
-        }));
-
-        // ✅ Mets à jour formData avec la version SELECTED
-        setFormData({
-            ...role,
-            selected, // prêt pour MultiSelectField
-        });
-
-        /*
-       *
-       *===============================
-       * Fin les composants multiples
-       *===============================
-       * 
-       */
 
 
     };
@@ -205,7 +113,7 @@ export default function Blog() {
 
         if (confirmed) {
             try {
-                await removeItem('/delete_blog', id);
+                await removeItem('/delete_team', id);
                 loadlistData();
                 Swal.fire('Supprimé', '', 'success');
             } catch (error) {
@@ -218,7 +126,7 @@ export default function Blog() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        await saveItem('/insert_blog', formData);
+        await saveItem('/insert_team', formData);
         loadlistData();
         handleCloseModal();
     };
@@ -250,7 +158,7 @@ export default function Blog() {
 
     const [showModalSiteLogo, setShowModalSiteLogo] = useState(false);
     const handlEditImage = async (id: number) => {
-        const data = await fetchItem<UiBlog>('/fetch_single_blog', id);
+        const data = await fetchItem<UiTeam>('/fetch_single_team', id);
         // console.log("Site:" + role);
         setPreview('');
         setFormData(data);
@@ -302,7 +210,7 @@ export default function Blog() {
             formDataToSend.append('logo', formData.logoFile);
         }
 
-        await saveItemImageForm('/edit_blog_logo', formDataToSend);
+        await saveItemImageForm('/edit_team_logo', formDataToSend);
         loadlistData();
         handleCloseModalImage();
     };
@@ -318,7 +226,7 @@ export default function Blog() {
 
     return (
         <div className="mt-4">
-            <h4 className="mb-3">Liste des blogs</h4>
+            <h4 className="mb-3">Liste des teams</h4>
             {/* loading component */}
             <LoaderAndError
                 loading={loading}
@@ -339,90 +247,94 @@ export default function Blog() {
                     <div className="row">
                         <div className="col-md-12">
                             <TextField
-                                name="titre"
-                                value={formData.titre || ''}
+                                name="nom"
+                                value={formData.nom || ''}
                                 onChange={handleInputChange}
-                                placeholder="Titre de blog"
-                                label="Titre de blog"
+                                placeholder="Nom complet"
+                                label="Nom complet"
                                 icon="fas fa-text-width"
                                 required
                             />
                         </div>
                         <div className="col-md-6">
-                            <ComboBoxField
-                                name="idCategory"
-                                value={formData.idCategory || 0}
+                            <TextField
+                                name="fonction"
+                                value={formData.fonction || ''}
                                 onChange={handleInputChange}
-                                placeholder="Catégorie"
-                                label="Catégorie"
-                                icon="fab fa-accusoft"
-                                options={categoryBlog}
-                                required
-                            />
-                        </div>
-                        <div className="col-md-6">
-
-                            {/* <ComboBoxField
-                                name="tug"
-                                value={formData.tug || ''}
-                                onChange={handleInputChange}
-                                placeholder="Tug"
-                                label="Tug"
-                                icon="fas fa-tags"
-                                options={tugBlog}
-
-                                required
-                            /> */}
-
-                            <MultiSelectField
-                                name="tug"
-                                label="Mots-clés du blog"
-                                value={formData.selected || []}
-                                onChange={(selected) => {
-                                    setFormData((prev) => ({
-                                        ...prev,
-                                        selected,                             // tableau pour l'UI
-                                        tug: selected.map(opt => opt.value).join(',') // CSV pour la DB
-                                    }));
-                                }}
-                                options={tugBlog}
-                                placeholder="Choisis tes fruits"
-                                icon="fas fa-list"
-                                required
-
-                            />
-
-
-
-                        </div>
-                        <div className="col-md-12">
-                            <TextAreaFild
-                                name="sousTitre"
-                                value={formData.sousTitre || ''}
-                                onChange={handleInputChange}
-                                placeholder="Sous titre de blog"
-                                label="Sous titre de blog"
-                                icon="fas fa-text-height"
-                                rows={2}
-                                required
-                            />
-
-                        </div>
-                        <div className="col-md-12">
-                            <RichTextField
-                                name="description"
-                                value={formData.description || ''}
-                                onChange={handleInputChange}
-                                placeholder="Description de blog"
-                                label="Description de blog"
+                                placeholder="Fonction"
+                                label="Fonction"
                                 icon="fas fa-text-width"
                                 required
+
                             />
                         </div>
 
                         <div className="col-md-6">
+                            <TextField
+                                type='tel'
+                                name="telephone"
+                                value={formData.telephone || ''}
+                                onChange={handleInputChange}
+                                placeholder="N° de téléphone"
+                                label="N° de téléphone"
+                                icon="fas fa-phone"
+                                required
+
+                            />
 
                         </div>
+
+                        <div className="col-md-6">
+                            <TextField
+                                type='email'
+                                name="email"
+                                value={formData.email || ''}
+                                onChange={handleInputChange}
+                                placeholder="Adresse mail"
+                                label="Adresse mail"
+                                icon="fas fa-envelope"
+
+                            />
+
+                        </div>
+                        <div className="col-md-6">
+                            <TextField
+                                name="facebook"
+                                value={formData.facebook || ''}
+                                onChange={handleInputChange}
+                                placeholder="Facebook"
+                                label="Facebook"
+                                icon="fab fa-facebook"
+
+                            />
+
+                        </div>
+                        <div className="col-md-6">
+                            <TextField
+                                name="twitter"
+                                value={formData.twitter || ''}
+                                onChange={handleInputChange}
+                                placeholder="Twitter"
+                                label="Twitter"
+                                icon="fab fa-twitter"
+
+                            />
+
+                        </div>
+                        <div className="col-md-6">
+                            <TextField
+                                name="linkedin"
+                                value={formData.linkedin || ''}
+                                onChange={handleInputChange}
+                                placeholder="Linkedin"
+                                label="Linkedin"
+                                icon="fab fa-linkedin"
+
+                            />
+
+                        </div>
+
+
                     </div>
 
 
@@ -461,7 +373,7 @@ export default function Blog() {
 
                             <div className="col-md-12">
                                 {/* affichage de l'image selectionnée */}
-                                <img src={preview || fileUrl + '/images/' + formData.icone!} alt="image sélectionnée"
+                                <img src={preview || fileUrl + '/images/' + formData.logo!} alt="image sélectionnée"
                                     className='img img-thumbnail col-md-6' width={50} height={50} />
 
                             </div>
@@ -522,11 +434,14 @@ export default function Blog() {
                     <thead className="table-dark">
                         <tr>
                             <th>Avatar</th>
-                            <th>Titre</th>
-                            <th>Sous titre</th>
-                            <th>Catégorie</th>
-                            <th>Tug</th>
-                            <th>Statut</th>
+                            <th>Nom</th>
+                            <th>Fonction</th>
+
+                            <th>Téléphone/Email</th>
+                            <th>Reseaux sociaux</th>
+
+
+
                             <th>Date de création</th>
                             <th>Actions</th>
                         </tr>
@@ -534,23 +449,35 @@ export default function Blog() {
                     <tbody>
                         {listData.length === 0 ? (
                             <tr>
-                                <td colSpan={8} className="text-center">
+                                <td colSpan={7} className="text-center">
                                     Aucune donnée trouvée
                                 </td>
                             </tr>
                         ) : (
                             listData.map((item) => (
                                 <tr key={item.id}>
-                                    <td><img src={fileUrl + '/images/' + item.icone} alt={item.icone} width={40} height={40} className='img rounded-circle' /></td>
+                                    <td><img src={fileUrl + '/images/' + item.logo} alt={item.logo} width={40} height={40} className='img rounded-circle' /></td>
 
-                                    <td>{truncateText(item.titre!, 20)}</td>
-                                    <td>{truncateText(item.sousTitre!, 20)}</td>
-                                    <td>{truncateText(item.category_blog?.titre!, 20)}</td>
-                                    <td>{truncateText(item.tug ?? '', 20)}</td>
+                                    <td>{truncateText(item.nom!, 20)}</td>
+                                    <td>{truncateText(item.fonction!, 20)}</td>
+
                                     <td>
-                                        <span onClick={() => checkStatusBlog(item.id!)} style={{ cursor: 'pointer' }} className={`${item.status! == 1 ? 'badge rounded-pill bg-success text-white' : 'badge rounded-pill bg-danger text-white'}`}>
-                                            {item.status! === 1 ? 'actif' : 'inactif'}
-                                        </span>
+                                        <ul>
+                                            <li>
+                                                <a href={'tel:+' + item.telephone}><i className='fas fa-phone fa-sm'></i> {truncateText(item.telephone!, 20)}</a>
+
+                                            </li>
+                                            <li>
+                                                <a href={'mailto:+' + item.email}><i className='fas fa-envelope fa-sm'></i> {truncateText(item.email!, 20)}</a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li><a href={item.facebook} target='_blank'><i className='fab fa-facebook'></i> lien facebook</a></li>
+                                            <li><a href={item.twitter} target='_blank'><i className='fab fa-twitter'></i> lien twitter</a></li>
+                                            <li><a href={item.linkedin} target='_blank'><i className='fab fa-linkedin'></i> lien linkedin</a></li>
+                                        </ul>
                                     </td>
 
                                     <td>{formatDateFR(item.createdAt ?? '')} {extractTime(item.createdAt ?? '')}</td>
