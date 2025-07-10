@@ -35,6 +35,12 @@ import CarouselPage from './pages/Site/Pages/Carousel';
 import ProjetPage from './pages/Site/Pages/ProjetPage';
 import OffrePage from './pages/Site/Pages/OffrePage';
 import BasicPage from './pages/Site/Pages/BasicPage';
+import ServicePage from './pages/Site/Pages/ServicePage';
+import ValeurPage from './pages/Site/Pages/ValeurPage';
+import ChoicePage from './pages/Site/Pages/ChoixPage';
+import PartenairePage from './pages/Site/Pages/PartenairePage';
+import VideoPage from './pages/Site/Pages/VideoPage';
+import ImagePage from './pages/Site/Pages/ImagePage';
 
 
 
@@ -179,6 +185,71 @@ function App() {
               </PrivateRoute>
             }
           />
+
+          <Route
+            path="/service"
+            element={
+              <PrivateRoute>
+                <ServicePage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/valeur"
+            element={
+              <PrivateRoute>
+                <ValeurPage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/choice"
+            element={
+              <PrivateRoute>
+                <ChoicePage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/partenaire"
+            element={
+              <PrivateRoute>
+                <PartenairePage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/video"
+            element={
+              <PrivateRoute>
+                <VideoPage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/galery"
+            element={
+              <PrivateRoute>
+                <ImagePage />
+              </PrivateRoute>
+            }
+          />
+
+
+
+
+
+
+
+
+
+
+
 
 
 

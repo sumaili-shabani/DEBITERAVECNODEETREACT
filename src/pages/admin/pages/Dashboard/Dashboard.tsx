@@ -10,6 +10,7 @@ import ColumnStatsChart from '../Statistique/ColumnStatsChart';
 import { formatChartData } from '../../../../api/callApi';
 import { apiURL } from '../../../../api/config';
 import { getToken } from '../../../../api/storage';
+import { Link } from 'react-router-dom';
 
 interface ChartData {
     category: string[];
@@ -37,6 +38,9 @@ export default function Dashboard() {
     const [dashStatistique, setDashStatistique] = useState<Statistique[]>();
     const [chartSexeData, setChartSexeData] = useState<Partial<ChartData>>();
     const [chartRoleData, setChartRoleData] = useState<Partial<ChartData>>();
+    const [chartBlogData, setchartBlogData] = useState<Partial<ChartData>>();
+    const [chartProjetData, setchartProjetData] = useState<Partial<ChartData>>();
+
 
 
 
@@ -52,6 +56,8 @@ export default function Dashboard() {
                 const item = res.data[0]; // Il semble qu’il y a un seul objet
                 setChartSexeData(item.chartSexeData);
                 setChartRoleData(item.chartData);
+                setchartBlogData(item.chartBlogData);
+                setchartProjetData(item.chartProjetData);
 
                 // console.log(JSON.stringify(item.chartData));
             }
@@ -69,6 +75,11 @@ export default function Dashboard() {
 
     const formattedSexeData = formatChartData(chartSexeData);
     const formattedRoleData = formatChartData(chartRoleData);
+    const formattedBlogData = formatChartData(chartBlogData);
+    const formattedProjetData = formatChartData(chartProjetData);
+
+
+
 
 
 
@@ -102,7 +113,7 @@ export default function Dashboard() {
 
                 <div className="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 className="h3 mb-0 text-gray-800">{t('dashboardPage_title') ?? ''}</h1>
-                    <button  className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onClick={exportExcel}><i
+                    <button className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onClick={exportExcel}><i
                         className="fas fa-download fa-sm text-white-50"></i> Exporter les données en excel</button>
                 </div>
 
@@ -216,11 +227,11 @@ export default function Dashboard() {
                                         <i className="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                     </a>
                                     <div className="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" >
-                                        <div className="dropdown-header">Dropdown Header:</div>
+                                        <div className="dropdown-header">En-tête déroulant:</div>
                                         <a className="dropdown-item" href="javascript:void(0);">Action</a>
-                                        <a className="dropdown-item" href="javascript:void(0);">Another action</a>
+                                        <Link className="dropdown-item" to="/counts">Gestion de compte utilisateur</Link>
                                         <div className="dropdown-divider"></div>
-                                        <a className="dropdown-item" href="javascript:void(0);">Something else here</a>
+                                        <Link className="dropdown-item" to="/rules">Gestion de privilège</Link>
                                     </div>
                                 </div>
                             </div>
@@ -245,11 +256,11 @@ export default function Dashboard() {
                                         <i className="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                     </a>
                                     <div className="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" >
-                                        <div className="dropdown-header">Dropdown Header:</div>
+                                        <div className="dropdown-header">En-tête déroulant:</div>
                                         <a className="dropdown-item" href="#">Action</a>
-                                        <a className="dropdown-item" href="#">Another action</a>
+                                        <Link className="dropdown-item" to="/counts">Gestion de compte utilisateur</Link>
                                         <div className="dropdown-divider"></div>
-                                        <a className="dropdown-item" href="#">Something else here</a>
+                                        <Link className="dropdown-item" to="/rules">Gestion de privilège</Link>
                                     </div>
                                 </div>
                             </div>
@@ -261,6 +272,68 @@ export default function Dashboard() {
                                 </div>
                             </div>
 
+                        </div>
+                    </div>
+
+                    {/* <!-- Pie Chart Projet --> */}
+                    <div className="col-xl-4 col-lg-5">
+                        <div className="card shadow mb-4">
+                            {/* <!-- Card Header - Dropdown --> */}
+                            <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 className="m-0 font-weight-bold text-primary">Statistique par secteur des projets</h6>
+                                <div className="dropdown no-arrow">
+                                    <a className="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i className="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                    </a>
+                                    <div className="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" >
+                                        <div className="dropdown-header">En-tête déroulant:</div>
+                                        <a className="dropdown-item" href="#">Action</a>
+                                        <Link className="dropdown-item" to="/project">Projet</Link>
+                                        <div className="dropdown-divider"></div>
+                                        <Link className="dropdown-item" to="/secteur">Secteur</Link>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* <!-- Card Body --> */}
+                            <div className="card-body">
+                                <div className="chart-area"><div className="chartjs-size-monitor"><div className="chartjs-size-monitor-expand"><div className=""></div></div><div className="chartjs-size-monitor-shrink"><div className=""></div></div></div>
+
+                                    <PieStatsChart data={formattedProjetData} />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    
+
+                    {/* <!-- Area Chart Blog --> */}
+                    <div className="col-xl-8 col-lg-7">
+                        <div className="card shadow mb-4">
+                            {/* <!-- Card Header - Dropdown --> */}
+                            <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 className="m-0 font-weight-bold text-primary">Statiatique par catégorie d'article</h6>
+                                <div className="dropdown no-arrow">
+                                    <a className="dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i className="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                    </a>
+                                    <div className="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" >
+                                        <div className="dropdown-header">En-tête déroulant:</div>
+                                        <a className="dropdown-item" href="javascript:void(0);">Action</a>
+                                        <Link className="dropdown-item" to="/article">Blog</Link>
+                                        <div className="dropdown-divider"></div>
+                                        <Link className="dropdown-item" to="/category-blog">Category Blog</Link>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* <!-- Card Body --> */}
+                            <div className="card-body">
+                                <div className="chart-area"><div className="chartjs-size-monitor"><div className="chartjs-size-monitor-expand"><div className=""></div></div><div className="chartjs-size-monitor-shrink"><div className=""></div></div></div>
+
+                                    <UserStatsCharts data={formattedBlogData} />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

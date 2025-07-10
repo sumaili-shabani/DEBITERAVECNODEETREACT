@@ -87,6 +87,7 @@ export default function Sidebar() {
                     </a>
                     {openMenus.utilities && (
                         <ul className="pl-3 list-unstyled">
+                            <li><Link className="nav-link py-1" to="/valeur"><i className="fas fa-rocket"></i> Valeur</Link></li>
                             <li><Link className="nav-link py-1" to="/service"><i className="fas fa-palette"></i> Service</Link></li>
                             <li><Link className="nav-link py-1" to="/choice"><i className="fas fa-border-style"></i> Choix</Link></li>
                             <li><Link className="nav-link py-1" to="/carousel"><i className="fas fa-magic"></i> Carousel</Link></li>
