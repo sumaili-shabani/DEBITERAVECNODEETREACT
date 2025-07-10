@@ -14,12 +14,12 @@ const backupRoutes = require('./backup/backupRoutes');
 const exportRoutes = require('./backup/exportDatabaseToExcel'); // 👈 chemin correct ici
 
 //suite de blog
-const valeurRoute = require('./routes/ValeurRoute');
-const ChoixRoute = require('./routes/ChoixRoute');
-const ServiceRoute = require('./routes/ServiceRoute');
-const GaleryRoute = require('./routes/GaleryRoute');
-const VideoRoute = require('./routes/VideoRoute');
-const PartenaireRoute = require('./routes/PartenaireRoute');
+const valeurRoute = require('./routes/ValeurRoute');//✅ 
+const ChoixRoute = require('./routes/ChoixRoute');//✅ 
+const ServiceRoute = require('./routes/ServiceRoute');//✅ 
+const GaleryRoute = require('./routes/GaleryRoute');//✅ 
+const VideoRoute = require('./routes/VideoRoute');//✅ 
+const PartenaireRoute = require('./routes/PartenaireRoute');//✅ 
 const TugRoute = require('./routes/TugRoute');//✅ 
 const CategoryBlogRoute = require('./routes/CategoryBlogRoute');//✅ 
 const BlogRoute = require('./routes/BlogRoute'); //✅ 

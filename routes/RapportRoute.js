@@ -40,4 +40,7 @@ router.delete('/delete_rapport/:id',auth, RapportController.deleteData);
 router.get('/fetch_all_rapport', auth, RapportController.fetchAllDatas);
 router.post('/edit_rapport_logo', auth, upload.single('logo'), RapportController.editLogo);
 
+//par slug
+router.get('/fetch_single_rapport_by_slug/:slug', auth, RapportController.fetchDatasBySlug);
+
 module.exports = router;

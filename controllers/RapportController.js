@@ -70,6 +70,27 @@ exports.fetchSigleData = async (req, res) => {
     }
 };
 
+// 🔹 Récupérer tous les blogs par rapport au slug
+exports.fetchDatasBySlug = async (req, res) => {
+    const slug = req.params.slug;
+
+    try {
+        const datas = await RapportModel.findAll({
+            where: { slug: slug }, // ✅ Le WHERE à l'intérieur !
+          
+        });
+
+        if (!datas || datas.length === 0) {
+            return res.status(404).json({ data: [] });
+        }
+
+        res.status(200).json({ data: datas });
+    } catch (err) {
+        console.error("Erreur lors de la récupération des données :", err);
+        res.status(500).json({ message: "Erreur serveur" });
+    }
+};
+
 // 🔹 Ajouter ou modifier un élément
 exports.postData = async (req, res) => {
     const { id, annee, titre, sousTitre, description, slug } = req.body;

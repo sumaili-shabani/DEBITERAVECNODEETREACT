@@ -25,6 +25,10 @@ const ServiceModel = sequelize.define('ServiceModel', {
         type: DataTypes.STRING,
         allowNull: true
     },
+    slug: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
 
 
 }, {

@@ -1,5 +1,6 @@
 const ServiceModel = require('../models/ServiceModel');
 const { Op } = require('sequelize');
+const { generateSlug } = require('../utils/trait');
 
 // 🔹 Récupérer tous les rôles
 exports.fetchDatas = async (req, res) => {
@@ -70,10 +71,11 @@ exports.fetchSigleData = async (req, res) => {
 // 🔹 Ajouter ou modifier un élément
 exports.postData = async (req, res) => {
     const { id, titre, description, icone, nom } = req.body;
+    const mySlug = generateSlug(titre);
     try {
         if (!id || id === "") {
             // 🔸 Insertion
-            await ServiceModel.create({ titre, description, icone, nom});
+            await ServiceModel.create({ titre, description, icone, nom, slug: mySlug });
             res.status(200).json({ message: "Insertion avec succès !!!" });
         } else {
             // 🔸 Mise à jour

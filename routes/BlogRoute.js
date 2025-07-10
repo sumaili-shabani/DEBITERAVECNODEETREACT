@@ -41,6 +41,11 @@ router.get('/fetch_all_blog', auth, BlogController.fetchAllDatas);
 router.post('/edit_blog_logo', auth, upload.single('logo'), BlogController.editLogo);
 router.get('/check_status_blog/:id', auth, BlogController.editStatus);
 
+//par slug
+router.get('/fetch_single_blog_by_slug/:slug', auth, BlogController.fetchDatasBySlug);
+
+
+
 
 
 module.exports = router;

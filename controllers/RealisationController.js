@@ -38,6 +38,27 @@ exports.fetchDatas = async (req, res) => {
     }
 };
 
+// 🔹 Récupérer tous les blogs par rapport au slug
+exports.fetchDatasBySlug = async (req, res) => {
+    const slug = req.params.slug;
+
+    try {
+        const datas = await RealisationModel.findAll({
+            where: { slug: slug }, // ✅ Le WHERE à l'intérieur !
+
+        });
+
+        if (!datas || datas.length === 0) {
+            return res.status(404).json({ data: [] });
+        }
+
+        res.status(200).json({ data: datas });
+    } catch (err) {
+        console.error("Erreur lors de la récupération des données :", err);
+        res.status(500).json({ message: "Erreur serveur" });
+    }
+};
+
 // 🔹 Récupérer tous les rôles avec alias : nom → label, id → value
 exports.fetchAllDatas = async (req, res) => {
     try {
@@ -77,7 +98,7 @@ exports.postData = async (req, res) => {
     try {
         if (!id || id === "") {
             // 🔸 Insertion
-            await RealisationModel.create({ annee, titre, sousTitre, description, icone:'logo.png', slug: mySlug });
+            await RealisationModel.create({ annee, titre, sousTitre, description, icone: 'logo.png', slug: mySlug });
             res.status(200).json({ message: "Insertion avec succès !!!" });
         } else {
             // 🔸 Mise à jour
@@ -101,7 +122,7 @@ exports.editLogo = async (req, res) => {
     if (!logo) return res.status(400).json({ message: "Aucune image envoyée" });
 
     try {
-       
+
         //appel de la fonction de suppression de l'ancien fichier
         // ✅ Supprimer l'ancien fichier avant la modification
         await deleteFileForRecord(

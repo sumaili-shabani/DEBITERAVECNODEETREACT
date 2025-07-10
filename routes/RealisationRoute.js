@@ -39,5 +39,7 @@ router.post('/insert_realisation',auth, RealisationController.postData);
 router.delete('/delete_realisation/:id',auth, RealisationController.deleteData);
 router.get('/fetch_all_realisation', auth, RealisationController.fetchAllDatas);
 router.post('/edit_realisation_logo', auth, upload.single('logo'), RealisationController.editLogo);
+//par slug
+router.get('/fetch_single_realisation_by_slug/:slug', auth, RealisationController.fetchDatasBySlug);
 
 module.exports = router;

@@ -40,4 +40,7 @@ router.delete('/delete_projet/:id',auth, ProjetController.deleteData);
 router.get('/fetch_all_projet', auth, ProjetController.fetchAllDatas);
 router.post('/edit_projet_logo', auth, upload.single('logo'), ProjetController.editLogo);
 
+//par slug
+router.get('/fetch_single_projet_by_slug/:slug', auth, ProjetController.fetchDatasBySlug);
+
 module.exports = router;

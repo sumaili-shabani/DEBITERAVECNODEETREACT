@@ -10,5 +10,7 @@ router.get('/fetch_single_category_blog/:id',auth, CategoryBlogController.fetchS
 router.post('/insert_category_blog',auth, CategoryBlogController.postData);
 router.delete('/delete_category_blog/:id',auth, CategoryBlogController.deleteData);
 router.get('/fetch_all_category_blog', auth, CategoryBlogController.fetchAllDatas);
+//par slug
+router.get('/fetch_single_category_blog_by_slug/:slug', auth, CategoryBlogController.fetchDatasBySlug);
 
 module.exports = router;

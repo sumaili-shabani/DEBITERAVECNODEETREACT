@@ -1,6 +1,7 @@
 const CategoryBlogModel = require('../models/CategoryBlogModel');
 const { Op } = require('sequelize');
 const { generateSlug } = require('../utils/trait');
+const BlogModel = require('../models/BlogModel');
 
 // 🔹 Récupérer tous les éléments
 exports.fetchDatas = async (req, res) => {
@@ -33,6 +34,51 @@ exports.fetchDatas = async (req, res) => {
         });
     } catch (err) {
         res.status(500).json({ err: "Erreur lors de la récupération des données avec recherche et pagination" });
+    }
+};
+
+// 🔹 Récupérer tous les blogs par rapport au slug
+exports.fetchDatasBySlug = async (req, res) => {
+    const slug = req.params.slug;
+
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const offset = (page - 1) * limit;
+    const search = req.query.q || '';
+
+    // 🔍 Filtre sur titre (si recherche)
+    const searchFilter = search
+        ? { titre: { [Op.like]: `%${search}%` } }
+        : {};
+
+    try {
+        const { count, rows } = await BlogModel.findAndCountAll({
+            where: searchFilter, // ✅ Filtre sur BlogModel (titre)
+            include: [
+                {
+                    model: CategoryBlogModel,
+                    as: 'category_blog',
+                    attributes: ['titre'],
+                    where: { slug: slug } // ✅ Filtre sur CategoryBlogModel
+                }
+            ],
+            limit,
+            offset,
+            order: [['id', 'DESC']]
+        });
+
+        res.status(200).json({
+            currentPage: page,
+            perPage: limit,
+            total: count,
+            totalPages: Math.ceil(count / limit),
+            data: rows
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            err: "Erreur lors de la récupération des données avec recherche et pagination"
+        });
     }
 };
 

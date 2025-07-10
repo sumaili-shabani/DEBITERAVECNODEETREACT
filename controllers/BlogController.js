@@ -1,5 +1,5 @@
 const { BlogModel, CategoryBlogModel } = require('../models/associations');
-const { Op } = require('sequelize');
+const { Op, where } = require('sequelize');
 const { generateSlug } = require('../utils/trait');
 const { deleteFileForRecord } = require('../utils/deleteFileForRecord');
 const path = require('path');
@@ -44,6 +44,34 @@ exports.fetchDatas = async (req, res) => {
         res.status(500).json({ err: "Erreur lors de la récupération des données avec recherche et pagination" });
     }
 };
+
+// 🔹 Récupérer tous les blogs par rapport au slug
+exports.fetchDatasBySlug = async (req, res) => {
+    const slug = req.params.slug;
+
+    try {
+        const datas = await BlogModel.findAll({
+            where: { slug: slug }, // ✅ Le WHERE à l'intérieur !
+            include: [
+                {
+                    model: CategoryBlogModel,
+                    as: 'category_blog', // ✅ Même alias que dans tes associations
+                    attributes: ['titre']
+                }
+            ]
+        });
+
+        if (!datas || datas.length === 0) {
+            return res.status(404).json({ data: [] });
+        }
+
+        res.status(200).json({ data: datas });
+    } catch (err) {
+        console.error("Erreur lors de la récupération des données :", err);
+        res.status(500).json({ message: "Erreur serveur" });
+    }
+};
+  
 
 // 🔹 Récupérer tous les rôles avec alias : nom → label, id → value
 exports.fetchAllDatas = async (req, res) => {

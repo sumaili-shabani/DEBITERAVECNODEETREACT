@@ -35,8 +35,9 @@ const upload = multer({ storage });
 // 🔹 Routes 
 router.get('/fetch_partenaire', auth, PartenaireController.fetchDatas);
 router.get('/fetch_single_partenaire/:id', auth, PartenaireController.fetchSigleData);
-router.post('/insert_partenaire', auth, upload.single('avatar'), PartenaireController.postData);
+router.post('/insert_partenaire', auth, PartenaireController.postData);
 router.delete('/delete_partenaire/:id', auth, PartenaireController.deleteData);
 router.get('/fetch_all_partenaire', auth, PartenaireController.fetchAllDatas);
+router.post('/edit_partenaire_logo', auth, upload.single('logo'), PartenaireController.editLogo);
 
 module.exports = router;

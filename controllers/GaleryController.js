@@ -1,5 +1,7 @@
 const GaleryMadel = require('../models/GaleryMadel');
 const { Op } = require('sequelize');
+const { deleteFileForRecord } = require('../utils/deleteFileForRecord');
+const path = require('path');
 
 // 🔹 Récupérer tous les rôles
 exports.fetchDatas = async (req, res) => {
@@ -74,21 +76,41 @@ exports.postData = async (req, res) => {
     if (!avatar) return res.status(400).json({ message: "Aucune image envoyée" });
 
     try {
-        if (!id || id === "") {
-            // 🔸 Insertion
-            await GaleryMadel.create({ icone: avatar });
-            res.status(200).json({ message: "Insertion avec succès !!!" });
-        } else {
-            // 🔸 Mise à jour
-            const [updated] = await GaleryMadel.update({ icone: avatar}, { where: { id } });
-            if (updated) {
-                res.status(200).json({ message: "Modification avec succès !!!" });
-            } else {
-                res.status(404).json({ message: "Donnée introuvable" });
-            }
-        }
+
+        await GaleryMadel.create({ icone: avatar });
+        res.status(200).json({ message: "Insertion avec succès !!!" });
+
+
     } catch (err) {
         res.status(500).json({ err: "Erreur lors de l'opération : " + err });
+    }
+};
+
+// 🔹 Modifier la photo
+exports.editLogo = async (req, res) => {
+    const id = req.body.id;
+    const avatar = req.file ? req.file.filename : null;
+
+    if (!avatar) return res.status(400).json({ message: "Aucune image envoyée" });
+
+    try {
+
+        //appel de la fonction de suppression de l'ancien fichier
+        // ✅ Supprimer l'ancien fichier avant la modification
+        await deleteFileForRecord(
+            GaleryMadel,
+            id,
+            'icone', // colonne
+            path.join(__dirname, '../upload/images'),
+            ['logo.png', 'avatar.png'] // fichiers protégés
+        );
+        // 3. Mettre à jour avec le nouveau logo
+        await GaleryMadel.update({ icone: avatar }, { where: { id } });
+
+        res.json({ message: "Image de profil mise à jour avec succès", filename: avatar });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ err });
     }
 };
 

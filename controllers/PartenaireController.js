@@ -73,59 +73,52 @@ exports.fetchSigleData = async (req, res) => {
 // 🔹 Ajouter ou modifier un élément
 exports.postData = async (req, res) => {
     const { id, nom, url } = req.body;
-    const avatar = req.file ? req.file.filename : null;
-    // if (!avatar) return res.status(400).json({ message: "Aucune image envoyée" });
-
     try {
-        if (!avatar) {
-            //sans logo ou fichier n'a pas été sélectionné
-            if (!id || id === "") {
-                // 🔸 Insertion
-                await PartenaireMadel.create({ icone: 'logo.png', nom, url });
-                res.status(200).json({ message: "Insertion avec succès !!!" });
-            } else {
-                // 🔸 Mise à jour
-                const [updated] = await PartenaireMadel.update({ nom, url }, { where: { id } });
-                if (updated) {
-                    res.status(200).json({ message: "Modification avec succès !!!" });
-                } else {
-                    res.status(404).json({ message: "Donnée introuvable" });
-                }
-            }
-
+        if (!id || id === "") {
+            // 🔸 Insertion
+            await PartenaireMadel.create({ nom, url, icone: 'logo.png' });
+            res.status(200).json({ message: "Insertion avec succès !!!" });
         } else {
-            //avec avatar ou logo =>fichier selectionné
-            if (!id || id === "") {
-                // 🔸 Insertion
-                await PartenaireMadel.create({ icone: avatar, nom, url });
-                res.status(200).json({ message: "Insertion avec succès !!!" });
+            // 🔸 Mise à jour
+            const [updated] = await PartenaireMadel.update({ nom, url }, { where: { id } });
+            if (updated) {
+                res.status(200).json({ message: "Modification avec succès !!!" });
             } else {
-                // 🔸 Mise à jour
-
-                //appel de la fonction de suppression de l'ancien fichier
-                await deleteFileForRecord(
-                    PartenaireMadel,          // Ton modèle Sequelize
-                    id,                       // L'ID
-                    'icone',                  // La colonne qui contient le nom du fichier
-                    path.join(__dirname, '../upload/images') // Ton dossier uploads
-                );
-
-                // 🔸 Mise à jour et modification
-                const [updated] = await PartenaireMadel.update({ icone: avatar, nom, url }, { where: { id } });
-                if (updated) {
-                    res.status(200).json({ message: "Modification avec succès !!!" });
-                } else {
-                    res.status(404).json({ message: "Donnée introuvable" });
-                }
+                res.status(404).json({ message: "Donnée introuvable" });
             }
-
         }
-
     } catch (err) {
         res.status(500).json({ err: "Erreur lors de l'opération : " + err });
     }
 };
 
+// 🔹 Modifier la photo
+exports.editLogo = async (req, res) => {
+    const id = req.body.id;
+    const logo = req.file ? req.file.filename : null;
+
+    if (!logo) return res.status(400).json({ message: "Aucune image envoyée" });
+
+    try {
+
+        //appel de la fonction de suppression de l'ancien fichier
+        // ✅ Supprimer l'ancien fichier avant la modification
+        await deleteFileForRecord(
+            PartenaireMadel,
+            id,
+            'icone', // colonne
+            path.join(__dirname, '../upload/images'),
+            ['logo.png', 'avatar.png'] // fichiers protégés
+        );
+        // 3. Mettre à jour avec le nouveau logo
+        await PartenaireMadel.update({ icone: logo }, { where: { id } });
+
+        res.json({ message: "Image de profil mise à jour avec succès", filename: logo });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ err });
+    }
+};
 // 🔹 Supprimer un élément
 exports.deleteData = async (req, res) => {
     try {

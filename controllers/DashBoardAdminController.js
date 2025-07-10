@@ -1,4 +1,5 @@
-const { User, Role } = require('../models/associations');
+const { User, Role, CategoryBlogModel, BlogModel, ProjetModel, SecteurModel } = require('../models/associations');
+
 const { Op, fn, col } = require('sequelize');
 
 // 🧮 Compter les utilisateurs par sexe
@@ -34,17 +35,85 @@ async function countUsersGroupedByRole() {
     });
 }
 
+/*
+*
+*==========================================
+* Statistique blog
+*==========================================
+*
+*/
+
+// 🔹 Statistiques groupées par categorie
+async function countBlogGroupedCategory() {
+    return await BlogModel.findAll({
+        attributes: [
+            'idCategory',
+            [fn('COUNT', col('BlogModel.idCategory')), 'value']
+        ],
+        include: [
+            {
+                model: CategoryBlogModel,
+                as: 'category_blog',
+                attributes: [
+                    'titre',
+                    ['titre', 'category'] // ✅ Renomme 'titre' en 'category'
+                ]
+            }
+        ],
+        group: ['BlogModel.idCategory', 'category_blog.id'],
+        raw: true,
+        nest: true
+    });
+}
+
+// 🔹 Statistiques groupées par secteur de projet
+async function countProjetGroupedSecteur() {
+    return await ProjetModel.findAll({
+        attributes: [
+            'idSecteur',
+            [fn('COUNT', col('ProjetModel.idSecteur')), 'value']
+        ],
+        include: [
+            {
+                model: SecteurModel,
+                as: 'secteur_projet',
+                attributes: [
+                    'nomSecteur',
+                    ['nomSecteur', 'category'] // ✅ Renomme 'nomSecteur' en 'category'
+                ]
+            }
+        ],
+        group: ['ProjetModel.idSecteur', 'secteur_projet.id'],
+        raw: true,
+        nest: true
+    });
+}
+
+
 // ✅ Fonction principale : Statistiques Dashboard
 exports.getStats = async (req, res) => {
     try {
-        const [nbM, nbF, totalUsers, totalRoles, nbAdmin, nbUtilisateurs, usersByRole] = await Promise.all([
+        const [
+            nbM,
+            nbF,
+            totalUsers,
+            totalRoles,
+            nbAdmin,
+            nbUtilisateurs,
+            usersByRole,
+            blogByCategory,
+            projetBySecteur,
+        ] = await Promise.all([
             countBySexe('M'),
             countBySexe('F'),
             User.count(),
             Role.count(),
             countByRoleName('Admin'),
             countByRoleName('Utilisateur'),
-            countUsersGroupedByRole()
+            countUsersGroupedByRole(),
+
+            countBlogGroupedCategory(),
+            countProjetGroupedSecteur(),
         ]);
 
         // console.log(JSON.stringify(usersByRole));
@@ -54,6 +123,21 @@ exports.getStats = async (req, res) => {
             category: usersByRole.map(item => item.role.category),
             value: usersByRole.map(item => parseInt(item.value))
         };
+
+        // 📊 Formater les données pour chart des blogs
+        const chartBlogData = {
+            category: blogByCategory.map(item => item.category_blog.category),
+            value: blogByCategory.map(item => parseInt(item.value))
+        };
+
+        // 📊 Formater les données pour chart des projets
+        const chartProjetData = {
+            category: projetBySecteur.map(item => item.secteur_projet.category),
+            value: projetBySecteur.map(item => parseInt(item.value))
+        };
+        
+
+
 
         const stats = {
             data: [
@@ -69,7 +153,9 @@ exports.getStats = async (req, res) => {
                         value: [nbM, nbF]
                     },
                     chartData,
-                    
+                    chartBlogData,
+                    chartProjetData,
+
                 }
             ]
         };
@@ -82,3 +168,6 @@ exports.getStats = async (req, res) => {
         });
     }
 };
+
+
+
