@@ -386,7 +386,7 @@ export default function Blog() {
                                     }));
                                 }}
                                 options={tugBlog}
-                                placeholder="Choisis tes fruits"
+                                placeholder="Choisissez les Mots-clés du blog"
                                 icon="fas fa-list"
                                 required
 

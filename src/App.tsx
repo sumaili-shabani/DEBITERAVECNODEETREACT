@@ -41,6 +41,7 @@ import ChoicePage from './pages/Site/Pages/ChoixPage';
 import PartenairePage from './pages/Site/Pages/PartenairePage';
 import VideoPage from './pages/Site/Pages/VideoPage';
 import ImagePage from './pages/Site/Pages/ImagePage';
+import FaqPage from './pages/Site/Pages/FaqPage';
 
 
 
@@ -240,28 +241,14 @@ function App() {
             }
           />
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+          <Route
+            path="/faq"
+            element={
+              <PrivateRoute>
+                <FaqPage />
+              </PrivateRoute>
+            }
+          />
 
 
 
