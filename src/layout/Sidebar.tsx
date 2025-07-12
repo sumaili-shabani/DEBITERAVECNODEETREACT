@@ -32,8 +32,8 @@ export default function Sidebar() {
             <ul className={`navbar-nav sidebar sidebar-dark bg-gradient-dark accordion ${isToggled ? 'toggled' : ''}`} id="accordionSidebar">
 
                 <a className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-                    <div className="sidebar-brand-icon rotate-n-15">
-                        <i className="fas fa-graduation-cap"></i>
+                    <div className="sidebar-brand-icon rotate-n-0">
+                        <i className="fas fa-taxi"></i>
                     </div>
                     <div className="sidebar-brand-text mx-3">Ui-Admin <sup>1</sup></div>
                 </a>

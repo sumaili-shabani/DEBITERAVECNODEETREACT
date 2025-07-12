@@ -14,6 +14,9 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import './i18n'; // Import obligatoire
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.js';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

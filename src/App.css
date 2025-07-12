@@ -127,8 +127,8 @@
 }
 
 .nav-tabs .nav-link.active {
-  border-bottom: 2px solid #0d6efd;
-  color: #0d6efd;
+  border-bottom: 2px solid var(--swift-green);
+  color: var(--swift-green);
   background-color: transparent;
 }
 
@@ -136,4 +136,318 @@
   display: block;
   height: 320px;
   width: 501px;
+}
+
+/*
+*
+*=====================================
+* style CSS personalisé du Site 
+*=====================================
+*
+*/
+/* Variables couleurs */
+:root {
+  --swift-green: #00B894;
+  --swift-green-dark: #008c6d;
+  --swift-light: #f8f9fa;
+  --swift-dark: #212529;
+}
+
+.swift-text-green {
+  color: var(--swift-green);
+}
+
+/* Menu adaptatif */
+.menu-fullscreen {
+  width: 100%;
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  transition: all 0.3s;
+}
+
+@media (min-width: 992px) {
+  .menu-fullscreen {
+    width: 400px !important;
+    /* Largeur fixe sur desktop */
+  }
+}
+
+/* Navbar */
+.navbar {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Liens */
+.nav-link {
+  font-size: 1.1rem;
+  color: inherit;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link:hover {
+  color: var(--swift-green);
+}
+
+/* Boutons téléchargement */
+.download-btn {
+  background-color: var(--swift-green);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.download-btn:hover {
+  background-color: var(--swift-green-dark);
+  transform: translateY(-2px);
+}
+
+/* Accordéon personnalisé */
+.accordion-button:not(.collapsed) {
+  color: var(--swift-green);
+  background-color: transparent;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+  border-color: transparent;
+}
+
+/* Mode sombre */
+body.dark {
+  --bs-body-bg: var(--swift-dark);
+  --bs-body-color: var(--swift-light);
+}
+
+body.dark .menu-fullscreen {
+  background-color: var(--swift-dark);
+  color: var(--swift-light);
+}
+
+body.dark .navbar {
+  background-color: var(--swift-dark) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+body.dark .nav-link {
+  color: var(--swift-light);
+}
+
+body.dark .accordion-button {
+  background-color: var(--swift-dark);
+  color: var(--swift-light);
+}
+
+body.dark .accordion-collapse {
+  color: var(--swift-light);
+}
+
+.navbar-dark .navbar-toggler-icon {
+  filter: invert(100%);
+}
+
+body.dark .navbar-toggler{
+  background-color: transparent;
+  color: #fff;
+}
+
+body.dark .navbar-brand {
+  color: #fff;
+}
+
+/*
+*
+*==================================
+* Menus
+*==================================
+*
+*/
+
+.mega-menu {
+  position: static !important;
+}
+
+.mega-menu .dropdown-menu {
+  width: 100%;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  margin-top: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
+.theme-dark .mega-menu .dropdown-menu {
+  background-color: var(--gray-dark);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  color: #e9ecef;
+}
+
+.mega-menu .dropdown-menu .container {
+  max-width: 1200px;
+}
+
+.mega-category {
+  margin-bottom: 1.5rem;
+}
+
+.mega-category h5 {
+  font-size: 1.1rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--primary);
+  display: inline-block;
+  color: var(--dark);
+}
+
+.theme-dark .mega-category h5 {
+  color: #f8f9fa;
+}
+
+.mega-menu .list-group-item {
+  border: none;
+  background: transparent;
+  padding: 0.5rem 0;
+  transition: var(--transition);
+  color: var(--dark);
+}
+
+.theme-dark .mega-menu .list-group-item {
+  color: #e9ecef;
+}
+
+.mega-menu .list-group-item:hover {
+  padding-left: 10px;
+  background: var(--swift-green);
+}
+
+.mega-menu .list-group-item i {
+  width: 24px;
+  text-align: center;
+  margin-right: 10px;
+  color: var(--swift-green);
+}
+
+.video-container {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.theme-dark .video-container {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Méga menu */
+
+/* Animations */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* Quand le body a la classe dark-mode */
+body.dark-mode .list-group-item {
+  background-color: #333;
+  /* fond foncé si tu veux */
+  color: #fff;
+  /* texte blanc */
+}
+
+/* Facultatif : hover encore plus clair */
+body.dark-mode .list-group-item:hover {
+  background-color: var(--swift-green);
+}
+
+/* Mode clair - style Bootstrap par défaut */
+
+
+body.dark .navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
+  color: #fff !important;
+}
+
+body.light #formationsDropdown{
+  color: var(--bs-nav-link-color)!important;
+}
+
+/* 💎 Conteneur pour bien gérer l'affichage horizontal et responsive */
+.chip-list {
+  margin-top: 1rem;
+}
+
+/* 💎 Style de base pour un chip */
+.chip {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  background-color: #f1f1f1;
+  /* clair par défaut */
+  color: #333;
+  border: 1px solid transparent;
+}
+
+/* 💎 Hover - clair */
+.chip:hover {
+  background-color: var(--swift-green);
+  /* Bootstrap primary */
+  color: #fff;
+}
+
+/* ✅ Mode sombre */
+body.dark-mode .chip {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #555;
+  /* petit contour pour bien ressortir */
+}
+
+body.dark-mode .chip:hover {
+  background-color: var(--swift-green);
+  color: #fff;
+}
+
+/* footer code */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+/* Pour que l'icône hamburger soit blanche */
+.navbar-dark .navbar-toggler-icon {
+  filter: invert(1) brightness(2);
+}
+
+/* Si tu utilises navbar-light sur fond sombre */
+.navbar-light .navbar-toggler-icon {
+  filter: invert(1) brightness(2);
+}
+
+/* Ou sur ta classe perso */
+button.navbar-toggle .navbar-toggler-icon {
+  filter: invert(1) brightness(2);
+}
+
+.navbar-toggle {
+  border: none;
+  background: transparent;
 }
