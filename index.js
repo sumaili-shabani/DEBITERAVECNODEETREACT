@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const path = require('path');
+require('dotenv').config(); // 🔑 Charge les variables depuis .env
 //sequelize
 const sequelize = require('./config/sequelize');
 
@@ -31,6 +32,8 @@ const BasicRoute = require('./routes/BasicRoute');//✅
 const CarouselRoute = require('./routes/CarouselRoute');//✅ 
 const ProjetRoute = require('./routes/ProjetRoute');//✅ 
 const RapportRoute = require('./routes/RapportRoute');//✅
+const FaqRoute = require('./routes/FaqRoute');//✅
+
 
 
 // Middlewares
@@ -67,22 +70,7 @@ app.use('/api', BasicRoute);
 app.use('/api', ProjetRoute);
 app.use('/api', CarouselRoute);
 app.use('/api', RapportRoute);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.use('/api', FaqRoute);
 
 sequelize.authenticate()
     .then(() => console.log('Connexion Sequelize OK'))
@@ -99,7 +87,7 @@ sequelize.sync({ alter: true }).then(() => {
 });
 
 // Démarrage serveur
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`Serveur lancé sur http://localhost:${PORT}`);
+    console.log(`✅ Serveur lancé sur ${process.env.BASE_URL || `http://localhost:${PORT}`}`);
 });
