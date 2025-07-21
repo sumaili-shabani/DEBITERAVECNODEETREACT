@@ -33,6 +33,7 @@ const CarouselRoute = require('./routes/CarouselRoute');//✅
 const ProjetRoute = require('./routes/ProjetRoute');//✅ 
 const RapportRoute = require('./routes/RapportRoute');//✅
 const FaqRoute = require('./routes/FaqRoute');//✅
+const FonctionaliteRoute = require('./routes/FonctionaliteRoute');//✅
 
 
 
@@ -71,6 +72,8 @@ app.use('/api', ProjetRoute);
 app.use('/api', CarouselRoute);
 app.use('/api', RapportRoute);
 app.use('/api', FaqRoute);
+app.use('/api', FonctionaliteRoute);
+
 
 sequelize.authenticate()
     .then(() => console.log('Connexion Sequelize OK'))
