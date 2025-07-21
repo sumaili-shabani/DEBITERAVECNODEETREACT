@@ -42,6 +42,7 @@ import PartenairePage from './pages/Site/Pages/PartenairePage';
 import VideoPage from './pages/Site/Pages/VideoPage';
 import ImagePage from './pages/Site/Pages/ImagePage';
 import FaqPage from './pages/Site/Pages/FaqPage';
+import FonctionalitePage from './pages/Site/Pages/FonctionalitePage';
 
 
 
@@ -249,6 +250,17 @@ function App() {
               </PrivateRoute>
             }
           />
+
+          <Route
+            path="/fonctionality"
+            element={
+              <PrivateRoute>
+                <FonctionalitePage />
+              </PrivateRoute>
+            }
+          />
+
+          
 
 
 
