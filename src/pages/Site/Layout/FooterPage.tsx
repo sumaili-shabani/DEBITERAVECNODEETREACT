@@ -4,7 +4,7 @@ export default function FooterPage() {
   return (
     <div className='col-lg-12 col-md-12 col-12 col-sm-12 mt-4'>
 
-          <footer className="footer bg-dark text-light pt-5 mt-4 pb-4 mt-auto">
+          <footer className="bg-dark text-light pt-5 mt-4 pb-4 mt-auto">
               <div className="container">
                   <div className="row">
                       {/* <!-- Bloc 1 : Logo et slogan --> */}

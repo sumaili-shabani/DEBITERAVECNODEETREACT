@@ -4,7 +4,6 @@ import Topbar from './layout/Topbar';
 import Footer from './layout/Footer';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 // import ProfilPage from './pages/ProfilPage';
-import SettingPage from './pages/SettingPage';
 import NotFoundPage from './pages/NotFoundPage';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
@@ -20,10 +19,9 @@ import RolePage from './pages/admin/pages/roles/rolePage';
 import './App.css';
 import './theme.css';
 import Index from './pages/Site/Pages/Index';
-
-
-
-
+import NavBar from './pages/Site/Layout/NavBar';
+import SiderBar from './pages/Site/Layout/SiderBar';
+import FooterPage from './pages/Site/Layout/FooterPAge';
 
 
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
@@ -40,20 +38,29 @@ function LayoutWrapper({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div>
-      {children}
 
-      {/*<div id="wrapper">
-         <Sidebar />
+    <div id="wrapper">
 
-      <div id="content-wrapper" className="d-flex flex-column">
-        <div id="content">
-          <Topbar />
-          <div className="container-fluid">{children}</div>
-        </div>
-        <Footer />
-      </div> 
-      </div>*/}
+      {/* NavBar lg */}
+      <NavBar />
+      {/* <!-- Navbar Mobile - Offcanvas Menu - Adaptatif --> */}
+      <SiderBar />
+
+      {/* body */}
+      <div className='col-md-12 col-lg-12 col-sm-12 col-12 mt-4'>
+
+        {children}
+
+      </div>
+      {/* fin body */}
+
+
+      {/* footer */}
+      <FooterPage />
+
+      {/* fin footer */}
+
+
     </div>
 
   );
@@ -75,6 +82,16 @@ function App() {
 
           {/* Fin Authentification (pas besoin de protection) */}
 
+          <Route
+            path="/"
+            element={
+
+              <Index />
+
+            }
+          />
+
+
 
 
           {/* Routes privées */}
@@ -86,15 +103,6 @@ function App() {
               </PrivateRoute>
             }
           /> */}
-
-          <Route
-            path="/"
-            element={
-
-              <Index />
-
-            }
-          />
 
 
 
