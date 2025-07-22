@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "../web-frontend/src/pages/Site/Layout/SideBarInfo.tsx"  ]
 }
