@@ -22,11 +22,13 @@ import Index from './pages/Site/Pages/Index';
 import NavBar from './pages/Site/Layout/NavBar';
 import SiderBar from './pages/Site/Layout/SiderBar';
 import FooterPage from './pages/Site/Layout/FooterPAge';
+import SideBarInfo from './pages/Site/Layout/SideBarInfo';
+import About from './pages/Site/Components/Sections/about/About';
 
 
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const location = useLocation();
-  const noLayoutRoutes = ['/login', '/register', '/forgot'];
+  const noLayoutRoutes = ['/home', '/'];
 
   const isAuthPage =
     noLayoutRoutes.includes(location.pathname) ||
@@ -34,7 +36,33 @@ function LayoutWrapper({ children }: { children: React.ReactNode }) {
     location.pathname === '*';
 
   if (isAuthPage) {
-    return <>{children}</>;
+    return (
+
+      <div id="wrapper">
+
+        {/* NavBar lg */}
+        <NavBar />
+        {/* <!-- Navbar Mobile - Offcanvas Menu - Adaptatif --> */}
+        <SiderBar />
+
+        {/* body */}
+        <div className='col-md-12 col-lg-12 col-sm-12 col-12 mt-2'>
+
+          {children}
+
+        </div>
+        {/* fin body */}
+
+
+        {/* footer */}
+        <FooterPage />
+
+        {/* fin footer */}
+
+
+      </div>
+
+    );
   }
 
   return (
@@ -47,10 +75,19 @@ function LayoutWrapper({ children }: { children: React.ReactNode }) {
       <SiderBar />
 
       {/* body */}
-      <div className='col-md-12 col-lg-12 col-sm-12 col-12 mt-4'>
+      <div className="container">
+        <div className='col-md-12 col-lg-12 col-sm-12 col-12 mt-2'>
 
-        {children}
+          <div className="row">
+            <div className="col-md-9 col-lg-9 col-sm-12 col-12">
+              {children}
+            </div>
+            <div className="col-md-3 col-lg-3 col-sm-12 col-12">
+              <SideBarInfo />
+            </div>
+          </div>
 
+        </div>
       </div>
       {/* fin body */}
 
@@ -63,6 +100,8 @@ function LayoutWrapper({ children }: { children: React.ReactNode }) {
 
     </div>
 
+
+
   );
 }
 
@@ -74,21 +113,15 @@ function App() {
       <LayoutWrapper>
         <Routes>
 
-          {/* Authentification (pas besoin de protection) */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot" element={<Forgot />} />
-          <Route path="/reset-password/:token" element={<ResetPassword />} />
+
 
           {/* Fin Authentification (pas besoin de protection) */}
 
           <Route
-            path="/"
-            element={
-
-              <Index />
-
-            }
+            path="/" element={<Index />}
+          />
+          <Route
+            path="/about" element={<About />}
           />
 
 

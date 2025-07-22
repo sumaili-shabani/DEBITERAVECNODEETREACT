@@ -1,23 +1,27 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Choix from './home/Choix'
+import Service from './home/Service'
+import Partenaire from './home/Partenaire'
+import Projet from './home/Projet'
+import Article from './home/Article'
 
 export default function HiroPage() {
     return (
         <div>
-           
             {/* carousel */}
-            <div className="container-fluid px-0 mb-5">
+            <div className="container-fluid px-0 mb-2">
                 <div className="row g-0 align-items-center">
                     <div className="col-lg-6 px-4 px-md-5 py-5">
                         <h1 className="display-4 fw-bold mb-4">
-                            <span className="text-primary">SWIFTRIDE</span> - Mobilité intelligente, sécurité absolue
+                            <span className="text-success">SWIFTRIDE</span> - Mobilité intelligente, sécurité absolue
                         </h1>
-                        <p className="lead mb-4">
+                     <p className="lead mb-4">
                             L'application de transport qui révolutionne vos déplacements urbains avec des fonctionnalités pensées pour l'Afrique.
                         </p>
 
                         <div className="col-md-12 mb-2">
-                            <span> <i className="fas fa-download me-1 text-primary"></i> <b>Téléchargez l'application SwiftRide </b></span>
+                            <span> <i className="fas fa-download me-1 text-success"></i> <b>Téléchargez l'application SwiftRide </b></span>
                             Disponible sur:
                         </div>
                         <div className="d-flex gap-3 flex-wrap">
@@ -89,10 +93,93 @@ export default function HiroPage() {
             </div>
             {/* fin carousel */}
 
+            {/* valeur */}
+            <div className="container py-5 my-1">
+                <div className="text-center mb-5">
+                    <h2 className="fw-bold display-5">Nos <span className="text-success">Valeurs Fondatrices</span></h2>
+                    <p className="lead">Ce qui fait de SWIFTRIDE le partenaire de mobilité préféré en Afrique</p>
+                </div>
+
+                <div className="row g-4">
+                    {/* Valeur 1 - Sécurité */}
+                    <div className="col-md-6 col-lg-3">
+                        <div className="card h-100 border-0 shadow-sm bg-success bg-opacity-10 hover-transform">
+                            <div className="card-body p-4 text-center">
+                                <div className="icon-xl bg-success text-white rounded-circle mb-4 mx-auto">
+                                    <i className="fas fa-shield-alt fs-4"></i>
+                                </div>
+                                <h4 className="fw-bold text-success">Sécurité Totale</h4>
+                                <p className="text-muted">
+                                    <strong>Innovation technologique :</strong> Bouton SOS, traçage GPS et chauffeurs vérifiés réduisent les risques de 80% par rapport aux transports traditionnels.
+                                </p>
+                               
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Valeur 2 - Innovation */}
+                    <div className="col-md-6 col-lg-3">
+                        <div className="card h-100 border-0 shadow-sm bg-white hover-transform">
+                            <div className="card-body p-4 text-center">
+                                <div className="icon-xl bg-success text-white rounded-circle mb-4 mx-auto">
+                                    <i className="fas fa-lightbulb fs-4"></i>
+                                </div>
+                                <h4 className="fw-bold text-success">Innovation Locale</h4>
+                                <p className="text-muted">
+                                    <strong>Adaptation unique :</strong> Solution optimisée pour les infrastructures africaines avec mode hors-ligne et paiements Mobile Money. <strong>+300%</strong> d'adoption vs solutions importées.
+                                </p>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Valeur 3 - Accessibilité */}
+                    <div className="col-md-6 col-lg-3">
+                        <div className="card h-100 border-0 shadow-sm bg-success bg-opacity-10 hover-transform">
+                            <div className="card-body p-4 text-center">
+                                <div className="icon-xl bg-success text-white rounded-circle mb-4 mx-auto">
+                                    <i className="fas fa-hand-holding-usd fs-4"></i>
+                                </div>
+                                <h4 className="fw-bold text-success">Accessibilité</h4>
+                                <p className="text-muted">
+                                    <strong>Modèle économique inclusif :</strong> Tarifs jusqu'à 40% moins chers que la concurrence avec qualité premium. <strong>92%</strong> de satisfaction client.
+                                </p>
+                              
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Valeur 4 - Impact */}
+                    <div className="col-md-6 col-lg-3">
+                        <div className="card h-100 border-0 shadow-sm bg-white hover-transform">
+                            <div className="card-body p-4 text-center">
+                                <div className="icon-xl bg-success text-white rounded-circle mb-4 mx-auto">
+                                    <i className="fas fa-chart-line fs-4"></i>
+                                </div>
+                                <h4 className="fw-bold text-success">Impact Social</h4>
+                                <p className="text-muted">
+                                    <strong>Création d'emplois :</strong> <strong>5,000+</strong> chauffeurs partenaires formés. <strong>Solution clé</strong> pour la mobilité urbaine durable en Afrique subsaharienne.
+                                </p>
+                             
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/* fin valeur */}
+
+            {/* pourquoi nous choisir */}
+            <Choix />
+            {/* fin */}
+
+            {/* Nos Services */}
+            <Service />
+            {/* fin  Nos Services */}
+
             {/*  Bloc Fonctionnalités (Cartes Illustrées) */}
             <div className="container py-5">
                 <div className="text-center mb-5">
-                    <h2 className="fw-bold">Nos <span className="text-primary">Fonctionnalités</span> Clés</h2>
+                    <h2 className="fw-bold">Nos <span className="text-success">Fonctionnalités</span> Clés</h2>
                     <p className="text-muted">Découvrez ce qui fait la différence</p>
                 </div>
 
@@ -100,7 +187,7 @@ export default function HiroPage() {
                     <div className="col-md-6 col-lg-3">
                         <div className="card h-100 border-0 shadow-sm hover-shadow transition-all">
                             <div className="card-body p-4 text-center">
-                                <div className="icon-lg bg-primary bg-opacity-10 text-primary rounded-circle mb-4 mx-auto">
+                                <div className="icon-lg bg-success bg-opacity-10 text-success rounded-circle mb-4 mx-auto">
                                     <i className="fas fa-shield-alt fs-4"></i>
                                 </div>
                                 <h5 className="fw-bold">Sécurité renforcée</h5>
@@ -114,7 +201,7 @@ export default function HiroPage() {
                     <div className="col-md-6 col-lg-3">
                         <div className="card h-100 border-0 shadow-sm hover-shadow transition-all">
                             <div className="card-body p-4 text-center">
-                                <div className="icon-lg bg-primary bg-opacity-10 text-primary rounded-circle mb-4 mx-auto">
+                                <div className="icon-lg bg-success bg-opacity-10 text-success rounded-circle mb-4 mx-auto">
                                     <i className="fas fa-money-bill-wave fs-4"></i>
                                 </div>
                                 <h5 className="fw-bold">Paiements flexibles</h5>
@@ -128,7 +215,7 @@ export default function HiroPage() {
                     <div className="col-md-6 col-lg-3">
                         <div className="card h-100 border-0 shadow-sm hover-shadow transition-all">
                             <div className="card-body p-4 text-center">
-                                <div className="icon-lg bg-primary bg-opacity-10 text-primary rounded-circle mb-4 mx-auto">
+                                <div className="icon-lg bg-success bg-opacity-10 text-success rounded-circle mb-4 mx-auto">
                                     <i className="fas fa-bolt fs-4"></i>
                                 </div>
                                 <h5 className="fw-bold">Rapidité</h5>
@@ -142,7 +229,7 @@ export default function HiroPage() {
                     <div className="col-md-6 col-lg-3">
                         <div className="card h-100 border-0 shadow-sm hover-shadow transition-all">
                             <div className="card-body p-4 text-center">
-                                <div className="icon-lg bg-primary bg-opacity-10 text-primary rounded-circle mb-4 mx-auto">
+                                <div className="icon-lg bg-success bg-opacity-10 text-success rounded-circle mb-4 mx-auto">
                                     <i className="fas fa-user-friends fs-4"></i>
                                 </div>
                                 <h5 className="fw-bold">Support 24/7</h5>
@@ -155,6 +242,17 @@ export default function HiroPage() {
                 </div>
             </div>
             {/* fin  Bloc Fonctionnalités (Cartes Illustrées) */}
+            {/* les Projet */}
+            <Projet />
+            {/* fin les Projet */}
+            {/* les articles */}
+            <Article />
+            {/* fin les articles */}
+
+            {/* les partenaires */}
+            <Partenaire />
+            {/* fin les partenaires */}
+
         </div>
     )
 }

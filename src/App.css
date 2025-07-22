@@ -494,3 +494,48 @@ button.navbar-toggle .navbar-toggler-icon {
   border-radius: 50%;
 }
 
+.hover-transform {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 180, 79, 0.1) !important;
+}
+
+.hover-transform:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 180, 79, 0.1) !important;
+}
+
+.icon-xl {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-success-light {
+  background-color: rgba(0, 180, 79, 0.05);
+}
+
+/* Effet de zoom au survol */
+.card-img-top {
+  transition: transform 0.5s ease;
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+/* Style des badges */
+.badge {
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  padding: 0.35em 0.65em;
+}
+
+/* Ombre portée spécifique */
+.shadow-lg {
+  box-shadow: 0 1rem 3rem rgba(0, 180, 79, 0.1) !important;
+}
+
+
+

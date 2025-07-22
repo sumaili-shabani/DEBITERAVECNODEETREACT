@@ -2,6 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom'
 import { useTheme } from '../../../context/ThemeContext';
+import logoApp from '../../../assets/logos/logo_swift_ride_green.png'; 
 
 export default function NavBar() {
 
@@ -18,7 +19,11 @@ export default function NavBar() {
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
                 <div className="container-fluid">
-                    <a className="navbar-brand fw-bold swift-text-green" href="#">SWIFTRIDE</a>
+                    <a className="navbar-brand fw-bold swift-text-green" href="#">
+                        {/* SWIFTRIDE */}
+                        <img src={logoApp} alt="logo app" 
+                        className='img-fluid object-fit-cover' width={60} height={60}  />
+                    </a>
 
 
                     {/* autre */}
