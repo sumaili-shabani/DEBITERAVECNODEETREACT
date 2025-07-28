@@ -50,9 +50,9 @@ export default function Projet() {
                             </ul>
                         </div>
                         <div className="card-footer bg-transparent border-0 pt-0">
-                            <button className="btn btn-outline-success w-100 rounded-pill py-2">
+                            <Link to={`/project/poject-detail-slug`} className="btn btn-outline-success w-100 rounded-pill py-2">
                                 Découvrir <i className="fas fa-arrow-right ms-2"></i>
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -97,9 +97,9 @@ export default function Projet() {
                             </ul>
                         </div>
                         <div className="card-footer bg-transparent border-0 pt-0">
-                            <button className="btn btn-outline-success w-100 rounded-pill py-2">
-                                Commander <i className="fas fa-motorcycle ms-2"></i>
-                            </button>
+                            <Link to={`/project/poject-detail-slug`} className="btn btn-outline-success w-100 rounded-pill py-2">
+                                Découvrir <i className="fas fa-arrow-right ms-2"></i>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -144,9 +144,9 @@ export default function Projet() {
                             </ul>
                         </div>
                         <div className="card-footer bg-transparent border-0 pt-0">
-                            <button className="btn btn-success w-100 rounded-pill py-2">
-                                Demander un devis <i className="fas fa-file-contract ms-2"></i>
-                            </button>
+                            <Link to={`/project/poject-detail-slug`} className="btn btn-outline-success w-100 rounded-pill py-2">
+                                Découvrir <i className="fas fa-arrow-right ms-2"></i>
+                            </Link>
                         </div>
                     </div>
                 </div>

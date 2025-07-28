@@ -43,9 +43,9 @@ export default function Article() {
                           </p>
                       </div>
                       <div className="card-footer bg-transparent border-0">
-                          <a href="#" className="btn btn-link text-success text-decoration-none p-0">
+                          <Link to={`/blog/article-cool-slug`} className="btn btn-link text-success text-decoration-none p-0">
                               Lire l'article <i className="fas fa-arrow-right ms-2"></i>
-                          </a>
+                          </Link>
                       </div>
                   </div>
               </div>
@@ -83,9 +83,9 @@ export default function Article() {
                           </p>
                       </div>
                       <div className="card-footer bg-transparent border-0">
-                          <a href="#" className="btn btn-link text-success text-decoration-none p-0">
+                          <Link to={`/blog/article-cool-slug`} className="btn btn-link text-success text-decoration-none p-0">
                               Lire l'article <i className="fas fa-arrow-right ms-2"></i>
-                          </a>
+                          </Link>
                       </div>
                   </div>
               </div>
@@ -123,9 +123,9 @@ export default function Article() {
                           </p>
                       </div>
                       <div className="card-footer bg-transparent border-0">
-                          <a href="#" className="btn btn-link text-success text-decoration-none p-0">
+                          <Link to={`/blog/article-cool-slug`} className="btn btn-link text-success text-decoration-none p-0">
                               Lire l'article <i className="fas fa-arrow-right ms-2"></i>
-                          </a>
+                          </Link>
                       </div>
                   </div>
               </div>

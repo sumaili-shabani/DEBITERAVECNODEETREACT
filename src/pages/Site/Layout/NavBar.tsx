@@ -62,38 +62,63 @@ export default function NavBar() {
                                                 <div className="mega-category border-end">
                                                     <h5><i className="fas fa-home me-2 swift-text-green"></i> Accueil</h5>
                                                     <div className="list-group">
-                                                        <a href="#services" className="list-group-item list-group-item-action">
+                                                        <Link to="/services" className="list-group-item list-group-item-action">
                                                             <i className="fas fa-concierge-bell swift-text-green"></i> Nos services
-                                                        </a>
-                                                        <a href="#taxi" className="list-group-item list-group-item-action">
+                                                        </Link>
+                                                        <a href="https://play.google.com/store/apps/details?id=com.dreamofdrc.liftiapp" target='_blank' className="list-group-item list-group-item-action">
                                                             <i className="fas fa-taxi swift-text-green"></i> Commander un taxi
                                                         </a>
-                                                        <a href="#moto" className="list-group-item list-group-item-action">
+                                                        <a href="https://play.google.com/store/apps/details?id=com.dreamofdrc.liftiapp" target='_blank' className="list-group-item list-group-item-action">
                                                             <i className="fas fa-motorcycle swift-text-green"></i> Commander une moto
                                                         </a>
-                                                        <a href="#premium" className="list-group-item list-group-item-action">
-                                                            <i className="fas fa-car-side swift-text-green"></i> Véhicule premium
-                                                        </a>
-                                                        <a href="#reservation" className="list-group-item list-group-item-action">
+                                                        <Link to="/location-vehicule" className="list-group-item list-group-item-action">
+                                                            <i className="fas fa-car-side swift-text-green"></i> Location des véhicules
+                                                        </Link>
+                                                        <Link to="/reservation-future" className="list-group-item list-group-item-action">
                                                             <i className="fas fa-calendar-check swift-text-green"></i> Réservation future
-                                                        </a>
+                                                        </Link>
                                                     </div>
                                                 </div>
 
-                                                <div className="mega-category mt-1 border-end">
+                                                <div className="mega-category mt-1 border-end border-top">
                                                     <h5><i className="fas fa-shield-alt me-2 swift-text-green"></i> Sécurité</h5>
                                                     <div className="list-group">
-                                                        <a href="#sos" className="list-group-item list-group-item-action">
+                                                        <Link to="/sos" className="list-group-item list-group-item-action">
                                                             <i className="fas fa-exclamation-triangle swift-text-green"></i> Bouton SOS
-                                                        </a>
-                                                        <a href="#partage" className="list-group-item list-group-item-action">
+                                                        </Link>
+                                                        <Link to="/partage" className="list-group-item list-group-item-action">
                                                             <i className="fas fa-share-square swift-text-green"></i> Partage de trajet
-                                                        </a>
-                                                        <a href="#chauffeur" className="list-group-item list-group-item-action">
+                                                        </Link>
+                                                        <Link to="/chauffeur" className="list-group-item list-group-item-action">
                                                             <i className="fas fa-id-badge swift-text-green"></i> Identification chauffeur
-                                                        </a>
+                                                        </Link>
                                                     </div>
                                                 </div>
+
+                                                {/* ✅ Réseaux sociaux */}
+                                                <div className="text-start py-3 border-end border-top">
+                                                    <h5><i className="fas fa-link me-2 swift-text-green"></i> Rejoignez-nous sur les réseaux</h5>
+
+
+                                                    <div className="text-muted fst-italic mb-3">
+                                                        Restez informé des nouveautés et offres exclusives.
+                                                    </div>
+                                                    <a href="#" className="me-3 text-decoration-none">
+                                                        <i className="fab fa-facebook-f fa-lg swift-text-green"></i>
+                                                    </a>
+                                                    <a href="#" className="me-3 text-decoration-none">
+                                                        <i className="fab fa-x-twitter fa-lg swift-text-green"></i>
+                                                    </a>
+                                                    <a href="#" className="me-3 text-decoration-none">
+                                                        <i className="fab fa-instagram fa-lg swift-text-green"></i>
+                                                    </a>
+                                                    {/* <!-- Optionnel --> */}
+                                                    <a href="#" className="me-3 text-decoration-none">
+                                                        <i className="fab fa-linkedin-in fa-lg swift-text-green"></i>
+                                                    </a>
+                                                </div>
+
+                                               
                                             </div>
 
                                             {/* ✅ Colonne 2 */}
@@ -101,67 +126,78 @@ export default function NavBar() {
                                                 <div className="mega-category border-end">
                                                     <h5><i className="fas fa-gift me-2 swift-text-green"></i> Promotions & Offres</h5>
                                                     <div className="list-group">
-                                                        <a href="#codes" className="list-group-item list-group-item-action">
+                                                        <Link to="/code-promo" className="list-group-item list-group-item-action">
                                                             <i className="fas fa-ticket-alt swift-text-green"></i> Codes promo
-                                                        </a>
-                                                        <a href="#offres" className="list-group-item list-group-item-action">
+                                                        </Link>
+                                                        <Link to="/offre-promotion" className="list-group-item list-group-item-action">
                                                             <i className="fas fa-tags swift-text-green"></i> Offres spéciales
-                                                        </a>
-                                                        <a href="#parrainage" className="list-group-item list-group-item-action">
-                                                            <i className="fas fa-user-friends swift-text-green"></i> Parrainage
-                                                        </a>
-                                                        <a href="#how-it-works" className="list-group-item list-group-item-action">
+                                                        </Link>
+                                                       
+                                                        <Link to="/how-it-works" className="list-group-item list-group-item-action">
                                                             <i className="fas fa-question-circle swift-text-green"></i> Comment ça marche
-                                                        </a>
-                                                        <a href="#faq" className="list-group-item list-group-item-action">
+                                                        </Link>
+                                                        <Link to="/faq" className="list-group-item list-group-item-action">
                                                             <i className="fas fa-info-circle swift-text-green"></i> FAQ
-                                                        </a>
-                                                        <a href="#contact" className="list-group-item list-group-item-action">
+                                                        </Link>
+                                                        <Link to="/contact" className="list-group-item list-group-item-action">
                                                             <i className="fas fa-envelope swift-text-green"></i> Contact
-                                                        </a>
+                                                        </Link>
                                                     </div>
                                                 </div>
 
                                                 <div className="col-md-12">
-                                                    {/* ✅ Boutons de téléchargement */}
-                                                    <div className="mt-auto pt-3 border-top">
-                                                        <h5><i className="fas fa-download me-2 swift-text-green"></i> Téléchargez l'application SwiftRide</h5>
 
-                                                        <div className="text-start mb-3 text-muted fst-italic">
-                                                            Votre mobilité, plus simple et plus sûre. Disponible sur:
-                                                        </div>
-                                                        <div className="d-flex justify-content-start flex-wrap">
-                                                            <a style={{ textDecoration: 'none' }} href='https://play.google.com/store/apps/details?id=com.dreamofdrc.liftiapp' target='_blank' className="download-btn me-2 mb-2">
-                                                                <i className="fab fa-google-play me-2"></i> Android
-                                                            </a>
-                                                            <a style={{ textDecoration: 'none' }} href='#' className="download-btn mb-2">
-                                                                <i className="fab fa-apple me-2"></i> iOS
-                                                            </a>
+                                                    <div className="mega-category mt-1 border-end border-top">
+                                                        <h5><i className="fas fa-info me-2 swift-text-green"></i> Infos</h5>
+                                                        <div className="list-group">
+                                                            <Link to="/works" className="list-group-item list-group-item-action">
+                                                                <i className="fas fa-briefcase swift-text-green"></i> Ce que nous faisons
+                                                            </Link>
+                                                            <Link to="/about" className="list-group-item list-group-item-action">
+                                                                <i className="fas fa-info-circle swift-text-green"></i> À propos de nous
+                                                            </Link>
+                                                            <Link to="/blogs" className="list-group-item list-group-item-action">
+                                                                <i className="fas fa-newspaper swift-text-green"></i> Articles
+                                                            </Link>
+                                                            <Link to="/team" className="list-group-item list-group-item-action">
+                                                                <i className="fas fa-users swift-text-green"></i> Équipe
+                                                            </Link>
+                                                            <Link to="/structure-gestion" className="list-group-item list-group-item-action">
+                                                                <i className="fas fa-sitemap swift-text-green"></i> Structure de gestion
+                                                            </Link>
+                                                            <Link to="/partenariat-ship" className="list-group-item list-group-item-action">
+                                                                <i className="fas fa-handshake swift-text-green"></i> Partenariat
+                                                            </Link>
+                                                            <Link to="/don" className="list-group-item list-group-item-action">
+                                                                <i className="fas fa-donate swift-text-green"></i> Nous faire un don
+                                                            </Link>
+                                                            <Link to="/financement" className="list-group-item list-group-item-action">
+                                                                <i className="fas fa-piggy-bank swift-text-green"></i> Financement
+                                                            </Link>
+                                                            <Link to="/secteur" className="list-group-item list-group-item-action">
+                                                                <i className="fas fa-layer-group swift-text-green"></i> Secteur
+                                                            </Link>
+
+                                                            <Link to="/vacancy" className="list-group-item list-group-item-action">
+                                                                <i className="fas fa-folder swift-text-green"></i> Offre d'emploi
+                                                            </Link>
+
+                                                            <Link to="/galery" className="list-group-item list-group-item-action">
+                                                                <i className="fas fa-camera swift-text-green"></i> Galérie photo
+                                                            </Link>
+
+                                                            <Link to="/video" className="list-group-item list-group-item-action">
+                                                                <i className="fas fa-video swift-text-green"></i> Vidéos
+                                                            </Link>
+
+                                                            
+
+
                                                         </div>
                                                     </div>
 
-                                                    {/* ✅ Réseaux sociaux */}
-                                                    <div className="text-start py-3 border-end">
-                                                        <h5><i className="fas fa-link me-2 swift-text-green"></i>  Rejoignez-nous sur les réseaux</h5>
 
 
-                                                        <div className="text-muted fst-italic mb-3">
-                                                            Restez informé des nouveautés et offres exclusives.
-                                                        </div>
-                                                        <a href="#" className="me-3 text-decoration-none">
-                                                            <i className="fab fa-facebook-f fa-lg swift-text-green"></i>
-                                                        </a>
-                                                        <a href="#" className="me-3 text-decoration-none">
-                                                            <i className="fab fa-x-twitter fa-lg swift-text-green"></i>
-                                                        </a>
-                                                        <a href="#" className="me-3 text-decoration-none">
-                                                            <i className="fab fa-instagram fa-lg swift-text-green"></i>
-                                                        </a>
-                                                        {/* <!-- Optionnel --> */}
-                                                        <a href="#" className="me-3 text-decoration-none">
-                                                            <i className="fab fa-linkedin-in fa-lg swift-text-green"></i>
-                                                        </a>
-                                                    </div>
                                                 </div>
 
 
@@ -205,6 +241,29 @@ export default function NavBar() {
                                                         </a>
                                                     </div>
 
+                                                </div>
+
+
+                                                <div className="col-md-12">
+
+                                                    {/* ✅ Boutons de téléchargement */}
+                                                    <div className="mt-auto pt-3 border-top border-end">
+                                                        <h5><i className="fas fa-download me-2 swift-text-green"></i> Téléchargez l'application SwiftRide</h5>
+
+                                                        <div className="text-start mb-3 text-muted fst-italic">
+                                                            Votre mobilité, plus simple et plus sûre. Disponible sur:
+                                                        </div>
+                                                        <div className="d-flex justify-content-start flex-wrap">
+                                                            <a style={{ textDecoration: 'none' }} href='https://play.google.com/store/apps/details?id=com.dreamofdrc.liftiapp' target='_blank' className="download-btn me-2 mb-2">
+                                                                <i className="fab fa-google-play me-2"></i> Android
+                                                            </a>
+                                                            <a style={{ textDecoration: 'none' }} href='#' className="download-btn mb-2">
+                                                                <i className="fab fa-apple me-2"></i> iOS
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                   
                                                 </div>
                                             </div>
 

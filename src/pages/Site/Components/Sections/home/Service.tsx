@@ -21,9 +21,9 @@ export default function Service() {
                                 </div>
                                 <h4 className="fw-bold mb-3">Course rapide</h4>
                                 <p className="text-muted mb-4">Arrivée en moins de 5 minutes dans toute la ville</p>
-                                <a href="#" className="btn btn-link text-success text-decoration-none p-0">
+                                <Link to={`/service/service-slug`} className="btn btn-link text-success text-decoration-none p-0">
                                     Lire plus <i className="fas fa-arrow-right ms-2"></i>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -37,9 +37,9 @@ export default function Service() {
                                 </div>
                                 <h4 className="fw-bold mb-3">Sécurité</h4>
                                 <p className="text-muted mb-4">Chauffeurs vérifiés et trajet suivi en direct</p>
-                                <a href="#" className="btn btn-link text-success text-decoration-none p-0">
+                                <Link to={`/service/service-slug`} className="btn btn-link text-success text-decoration-none p-0">
                                     Lire plus <i className="fas fa-arrow-right ms-2"></i>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -53,9 +53,9 @@ export default function Service() {
                                 </div>
                                 <h4 className="fw-bold mb-3">24/7</h4>
                                 <p className="text-muted mb-4">Service disponible jour et nuit, 7j/7</p>
-                                <a href="#" className="btn btn-link text-success text-decoration-none p-0">
+                                <Link to={`/service/service-slug`} className="btn btn-link text-success text-decoration-none p-0">
                                     Lire plus <i className="fas fa-arrow-right ms-2"></i>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -69,9 +69,9 @@ export default function Service() {
                                 </div>
                                 <h4 className="fw-bold mb-3">Tarif fixe</h4>
                                 <p className="text-muted mb-4">Prix connu à l'avance, pas de mauvaise surprise</p>
-                                <a href="#" className="btn btn-link text-success text-decoration-none p-0">
+                                <Link to={`/service/service-slug`} className="btn btn-link text-success text-decoration-none p-0">
                                     Lire plus <i className="fas fa-arrow-right ms-2"></i>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -85,9 +85,9 @@ export default function Service() {
                                 </div>
                                 <h4 className="fw-bold mb-3">Accessibilité</h4>
                                 <p className="text-muted mb-4">Véhicules adaptés aux personnes à mobilité réduite</p>
-                                <a href="#" className="btn btn-link text-success text-decoration-none p-0">
+                                <Link to={`/service/service-slug`} className="btn btn-link text-success text-decoration-none p-0">
                                     Lire plus <i className="fas fa-arrow-right ms-2"></i>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -101,9 +101,9 @@ export default function Service() {
                                 </div>
                                 <h4 className="fw-bold mb-3">Business</h4>
                                 <p className="text-muted mb-4">Service premium pour vos déplacements professionnels</p>
-                                <a href="#" className="btn btn-link text-success text-decoration-none p-0">
+                                <Link to={`/service/service-slug`} className="btn btn-link text-success text-decoration-none p-0">
                                     Lire plus <i className="fas fa-arrow-right ms-2"></i>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

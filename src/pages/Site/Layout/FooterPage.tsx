@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function FooterPage() {
   return (
@@ -21,10 +22,10 @@ export default function FooterPage() {
                       <div className="col-lg-2 col-md-4 mb-4 mb-md-0">
                           <h6 className="mb-4">Navigation</h6>
                           <ul className="list-unstyled footer-links">
-                              <li className="mb-2"><a href="#" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Accueil</a></li>
-                              <li className="mb-2"><a href="#services" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Nos services</a></li>
-                              <li className="mb-2"><a href="#faq" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>FAQ</a></li>
-                              <li className="mb-2"><a href="#contact" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Contact</a></li>
+                              <li className="mb-2"><Link to="/" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Accueil</Link></li>
+                              <li className="mb-2"><Link to="/services" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Nos services</Link></li>
+                              <li className="mb-2"><Link to="/faq" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>FAQ</Link></li>
+                              <li className="mb-2"><Link to="/contact" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Contact</Link></li>
                           </ul>
                       </div>
 
@@ -32,9 +33,9 @@ export default function FooterPage() {
                       <div className="col-lg-2 col-md-4 mb-4 mb-md-0">
                           <h6 className="mb-4">Sécurité</h6>
                           <ul className="list-unstyled footer-links">
-                              <li className="mb-2"><a href="#sos" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Bouton SOS</a></li>
-                              <li className="mb-2"><a href="#partage" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Partage trajet</a></li>
-                              <li className="mb-2"><a href="#chauffeurs" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Nos chauffeurs</a></li>
+                              <li className="mb-2"><Link to="/sos" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Bouton SOS</Link></li>
+                              <li className="mb-2"><Link to="/partage" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Partage trajet</Link></li>
+                              <li className="mb-2"><Link to="/projects" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Nos Projets</Link></li>
                           </ul>
                       </div>
 
@@ -42,7 +43,7 @@ export default function FooterPage() {
                       <div className="col-lg-2 col-md-4 mb-4 mb-md-0">
                           <h6 className="mb-4">Télécharger</h6>
                           <ul className="list-unstyled footer-links">
-                              <li className="mb-2"><a href="#" className="text-light text-decoration-none"><i className="fab fa-google-play me-2"></i>Android</a></li>
+                              <li className="mb-2"><a href="https://play.google.com/store/apps/details?id=com.dreamofdrc.liftiapp" target='_blank' className="text-light text-decoration-none"><i className="fab fa-google-play me-2"></i>Android</a></li>
                               <li className="mb-2"><a href="#" className="text-light text-decoration-none"><i className="fab fa-apple me-2"></i>iOS</a></li>
                           </ul>
                       </div>

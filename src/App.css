@@ -537,5 +537,200 @@ button.navbar-toggle .navbar-toggler-icon {
   box-shadow: 0 1rem 3rem rgba(0, 180, 79, 0.1) !important;
 }
 
+.img-fluid {
+  transition: transform 0.5s ease;
+}
 
+.img-fluid:hover {
+  transform: scale(1.02);
+}
+
+/* Style des cartes chiffres clés */
+.shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 180, 79, 0.075) !important;
+}
+
+/* Animation des icônes */
+.bg-success-opacity-10 {
+  background-color: rgba(0, 180, 79, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .display-4 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Effets de hover */
+.btn-outline-success:hover {
+  background-color: var(--bs-success);
+  color: white !important;
+}
+
+/* Animation des icônes de contact */
+.rounded-circle {
+  transition: transform 0.3s ease;
+}
+
+.d-flex:hover .rounded-circle {
+  transform: scale(1.1);
+}
+
+/* Style du formulaire */
+.form-control, .form-select {
+  border: 1px solid #dee2e6;
+  transition: all 0.3s;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--bs-success);
+  box-shadow: 0 0 0 0.25rem rgba(0, 180, 79, 0.25);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .display-4 {
+    font-size: 2.5rem;
+  }
+  
+  .d-flex {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* team */
+/* Animation des cartes */
+.hover-lift-team {
+  transition: all 0.3s ease;
+}
+
+.hover-lift-team:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 1rem 3rem rgba(0, 180, 79, 0.2) !important;
+}
+
+/* Style des images */
+.card-img-top {
+  transition: transform 0.5s ease;
+}
+
+.hover-lift-team:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+/* Style des liens sociaux */
+.text-success {
+  transition: all 0.3s ease;
+}
+
+.text-success:hover {
+  color: var(--bs-success-dark) !important;
+  transform: scale(1.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .display-5 {
+    font-size: 2.3rem;
+  }
+
+  .card {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* detail article */
+/* Style du contenu de l'article */
+.article-content {
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.article-content p {
+  margin-bottom: 1.5rem;
+}
+
+/* Style des boutons de partage */
+.btn-outline-primary {
+  color: #3b5998;
+  border-color: #3b5998;
+}
+
+.btn-outline-primary:hover {
+  background-color: #3b5998;
+  color: white;
+}
+
+.btn-outline-info {
+  color: #1da1f2;
+  border-color: #1da1f2;
+}
+
+.btn-outline-info:hover {
+  background-color: #1da1f2;
+  color: white;
+}
+
+.btn-outline-secondary {
+  color: #0077b5;
+  border-color: #0077b5;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #0077b5;
+  color: white;
+}
+
+/* Animation pour le bouton copier */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+#copyLinkBtn.copied {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .display-5 {
+    font-size: 2.3rem;
+  }
+
+  .article-content {
+    font-size: 1rem;
+  }
+}
+
+.hover-shadow:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 180, 79, 0.15) !important;
+  transition: all 0.3s ease;
+}
+
+/* Style de la barre de recherche */
+.rounded-pill {
+  border-radius: 50rem !important;
+}
+
+.input-group-text {
+  background-color: transparent;
+  border-right: none;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #ced4da;
+}
+
+.linkbtn{
+  text-decoration: none;
+}
 
