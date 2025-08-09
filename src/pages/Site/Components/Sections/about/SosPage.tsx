@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function SosPage() {
+    useEffect(() => {
+        document.title = "Assistance d'Urgence (SOS) - Swiftride";
+
+    }, []);
     return (
         // < !--Bloc Interface SOS-- >
         <section className="py-5 bg-opacity-10" id="sos">

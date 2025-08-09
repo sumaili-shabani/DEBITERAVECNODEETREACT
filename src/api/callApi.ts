@@ -2,6 +2,10 @@ import api from './config';
 import { toast } from 'react-toastify';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
 
+import moment from "moment";
+import "moment/locale/fr";
+moment.locale("fr");
+
 export const fetchAll = async (endpoint: string, params = {}) => {
     try {
         const res = await api.get(endpoint, { params });
@@ -164,6 +168,10 @@ export function extractTime(dateStr: string): string {
 export function truncateText(text: string, maxLength = 10): string {
     if (text.length <= maxLength) return text;
     return text.slice(0, maxLength) + '...';
+}
+
+export function getRelativeTime(date: string | Date): string {
+    return moment(date).fromNow();
 }
 interface ChartData {
     category: string[];

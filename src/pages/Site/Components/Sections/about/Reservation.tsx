@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function Reservation() {
+    useEffect(() => {
+        document.title = "Réservation à l'avance & Planification - Swiftride";
+    
+        }, []);
   return (
       <section className="py-5" id="reservation-future">
           <div className="container">

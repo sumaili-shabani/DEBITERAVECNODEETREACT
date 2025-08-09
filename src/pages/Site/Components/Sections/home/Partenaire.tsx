@@ -1,41 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { fetchListItems } from '../../../../../hooks/useCrud';
+import { fileUrl } from '../../../../../api/config';
 
-interface Partner {
-    name: string;
-    logo: string;
-    url: string;
+interface UiPartenaire {
+    id?: number;
+    nom?: string;
+    url?: string;
+    icone?: string;
+    logoFile?: File;
+    createdAt?: string;
+    updatedAt?: string;
+
 }
+
 export default function Partenaire() {
-    
-    const partners: Partner[] = [
-        {
-            name: "WFP",
-            logo: "https://santeplusrdc.org/partenaire/1713261162.png",
-            url: "https://fr.wfp.org/"
-        },
-        {
-            name: "UNICEF",
-            logo: "https://santeplusrdc.org/partenaire/1713260618.jpg",
-            url: "https://www.unicef.org/fr"
-        },
-        {
-            name: "USAID",
-            logo: "https://santeplusrdc.org/partenaire/1713260580.jpg",
-            url: "https://www.usaid.gov/"
-        },
-        {
-            name: "Santé Plus RDC",
-            logo: "https://santeplusrdc.org/partenaire/1713260528.png",
-            url: "https://santeplusrdc.org/"
-        },
-        {
-            name: "Dream of DRC",
-            logo: "https://santeplusrdc.org/partenaire/1702989736.png",
-            url: "https://dreamofdrc.com/"
-        }
-    ];
+
     const responsive = {
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
@@ -53,13 +34,39 @@ export default function Partenaire() {
             slidesToSlide: 1
         }
     };
+    const [preview, setPreview] = useState<string | null>(null);
+
+    const [partners, setPartenaire] = useState<UiPartenaire[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const fetchListPartenaire = async () => {
+        setLoading(true);
+        try {
+            const res = await fetchListItems<UiPartenaire>('/fetch_partenaire_data');
+            setPartenaire(res.data);
+
+            // console.log(res);
+        } finally {
+            setLoading(false);
+        }
+
+    }
+
+    useEffect(() => {
+        fetchListPartenaire();
+    }, []);
+
+
+
+
     return (
         <section className="py-12 bg-gray-50">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-10">
-                    
+
                     <h2 className="display-5 fw-bold mb-3">Nos <span className="text-success">partenaires</span></h2>
-                    
+
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         <b className="text-3xl font-bold mt-2 mb-4">Ils nous accompagnent</b>: Découvrez nos partenaires qui nous font confiance
                     </p>
@@ -88,8 +95,8 @@ export default function Partenaire() {
                             >
                                 <div className="flex justify-center items-center h-32">
                                     <img
-                                        src={partner.logo}
-                                        alt={partner.name}
+                                        src={preview || fileUrl + '/images/' + partner.icone!}
+                                        alt={partner.nom}
                                         className="h-16 w-auto mx-auto opacity-80 hover:opacity-100 transition-opacity duration-300 filter grayscale hover:grayscale-0"
                                         style={{
                                             maxWidth: '200px',

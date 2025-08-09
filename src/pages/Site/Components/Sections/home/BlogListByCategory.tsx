@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { fetchItems } from '../../../../../hooks/useCrud';
-import { fileUrl } from '../../../../../api/config';
-import { extractTime, formatDateFR, getRelativeTime } from '../../../../../api/callApi';
-import Pagination from '../../../../../components/Pagination';
-import LoaderAndError from '../../../../../components/LoaderAndError';
-import { usePagination } from '../../../../../hooks/usePagination';
-import BlogCard from './BlogCard';
 import { UiBlog } from '../../../../../api/types';
+import { usePagination } from '../../../../../hooks/usePagination';
+import LoaderAndError from '../../../../../components/LoaderAndError';
+import BlogCard from './BlogCard';
+import Pagination from '../../../../../components/Pagination';
 
 
-
-export default function BlogList() {
+export default function BlogListByCategory() {
+    const { slug } = useParams<{ slug: string }>();
     // declaration de variables
     const [listData, setDataList] = useState<UiBlog[]>([]);
     const [formData, setFormData] = useState<Partial<UiBlog>>({});
@@ -35,9 +33,8 @@ export default function BlogList() {
     // chargement de la table
     const loadlistData = async () => {
         setLoading(true);
-
         try {
-            const res = await fetchItems<UiBlog>('/fetch_blog_data', {
+            const res = await fetchItems<UiBlog>('/fetch_blog_by_category_slug/' + slug, {
                 q: search,
                 page: currentPage,
                 limit,
@@ -52,12 +49,9 @@ export default function BlogList() {
     };
 
     useEffect(() => {
-        document.title = "Découvrez nos conseils et actualités sur la mobilité urbaine - Swiftride";
-          
+        document.title = "Articles Récents par catégorie - Swiftride";
         loadlistData();
-
-    }, [search, currentPage, limit]);
-
+    }, [slug, search, currentPage, limit]);
     return (
         <div className="container py-5">
             <div className="text-center mb-4">

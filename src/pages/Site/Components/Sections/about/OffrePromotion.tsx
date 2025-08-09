@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function OffrePromotion() {
+    useEffect(() => {
+        document.title = "Offres & Récompenses Hebdomadaires - Swiftride";
+
+    }, []);
     return (
         <div className="container-fluid  py-6">
             <div className="container">
@@ -79,7 +83,7 @@ export default function OffrePromotion() {
                     </div>
                 </div>
 
-               
+
             </div>
         </div>
 

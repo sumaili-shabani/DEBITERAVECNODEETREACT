@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function IdentificationChauffeur() {
-  return (
+    useEffect(() => {
+        document.title = "Identification des Chauffeurs - Swiftride";
+
+    }, []);
+    return (
 
         <section className="py-5" id="identification-chauffeurs">
             <div className="container">
@@ -13,7 +17,7 @@ export default function IdentificationChauffeur() {
                 </div>
                 <div className="row align-items-center">
                     <div className="col-md-6">
-                        <i className='fas fa-taxi text-center text-success' style={{ fontSize:'250px' }}></i>
+                        <i className='fas fa-taxi text-center text-success' style={{ fontSize: '250px' }}></i>
                     </div>
                     <div className="col-md-6">
                         <ul className="list-group list-group-flush">
@@ -40,5 +44,5 @@ export default function IdentificationChauffeur() {
             </div>
         </section>
 
-  )
+    )
 }

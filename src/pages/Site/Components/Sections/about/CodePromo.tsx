@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function CodePromo() {
-  return (
+    useEffect(() => {
+        document.title = "Code promo - Swiftride";
+
+    }, []);
+    return (
 
         <section className="py-5" id="promo">
             <div className="container">
@@ -11,7 +15,7 @@ export default function CodePromo() {
                 </div>
                 <div className="row justify-content-center">
                     <div className="col-md-6 col-lg-6 mb-4">
-                      <div className="card border-0 shadow rounded-4 h-100 hover-shadow transition">
+                        <div className="card border-0 shadow rounded-4 h-100 hover-shadow transition">
                             <div className="card-body text-center">
                                 <i className="fas fa-percentage fa-3x text-primary mb-3"></i>
                                 <h5 className="card-title fw-semibold">Économisez sur vos premiers trajets</h5>
@@ -20,7 +24,7 @@ export default function CodePromo() {
                         </div>
                     </div>
                     <div className="col-md-6 col-lg-6 mb-4">
-                      <div className="card border-0 shadow rounded-4 h-100 hover-shadow transition">
+                        <div className="card border-0 shadow rounded-4 h-100 hover-shadow transition">
                             <div className="card-body text-center">
                                 <i className="fas fa-ticket-alt fa-3x text-success mb-3"></i>
                                 <h5 className="card-title fw-semibold">Partagez et gagnez</h5>
@@ -32,5 +36,5 @@ export default function CodePromo() {
             </div>
         </section>
 
-  )
+    )
 }

@@ -448,3 +448,11 @@ body.dark .bg-secondary .bg-dark {
     background-color: #2e2e42;
     color: #ffffff;
 }
+
+body.dark .text-dark {
+    color: white;
+}
+
+.text-justify {
+    text-align: justify;
+}

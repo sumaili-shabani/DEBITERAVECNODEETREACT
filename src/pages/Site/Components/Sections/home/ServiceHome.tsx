@@ -18,7 +18,7 @@ interface UiService {
     updatedAt?: string;
 }
 
-export default function Service() {
+export default function ServiceHome() {
 
     const [listData, setDataList] = useState<UiService[]>([]);
     const [formData, setFormData] = useState<Partial<UiService>>({});
@@ -59,10 +59,9 @@ export default function Service() {
         }
     };
 
-    
+
 
     useEffect(() => {
-        document.title = "Nos services - Swiftride";
         loadlistData();
     }, [search, currentPage, limit]);
     return (
@@ -70,27 +69,9 @@ export default function Service() {
         <div className="container-fluid py-2">
             <div className="container">
                 <div className="text-center mb-5">
-                    <h2 className="display-5 fw-bold mb-3">Nos <span className="text-success">Solutions Clés</span></h2>
+                    <h2 className="display-5 fw-bold mb-3">Nos <span className="text-success">Services</span></h2>
                     <p className="lead">Des services sur-mesure pour chaque besoin de mobilité</p>
-                    <div className="col-lg-8 mx-auto">
-                        <div className="input-group mb-3 shadow-sm rounded-pill">
-                            <input
-                                type="text"
-                                className="form-control border-0 rounded-pill-start py-3 px-4"
-                                placeholder="Rechercher un service..."
-                                value={search}
-                                onChange={(e) => {
-                                    setSearch(e.target.value);
-                                    setCurrentPage(1);
-                                }}
-                            />
-                            <button className="btn btn-success rounded-pill-end px-4" type="button"
-                                onClick={() => loadlistData()}
-                            >
-                                <i className="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
+
                 </div>
 
                 <div className="row g-4">
@@ -131,16 +112,10 @@ export default function Service() {
 
                 <div className="text-center mt-5">
                     {/* pagination */}
-                    <Pagination
-                        currentPage={currentPage}
-                        totalPages={totalPages}
-                        paginationRange={paginationRange}
-                        isCurrentPage={isCurrentPage}
-                        isFirstPage={isFirstPage}
-                        isLastPage={isLastPage}
-                        onPageChange={setCurrentPage}
-                        textCounter={true}
-                    />
+                    <Link to="/services" className="btn btn-lg btn-outline-success rounded-pill px-4"
+                        data-discover="true">Voir tous les services
+                        <i className="fas fa-newspaper ms-2"></i>
+                    </Link>
                     {/* fin pagination */}
                 </div>
             </div>

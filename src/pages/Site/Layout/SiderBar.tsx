@@ -1,7 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../context/ThemeContext';
 import { Link } from 'react-router-dom';
+import { fetchListItems } from '../../../hooks/useCrud';
+
+interface Site {
+    id?: number;
+    nom?: string;
+    description?: string;
+    email?: string;
+    adresse?: string;
+    tel1?: string;
+    tel2?: string;
+    tel3?: string;
+    token?: string;
+    about?: string;
+    mission?: string;
+    objectif?: string;
+    politique?: string;
+    condition?: string;
+    logo?: string;
+    logoFile?: File;
+    facebook?: string;
+    linkedin?: string;
+    twitter?: string;
+    youtube?: string;
+    whatsapp?: string;
+    createdAt?: string;
+    updatedAt?: string;
+}
+
+interface UiCatBlog {
+    id?: number;
+    titre?: string;
+    slug?: string;
+    createdAt?: string;
+    updatedAt?: string;
+}
 
 export default function SiderBar() {
 
@@ -12,6 +47,43 @@ export default function SiderBar() {
         i18n.changeLanguage(lang);
     };
     // fin langue
+
+    const [sites, setSites] = useState<Site[]>([]);
+    const [categories, setCategories] = useState<UiCatBlog[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+
+    const fetchData = async () => {
+        setLoading(true);
+        try {
+            const res = await fetchListItems<Site>('/fetch_data_site');
+            setSites(res.data);
+
+            // console.log(res);
+        } finally {
+            setLoading(false);
+        }
+
+    }
+
+    const fetchListCategorie = async () => {
+        setLoading(true);
+        try {
+            const res = await fetchListItems<UiCatBlog>('/fetch_category_blog_data');
+            setCategories(res.data);
+
+            // console.log(res);
+        } finally {
+            setLoading(false);
+        }
+
+    }
+
+    useEffect(() => {
+        fetchData();
+        fetchListCategorie();
+    }, []);
 
     const { theme, toggleTheme } = useTheme();
     return (
@@ -103,7 +175,7 @@ export default function SiderBar() {
                                     <Link className="nav-link ps-5 py-2" to="/offre-promotion">
                                         <i className="fas fa-circle-notch fa-xs me-2 swift-text-green"></i>Offres spéciales
                                     </Link>
-                                   
+
                                 </div>
                             </div>
                         </div>
@@ -168,8 +240,8 @@ export default function SiderBar() {
                                         <i className="fas fa-video fa-xs me-2 swift-text-green"></i>Vidéo
                                     </Link>
 
- 
-                                    
+
+
                                 </div>
                             </div>
                         </div>
@@ -179,11 +251,16 @@ export default function SiderBar() {
                     <div className="py-3 border-top">
                         <h6 className="fw-bold mb-2"><i className="fas fa-folder-open swift-text-green me-2"></i>Catégories d’articles</h6>
                         <div className="d-flex flex-wrap gap-2">
-                            <a href="#actualites" className="chip"><i className="fas fa-newspaper me-1 swift-text-green"></i>Actualités</a>
-                            <a href="#securite" className="chip"><i className="fas fa-shield-alt me-1 swift-text-green"></i>Sécurité</a>
-                            <a href="#innovation" className="chip"><i className="fas fa-lightbulb me-1 swift-text-green"></i>Innovation</a>
-                            <a href="#temoignages" className="chip"><i className="fas fa-comment-dots me-1 swift-text-green"></i>Témoignages</a>
-                            <a href="#conseils" className="chip"><i className="fas fa-hand-point-right me-1 swift-text-green"></i>Conseils</a>
+                            {
+                                categories.map((item, index) => (
+                                    <div key={index}>
+
+                                        <Link to={'/category/' + item.slug} className="chip"><i className="fas fa-newspaper me-1 swift-text-green"></i>{item.titre}</Link>
+
+                                    </div>
+                                ))
+                            }
+
                         </div>
                     </div>
                 </div>
@@ -203,10 +280,19 @@ export default function SiderBar() {
 
                 {/* Réseaux sociaux */}
                 <div className="text-center py-3">
-                    <a href="#" className="me-3 text-decoration-none"><i className="fab fa-facebook fa-lg swift-text-green"></i></a>
-                    <a href="#" className="me-3 text-decoration-none"><i className="fab fa-x-twitter fa-lg swift-text-green"></i></a>
-                    <a href="#" className="me-3 text-decoration-none"><i className="fab fa-instagram fa-lg swift-text-green"></i></a>
-                    <a href="#" className="me-3 text-decoration-none"><i className="fab fa-linkedin fa-lg swift-text-green"></i></a>
+                    {
+                        sites.map((item, index) => (
+                            <div key={index}>
+
+                                <a href={item.facebook} target='_blank' className="me-3 text-decoration-none"><i className="fab fa-facebook fa-lg swift-text-green"></i></a>
+                                <a href={item.twitter} target='_blank'  className="me-3 text-decoration-none"><i className="fab fa-x-twitter fa-lg swift-text-green"></i></a>
+                                <a href={item.youtube} target='_blank'  className="me-3 text-decoration-none"><i className="fab fa-youtube fa-lg swift-text-green"></i></a>
+                                <a href={item.linkedin} target='_blank'  className="me-3 text-decoration-none"><i className="fab fa-linkedin fa-lg swift-text-green"></i></a>
+
+                            </div>
+                        ))
+                    }
+                    
                 </div>
             </div>
         </div>

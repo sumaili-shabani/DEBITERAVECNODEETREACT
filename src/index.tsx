@@ -16,6 +16,7 @@ import './i18n'; // Import obligatoire
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
+import 'react-image-lightbox/style.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

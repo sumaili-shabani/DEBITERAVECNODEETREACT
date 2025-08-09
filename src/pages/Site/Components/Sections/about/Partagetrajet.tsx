@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function Partagetrajet() {
+    useEffect(() => {
+        document.title = "Partage de Trajet - Swiftride";
+
+    }, []);
     return (
 
         <section className="py-5" id="partage-trajet">

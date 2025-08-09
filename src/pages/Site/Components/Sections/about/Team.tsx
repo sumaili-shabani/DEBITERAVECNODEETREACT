@@ -1,7 +1,77 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { fetchItems } from '../../../../../hooks/useCrud';
+import { usePagination } from '../../../../../hooks/usePagination';
+import LoaderAndError from '../../../../../components/LoaderAndError';
+import Pagination from '../../../../../components/Pagination';
+import { fileUrl } from '../../../../../api/config';
+
+interface UiTeam {
+    id?: number;
+    nom?: string;
+    fonction?: string;
+    email?: string;
+    logo?: string;
+    telephone?: string;
+    facebook?: string;
+    twitter?: string;
+    linkedin?: string;
+    logoFile?: File;
+
+    createdAt?: string;
+    updatedAt?: string;
+
+}
+
+
+
 
 export default function Team() {
+
+    // declaration de variables
+    const [listData, setDataList] = useState<UiTeam[]>([]);
+    const [formData, setFormData] = useState<Partial<UiTeam>>({});
+    const [isEditing, setIsEditing] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const [search, setSearch] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [limit, setLimit] = useState(6);
+    const [totalPages, setTotalPages] = useState(1);
+    //fin declaration
+
+    // declaration de la pagination
+    const { paginationRange, isCurrentPage, isFirstPage, isLastPage } = usePagination({
+        currentPage,
+        totalPages,
+    });
+
+    // chargement de la table
+    const loadlistData = async () => {
+        setLoading(true);
+
+        try {
+            const res = await fetchItems<UiTeam>('/fetch_team_data', {
+                q: search,
+                page: currentPage,
+                limit,
+            });
+            setDataList(res.data);
+            setTotalPages(res.totalPages);
+
+
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        document.title = "Les talents derrière la révolution - Swiftride";
+        loadlistData();
+
+    }, [search, currentPage, limit]);
     return (
         <div className="container py-6">
             {/* Titre Section */}
@@ -17,132 +87,101 @@ export default function Team() {
             {/* Grille des Membres */}
             <div className="row g-4 justify-content-center">
                 {/* Membre 1 - CEO */}
-                <div className="col-md-6 col-lg-4">
-                    <div className="card border-0 shadow-sm h-100 hover-lift-team">
-                        <div className="card-img-top overflow-hidden" style={{ height: "250px" }}>
-                            <img
-                                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&auto=format&fit=crop"
-                                className="img-fluid w-100 h-100"
-                                style={{ objectFit: "cover" }}
-                                alt="Directeur Général"
-                            />
-                            <div className="position-absolute bottom-0 start-0 end-0 p-3 bg-success bg-opacity-90 text-white">
-                                <h4 className="mb-0">Jean Koffi</h4>
-                                <p className="mb-0">CEO & Fondateur</p>
-                            </div>
-                        </div>
-                        <div className="card-body text-center">
-                            <p className="text-muted">
-                                Ancien de Google Afrique, visionnaire de la mobilité urbaine avec 15 ans d'expérience.
-                            </p>
-                            <div className="d-flex justify-content-center gap-3">
-                                <a href="#" className="text-success">
-                                    <i className="fab fa-linkedin-in fa-lg"></i>
-                                </a>
-                                <a href="#" className="text-success">
-                                    <i className="fab fa-twitter fa-lg"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                {/* Membre 2 - CTO */}
-                <div className="col-md-6 col-lg-4">
-                    <div className="card border-0 shadow-sm h-100 hover-lift-team">
-                        <div className="card-img-top overflow-hidden" style={{ height: "250px" }}>
-                            <img
-                                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&auto=format&fit=crop"
-                                className="img-fluid w-100 h-100"
-                                style={{ objectFit: "cover" }}
-                                alt="Directeur Technique"
-                            />
-                            <div className="position-absolute bottom-0 start-0 end-0 p-3 bg-success bg-opacity-90 text-white">
-                                <h4 className="mb-0">Amina Diallo</h4>
-                                <p className="mb-0">Directrice Technique</p>
-                            </div>
-                        </div>
-                        <div className="card-body text-center">
-                            <p className="text-muted">
-                                Architecte système primée, spécialiste en IA et sécurité des applications mobiles.
-                            </p>
-                            <div className="d-flex justify-content-center gap-3">
-                                <a href="#" className="text-success">
-                                    <i className="fab fa-github fa-lg"></i>
-                                </a>
-                                <a href="#" className="text-success">
-                                    <i className="fab fa-medium fa-lg"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                {/* Membre 3 - Responsable Sécurité */}
-                <div className="col-md-6 col-lg-4">
-                    <div className="card border-0 shadow-sm h-100 hover-lift-team">
-                        <div className="card-img-top overflow-hidden" style={{ height: "250px" }}>
-                            <img
-                                src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&auto=format&fit=crop"
-                                className="img-fluid w-100 h-100"
-                                style={{ objectFit: "cover" }}
-                                alt="Responsable Sécurité"
-                            />
-                            <div className="position-absolute bottom-0 start-0 end-0 p-3 bg-success bg-opacity-90 text-white">
-                                <h4 className="mb-0">Marc Kouamé</h4>
-                                <p className="mb-0">Responsable Sécurité</p>
-                            </div>
-                        </div>
-                        <div className="card-body text-center">
-                            <p className="text-muted">
-                                Ancien officier de police, expert en systèmes de protection des utilisateurs.
-                            </p>
-                            <div className="d-flex justify-content-center gap-3">
-                                <a href="#" className="text-success">
-                                    <i className="fas fa-shield-alt fa-lg"></i>
-                                </a>
-                                <a href="#" className="text-success">
-                                    <i className="fab fa-twitter fa-lg"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {
+                    listData.length === 0 ? (
+                        <LoaderAndError
+                            loading={loading}
+                            error={error}
+                            onClearError={() => setError(null)}
+                        />
 
-                {/* Membre 4 - Directrice Expérience Client */}
-                <div className="col-md-6 col-lg-4">
-                    <div className="card border-0 shadow-sm h-100 hover-lift-team">
-                        <div className="card-img-top overflow-hidden" style={{ height: "250px" }}>
-                            <img
-                                src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&auto=format&fit=crop"
-                                className="img-fluid w-100 h-100"
-                                style={{ objectFit: "cover" }}
-                                alt="Directrice Expérience Client"
-                            />
-                            <div className="position-absolute bottom-0 start-0 end-0 p-3 bg-success bg-opacity-90 text-white">
-                                <h4 className="mb-0">Élodie N'Guessan</h4>
-                                <p className="mb-0">Expérience Client</p>
+                    ) : (
+                        listData.map((item) => (
+
+                            <div className="col-md-6 col-lg-4" key={item.id}>
+                                <div className="card border-0 shadow-sm h-100 hover-lift-team">
+                                    <div className="card-img-top overflow-hidden" style={{ height: "250px" }}>
+                                        <img
+                                            src={fileUrl + '/images/' + item.logo!}
+                                            className="img-fluid w-100 h-100"
+                                            style={{ objectFit: "cover" }}
+                                            alt="Directeur Général"
+                                        />
+                                        <div className="position-absolute bottom-0 start-0 end-0 p-3 bg-success bg-opacity-90 text-white">
+                                            <h4 className="mb-0">{item.nom}</h4>
+                                            {/* <p className="mb-0">{item.fonction}</p> */}
+                                        </div>
+                                    </div>
+                                    <div className="card-body text-center">
+                                        <p className="text-muted">
+                                            {item.fonction}
+                                        </p>
+                                        <div className="d-flex justify-content-center gap-3">
+                                            {item.telephone && item.telephone.trim() !== '' && (
+                                                <a href={'tel:' + item.telephone} className="text-success">
+                                                    <i className="fas fa-phone fa-lg"></i>
+                                                </a>
+                                            )}
+
+                                            {item.email && item.email.trim() !== '' && (
+                                                <a href={'mailto:' + item.email} className="text-success">
+                                                    <i className="fas fa-envelope fa-lg"></i>
+                                                </a>
+                                            )}
+
+                                            {item.facebook && item.facebook.trim() !== '' && (
+                                                <a href={item.facebook} target="_blank" rel="noopener noreferrer" className="text-success">
+                                                    <i className="fab fa-facebook fa-lg"></i>
+                                                </a>
+                                            )}
+
+                                            {item.twitter && item.twitter.trim() !== '' && (
+                                                <a href={item.twitter} target="_blank" rel="noopener noreferrer" className="text-success">
+                                                    <i className="fab fa-twitter fa-lg"></i>
+                                                </a>
+                                            )}
+
+                                            {item.linkedin && item.linkedin.trim() !== '' && (
+                                                <a href={item.linkedin} target="_blank" rel="noopener noreferrer" className="text-success">
+                                                    <i className="fab fa-linkedin fa-lg"></i>
+                                                </a>
+                                            )}
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div className="card-body text-center">
-                            <p className="text-muted">
-                                Spécialiste UX/UI, elle conçoit l'expérience utilisateur la plus intuitive d'Afrique.
-                            </p>
-                            <div className="d-flex justify-content-center gap-3">
-                                <a href="#" className="text-success">
-                                    <i className="fab fa-behance fa-lg"></i>
-                                </a>
-                                <a href="#" className="text-success">
-                                    <i className="fab fa-dribbble fa-lg"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+
+                        ))
+                    )
+                }
+
+
+            </div>
+
+            <div className="row mb-1">
+                <div className="text-center mt-5">
+                    {/* pagination */}
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        paginationRange={paginationRange}
+                        isCurrentPage={isCurrentPage}
+                        isFirstPage={isFirstPage}
+                        isLastPage={isLastPage}
+                        onPageChange={setCurrentPage}
+                        textCounter={true}
+                    />
+                    {/* fin pagination */}
                 </div>
             </div>
 
+            <hr className='text-muted' />
+
             {/* Bloc Recrutement */}
-            <div className="row mt-6">
+            <div className="row mt-1">
                 <div className="col-lg-10 mx-auto mt-4">
                     <div className="bg-success text-white rounded-4 overflow-hidden">
                         <div className="row g-0 align-items-center">
@@ -151,7 +190,7 @@ export default function Team() {
                                 <p className="mb-4">
                                     Nous recrutons les meilleurs talents pour révolutionner la mobilité africaine.
                                 </p>
-                                <Link to="/offers" className="btn btn-light rounded-pill px-4 text-success">
+                                <Link to="/vacancy" className="btn btn-light rounded-pill px-4 text-success">
                                     Voir les offres <i className="fas fa-arrow-right ms-2"></i>
                                 </Link>
                             </div>

@@ -1,8 +1,46 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom'
 import { useTheme } from '../../../context/ThemeContext';
-import logoApp from '../../../assets/logos/logo_swift_ride_green.png'; 
+import logoApp from '../../../assets/logos/logo_swift_ride_green.png';
+import { fetchListItems } from '../../../hooks/useCrud';
+import GoogleTranslate from '../../../components/GoogleTranslate';
+import VideoPub from '../Components/Sections/about/VideoPub';
+
+
+interface Site {
+    id?: number;
+    nom?: string;
+    description?: string;
+    email?: string;
+    adresse?: string;
+    tel1?: string;
+    tel2?: string;
+    tel3?: string;
+    token?: string;
+    about?: string;
+    mission?: string;
+    objectif?: string;
+    politique?: string;
+    condition?: string;
+    logo?: string;
+    logoFile?: File;
+    facebook?: string;
+    linkedin?: string;
+    twitter?: string;
+    youtube?: string;
+    whatsapp?: string;
+    createdAt?: string;
+    updatedAt?: string;
+}
+
+interface UiCatBlog {
+    id?: number;
+    titre?: string;
+    slug?: string;
+    createdAt?: string;
+    updatedAt?: string;
+}
 
 export default function NavBar() {
 
@@ -13,6 +51,42 @@ export default function NavBar() {
         i18n.changeLanguage(lang);
     };
     // fin langue
+    const [sites, setSites] = useState<Site[]>([]);
+    const [categories, setCategories] = useState<UiCatBlog[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+
+    const fetchData = async () => {
+        setLoading(true);
+        try {
+            const res = await fetchListItems<Site>('/fetch_data_site');
+            setSites(res.data);
+
+            // console.log(res);
+        } finally {
+            setLoading(false);
+        }
+
+    }
+
+    const fetchListCategorie = async () => {
+        setLoading(true);
+        try {
+            const res = await fetchListItems<UiCatBlog>('/fetch_category_blog_data');
+            setCategories(res.data);
+
+            // console.log(res);
+        } finally {
+            setLoading(false);
+        }
+
+    }
+
+    useEffect(() => {
+        fetchData();
+        fetchListCategorie();
+    }, []);
 
     const { theme, toggleTheme } = useTheme();
     return (
@@ -21,8 +95,8 @@ export default function NavBar() {
                 <div className="container-fluid">
                     <a className="navbar-brand fw-bold swift-text-green" href="#">
                         {/* SWIFTRIDE */}
-                        <img src={logoApp} alt="logo app" 
-                        className='img-fluid object-fit-cover' width={60} height={60}  />
+                        <img src={logoApp} alt="logo app"
+                            className='img-fluid object-fit-cover' width={60} height={60} />
                     </a>
 
 
@@ -103,22 +177,37 @@ export default function NavBar() {
                                                     <div className="text-muted fst-italic mb-3">
                                                         Restez informé des nouveautés et offres exclusives.
                                                     </div>
-                                                    <a href="#" className="me-3 text-decoration-none">
-                                                        <i className="fab fa-facebook-f fa-lg swift-text-green"></i>
-                                                    </a>
-                                                    <a href="#" className="me-3 text-decoration-none">
-                                                        <i className="fab fa-x-twitter fa-lg swift-text-green"></i>
-                                                    </a>
-                                                    <a href="#" className="me-3 text-decoration-none">
-                                                        <i className="fab fa-instagram fa-lg swift-text-green"></i>
-                                                    </a>
-                                                    {/* <!-- Optionnel --> */}
-                                                    <a href="#" className="me-3 text-decoration-none">
-                                                        <i className="fab fa-linkedin-in fa-lg swift-text-green"></i>
-                                                    </a>
+                                                    {
+                                                        sites.map((item, index) => (
+
+                                                            <div key={index}>
+                                                                <a href={item.facebook} target='_blank' className="me-3 text-decoration-none">
+                                                                    <i className="fab fa-facebook-f fa-lg swift-text-green"></i>
+                                                                </a>
+
+
+                                                                <a href={item.twitter} target='_blank'  className="me-3 text-decoration-none">
+                                                                    <i className="fab fa-x-twitter fa-lg swift-text-green"></i>
+                                                                </a>
+                                                               
+                                                               
+                                                                <a href={item.linkedin} target='_blank'  className="me-3 text-decoration-none">
+                                                                    <i className="fab fa-linkedin-in fa-lg swift-text-green"></i>
+                                                                </a>
+
+                                                                <a href={item.youtube} target='_blank' className="me-3 text-decoration-none">
+                                                                    <i className="fab fa-youtube fa-lg swift-text-green"></i>
+                                                                </a>
+
+                                                            </div>
+
+                                                        ))
+                                                    }
+
+                                                    
                                                 </div>
 
-                                               
+
                                             </div>
 
                                             {/* ✅ Colonne 2 */}
@@ -132,7 +221,7 @@ export default function NavBar() {
                                                         <Link to="/offre-promotion" className="list-group-item list-group-item-action">
                                                             <i className="fas fa-tags swift-text-green"></i> Offres spéciales
                                                         </Link>
-                                                       
+
                                                         <Link to="/how-it-works" className="list-group-item list-group-item-action">
                                                             <i className="fas fa-question-circle swift-text-green"></i> Comment ça marche
                                                         </Link>
@@ -190,7 +279,7 @@ export default function NavBar() {
                                                                 <i className="fas fa-video swift-text-green"></i> Vidéos
                                                             </Link>
 
-                                                            
+
 
 
                                                         </div>
@@ -206,39 +295,28 @@ export default function NavBar() {
                                             {/* ✅ Colonne 3 : Vidéo conservée telle quelle */}
                                             <div className="col-lg-4">
                                                 {/* ✅ Découvrir SwiftRide */}
-                                                <div className="mega-category mb-1">
-                                                    <h5><i className="fas fa-play-circle me-2"></i> Découvrez SwiftRide</h5>
-                                                    <div className="video-container">
-                                                        <div className="ratio ratio-16x9">
-                                                            <iframe
-                                                                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                                                                title="Présentation SwiftRide"
-                                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                                allowFullScreen
-                                                            ></iframe>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                
+                                                <VideoPub />
 
                                                 {/* ✅ Catégories d'articles */}
                                                 <div className="mega-category mt-4 border-top border-end">
                                                     <h5><i className="fas fa-folder-open me-2 swift-text-green"></i> Catégories d’articles</h5>
                                                     <div className="chip-list d-flex flex-wrap gap-2">
-                                                        <a href="#actualites" className="chip">
-                                                            <i className="fas fa-newspaper me-1 swift-text-green"></i> Actualités SwiftRide
-                                                        </a>
-                                                        <a href="#securite" className="chip">
-                                                            <i className="fas fa-shield-alt me-1 swift-text-green"></i> Sécurité & Prévention
-                                                        </a>
-                                                        <a href="#innovation" className="chip">
-                                                            <i className="fas fa-lightbulb me-1 swift-text-green"></i> Innovation & Tech
-                                                        </a>
-                                                        <a href="#temoignages" className="chip">
-                                                            <i className="fas fa-comment-dots me-1 swift-text-green"></i> Témoignages clients
-                                                        </a>
-                                                        <a href="#conseils" className="chip">
-                                                            <i className="fas fa-hand-point-right me-1 swift-text-green"></i> Conseils Utilisateurs
-                                                        </a>
+                                                        {
+                                                            categories.map((item, index) => (
+
+                                                                <div key={index}>
+                                                                    <Link to={'/category/' + item.slug} className="chip">
+                                                                        <i className="fas fa-newspaper me-1 swift-text-green"></i> {item.titre}
+                                                                    </Link>
+
+                                                                </div>
+
+                                                            ))
+                                                        }
+
+                                                        
+                                                       
                                                     </div>
 
                                                 </div>
@@ -263,7 +341,7 @@ export default function NavBar() {
                                                         </div>
                                                     </div>
 
-                                                   
+
                                                 </div>
                                             </div>
 
@@ -299,13 +377,7 @@ export default function NavBar() {
                             </a>
 
                             <div className="dropdown me-3">
-                                <button className="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown">
-                                    <i className="fas fa-language me-1"></i> FR
-                                </button>
-                                <ul className="dropdown-menu">
-                                    <li><a className="dropdown-item active" href="#">Français</a></li>
-                                    <li><a className="dropdown-item" href="#">English</a></li>
-                                </ul>
+                                <GoogleTranslate />
                             </div>
 
                             <a className="btn btn-outline-success me-3" href="#login"> <i className='fas fa-sign-in-alt'></i> Connexion</a>

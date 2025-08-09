@@ -52,6 +52,8 @@ import Vacancy from './pages/Site/Components/Sections/about/Vacancy';
 import SigleVacancy from './pages/Site/Components/Sections/about/SigleVacancy';
 import Galery from './pages/Site/Components/Sections/about/Galery';
 import Videos from './pages/Site/Components/Sections/about/Videos';
+import BlogListByCategory from './pages/Site/Components/Sections/home/BlogListByCategory';
+import PartenariatShip from './pages/Site/Components/Sections/about/PartenariatShip';
 
 
 
@@ -204,7 +206,7 @@ function App() {
           />
 
           <Route
-            path="/partenariat-ship" element={<Partenaire />}
+            path="/partenariat-ship" element={<PartenariatShip />}
           />
           <Route
             path="/secteur" element={<Secteur />}
@@ -245,6 +247,10 @@ function App() {
 
           <Route
             path="/video" element={<Videos />}
+          />
+
+          <Route
+            path="/category/:slug" element={<BlogListByCategory />}
           />
 
           

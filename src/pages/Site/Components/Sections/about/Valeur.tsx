@@ -36,10 +36,10 @@ interface UiValeur {
     createdAt?: string;
     updatedAt?: string;
 }
-export default function Commentcamarche() {
+export default function Valeur() {
 
     const [sites, setSites] = useState<Site[]>([]);
-    const [fonctionalite, setFonctionalite] = useState<UiValeur[]>([]);
+    const [valeurs, setValeur] = useState<UiValeur[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -60,8 +60,8 @@ export default function Commentcamarche() {
     const fetchListCategorie = async () => {
         setLoading(true);
         try {
-            const res = await fetchListItems<UiValeur>('/fetch_fonctionalite_data');
-            setFonctionalite(res.data);
+            const res = await fetchListItems<UiValeur>('/fetch_valeur_data');
+            setValeur(res.data);
 
             // console.log(res);
         } finally {
@@ -71,7 +71,6 @@ export default function Commentcamarche() {
     }
 
     useEffect(() => {
-        document.title = "Comment ça marche - Swiftride";
         fetchData();
         fetchListCategorie();
     }, []);
@@ -80,14 +79,14 @@ export default function Commentcamarche() {
     return (
         <section className="container py-5">
             <div className="text-center mb-4">
-                <h2 className="fw-bold text-success">Comment ça marche ?</h2>
-                <p className="text-muted">Découvrez toutes les étapes pour utiliser <strong>SwiftRide</strong> facilement.</p>
+                <h2 className="fw-bold display-5">Nos <span className="text-success">Valeurs Fondatrices</span></h2>
+                <p className="lead">Ce qui fait de SWIFTRIDE le partenaire de mobilité préféré en Afrique</p>
             </div>
 
             <div className="row text-center g-4">
 
                 {
-                    fonctionalite.length === 0 ? (
+                    valeurs.length === 0 ? (
                         <LoaderAndError
                             loading={loading}
                             error={error}
@@ -96,13 +95,21 @@ export default function Commentcamarche() {
 
                     ) : (
 
-                        fonctionalite.map((item, index) => (
+                        valeurs.map((item, index) => (
 
-                            <div className="col-md-4" key={index}>
-                                <div className="p-4 border rounded shadow-sm h-100 hover-shadow transition">
-                                    <i className={`${item.icone} fa-2x text-success mb-3`}></i>
-                                    <h5 className="fw-bold">{item.titre}</h5>
-                                    <p className="text-muted">{item.description}</p>
+
+                            <div className="col-md-6 col-lg-3" key={index}>
+                                <div className="card h-100 border-0 shadow-sm bg-success bg-opacity-10 hover-transform">
+                                    <div className="card-body p-4 text-center">
+                                        <div className="icon-xl bg-success text-white rounded-circle mb-4 mx-auto">
+                                            <i className={`${item.icone} fs-4`}></i>
+                                        </div>
+                                        <h4 className="fw-bold text-success">{item.titre}</h4>
+                                        <p className="text-muted">
+                                            {item.description}
+                                        </p>
+                                    
+                                    </div>
                                 </div>
                             </div>
 
