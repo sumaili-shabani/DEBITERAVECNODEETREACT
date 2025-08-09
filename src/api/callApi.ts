@@ -161,6 +161,16 @@ export function extractTime(dateStr: string): string {
     return `${hours}:${minutes}:${seconds}`;
 }
 
+export function getTodayFormatted(): string {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // +1 car Janvier = 0
+    const day = String(today.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+}
+
+
 export function truncateText(text: string, maxLength = 10): string {
     if (text.length <= maxLength) return text;
     return text.slice(0, maxLength) + '...';

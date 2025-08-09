@@ -293,6 +293,7 @@ export default function TeamPage() {
                                 placeholder="Adresse mail"
                                 label="Adresse mail"
                                 icon="fas fa-envelope"
+                                required
 
                             />
 

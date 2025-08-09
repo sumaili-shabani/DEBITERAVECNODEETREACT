@@ -5,11 +5,12 @@ import { fileUrl } from '../api/config';
 import { useTheme } from '../context/ThemeContext';
 
 import { useTranslation } from 'react-i18next';
+import { formatDateFR, getTodayFormatted } from '../api/callApi';
 
 export default function Topbar() {
   const navigate = useNavigate();
   const user = getUser();
-  const handleLogout = async() => {
+  const handleLogout = async () => {
     await logout();
     navigate('/login');
   };
@@ -107,32 +108,11 @@ export default function Topbar() {
                 </div>
               </div>
               <div>
-                <div className="small text-gray-500">December 12, 2019</div>
-                <span className="font-weight-bold">A new monthly report is ready to download!</span>
+                <div className="small text-gray-500">{formatDateFR(getTodayFormatted())}</div>
+                <span className="font-weight-bold">Votre nouveau rapport mensuel est prêt à télécharger 📄</span>
               </div>
             </a>
-            <a className="dropdown-item d-flex align-items-center" href="#!">
-              <div className="mr-3">
-                <div className="icon-circle bg-success">
-                  <i className="fas fa-donate text-white"></i>
-                </div>
-              </div>
-              <div>
-                <div className="small text-gray-500">December 7, 2019</div>
-                $290.29 has been deposited into your account!
-              </div>
-            </a>
-            <a className="dropdown-item d-flex align-items-center" href="#!">
-              <div className="mr-3">
-                <div className="icon-circle bg-warning">
-                  <i className="fas fa-exclamation-triangle text-white"></i>
-                </div>
-              </div>
-              <div>
-                <div className="small text-gray-500">December 2, 2019</div>
-                Spending Alert: We've noticed unusually high spending for your account.
-              </div>
-            </a>
+
             <Link className="dropdown-item text-center small text-gray-500" to="/all-alerte">Show All Alerts</Link>
           </div>
         </li>
@@ -151,43 +131,8 @@ export default function Topbar() {
             <h6 className="dropdown-header">
               Message Center
             </h6>
-            <a className="dropdown-item d-flex align-items-center" href="#!">
-              <div className="dropdown-list-image mr-3">
-                <img className="rounded-circle" src="dev/img/undraw_profile_1.svg"
-                  alt="..." />
-                <div className="status-indicator bg-success"></div>
-              </div>
-              <div className="font-weight-bold">
-                <div className="text-truncate">Hi there! I am wondering if you can help me with a
-                  problem I've been having.</div>
-                <div className="small text-gray-500">Emily Fowler · 58m</div>
-              </div>
-            </a>
-            <a className="dropdown-item d-flex align-items-center" href="#!">
-              <div className="dropdown-list-image mr-3">
-                <img className="rounded-circle" src="dev/img/undraw_profile_2.svg"
-                  alt="..." />
-                <div className="status-indicator"></div>
-              </div>
-              <div>
-                <div className="text-truncate">I have the photos that you ordered last month, how
-                  would you like them sent to you?</div>
-                <div className="small text-gray-500">Jae Chun · 1d</div>
-              </div>
-            </a>
-            <a className="dropdown-item d-flex align-items-center" href="#!">
-              <div className="dropdown-list-image mr-3">
-                <img className="rounded-circle" src="dev/img/undraw_profile_3.svg"
-                  alt="..." />
-                <div className="status-indicator bg-warning"></div>
-              </div>
-              <div>
-                <div className="text-truncate">Last month's report looks great, I am very happy with
-                  the progress so far, keep up the good work!</div>
-                <div className="small text-gray-500">Morgan Alvarez · 2d</div>
-              </div>
-            </a>
-            
+
+
             <Link className="dropdown-item text-center small text-gray-500" to="/all-messages">Read More Messages</Link>
           </div>
         </li>

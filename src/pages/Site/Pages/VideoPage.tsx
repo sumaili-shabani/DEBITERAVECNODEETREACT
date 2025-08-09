@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import { usePagination } from '../../../hooks/usePagination';
-import { fetchItem, fetchItems, removeItem, saveItem } from '../../../hooks/useCrud';
-import { extractTime, formatDateFR, showConfirmationDialog, truncateText } from '../../../api/callApi';
+import { fetchItem, fetchItems, gethItem, removeItem, saveItem } from '../../../hooks/useCrud';
+import { extractTime, formatDateFR, showConfirmationDialog, showMessage, truncateText } from '../../../api/callApi';
 import Swal from 'sweetalert2';
 import Pagination from '../../../components/Pagination';
 import TextField from '../../../components/TextField';
@@ -14,6 +14,7 @@ import TextAreaFild from '../../../components/TextAreaField';
 interface UiVideo {
     id?: number;
     titre?: string;
+    status?: number;
     description?: string;
     urlYoutube?: string;
     createdAt?: string;
@@ -123,6 +124,22 @@ export default function VideoPage() {
             [name]: value,
         }));
     };
+
+
+    const checkStatusBlog = async (id: number) => {
+        setLoading(true);
+        try {
+            const res = await gethItem('/check_status_video', id);
+            const message = res.message;
+            showMessage(message);
+            loadlistData();
+
+        } finally {
+            setLoading(false);
+        }
+
+
+    }
 
 
     return (
@@ -244,6 +261,7 @@ export default function VideoPage() {
 
                             <th>Vidéo</th>
                             <th>Titre</th>
+                            <th>Pulicité d'accueil</th>
 
                             <th>Date de création</th>
                             <th>Actions</th>
@@ -252,7 +270,7 @@ export default function VideoPage() {
                     <tbody>
                         {listData.length === 0 ? (
                             <tr>
-                                <td colSpan={4} className="text-center">
+                                <td colSpan={5} className="text-center">
                                     Aucune donnée trouvée
                                 </td>
                             </tr>
@@ -261,13 +279,17 @@ export default function VideoPage() {
                                 <tr key={item.id}>
 
                                     <td>
-
-
                                         <div className="ratio ratio-16x9 w10">
                                             <iframe src={item.urlYoutube!} title="YouTube video" style={{ height: '40px' }}></iframe>
                                         </div>
                                     </td>
                                     <td>{truncateText(item.titre!, 20)}</td>
+
+                                    <td>
+                                        <span onClick={() => checkStatusBlog(item.id!)} style={{ cursor: 'pointer' }} className={`${item.status! == 1 ? 'badge rounded-pill bg-success text-white' : 'badge rounded-pill bg-danger text-white'}`}>
+                                            {item.status! === 1 ? 'actif' : 'inactif'}
+                                        </span>
+                                    </td>
 
                                     <td>{formatDateFR(item.createdAt ?? '')} {extractTime(item.createdAt ?? '')}</td>
                                     <td>
