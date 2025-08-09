@@ -27,6 +27,9 @@ router.post('/reset-password', UserController.resetPassword);
 //refresh-token
 router.post('/refresh-token', UserController.refreshToken);
 
+router.post('/contact_form', UserController.contactForm);
+
+
 
 
 
@@ -40,5 +43,6 @@ router.post('/editUserPassword', auth, UserController.editPasswordProfil);
 router.delete('/delete_user/:id', auth, UserController.deleteUser);
 router.post('/edit_password', auth, UserController.editPassword);
 router.post('/edit_avatar', auth, upload.single('avatar'), UserController.editAvatar);
+
 
 module.exports = router;

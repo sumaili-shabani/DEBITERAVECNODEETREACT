@@ -11,4 +11,6 @@ router.post('/insert_secteur',auth, SecteurController.postData);
 router.delete('/delete_secteur/:id',auth, SecteurController.deleteData);
 router.get('/fetch_all_secteur', auth, SecteurController.fetchAllDatas);
 
+router.get('/fetch_secteur_data', SecteurController.fetchDatas);
+
 module.exports = router;

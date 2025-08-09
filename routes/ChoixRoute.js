@@ -11,4 +11,6 @@ router.post('/insert_choix',auth, ChoixController.postData);
 router.delete('/delete_choix/:id',auth, ChoixController.deleteData);
 router.get('/fetch_all_choix', auth, ChoixController.fetchAllDatas);
 
+router.get('/fetch_choix_data', ChoixController.fetchDatas);
+
 module.exports = router;

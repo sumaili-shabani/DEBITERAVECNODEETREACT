@@ -176,5 +176,20 @@ exports.editLogo = async (req, res) => {
         res.status(500).json({ err });
     }
 };
+
+// 🔹 Récupérer un seul par ID
+exports.fetchDataSite = async (req, res) => {
+    try {
+        const data = await Site.findAll({
+            order: [['id', 'DESC']],
+            limit:1,
+        });
+        
+        if (!data) return res.json({ message: "Donnée introuvable" });
+        res.status(200).json({ data: data });
+    } catch (err) {
+        res.status(500).json({ err: "Erreur lors de la récupération du rôle" });
+    }
+};
   
 

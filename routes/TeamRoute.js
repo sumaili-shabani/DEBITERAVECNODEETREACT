@@ -40,4 +40,6 @@ router.delete('/delete_team/:id',auth, TeamController.deleteData);
 router.get('/fetch_all_team', auth, TeamController.fetchAllDatas);
 router.post('/edit_team_logo', auth, upload.single('logo'), TeamController.editLogo);
 
+router.get('/fetch_team_data', TeamController.fetchDatas);
+
 module.exports = router;

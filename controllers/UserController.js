@@ -448,4 +448,38 @@ exports.forgotPassword = async (req, res) => {
     }
 };
 
+// 🟩 envoied de mail de contact
+exports.contactForm = async (req, res) => {
+    const { name, email, telephone, subject, message } = req.body;
+
+    try {
+        // Vérification simple
+        if (!name || !email || !subject || !message) {
+            return res.status(400).json({ message: "Tous les champs obligatoires doivent être remplis." });
+        }
+
+        // Contenu HTML de l'email
+        const html = `
+            <h3>📩 Nouveau message de contact</h3>
+            <p><strong>Nom :</strong> ${name}</p>
+            <p><strong>Email :</strong> ${email}</p>
+            <p><strong>Téléphone :</strong> ${telephone || 'Non fourni'}</p>
+            <p><strong>Sujet :</strong> ${subject}</p>
+            <p><strong>Message :</strong><br/>${message}</p>
+        `;
+
+        // Adresse où tu veux recevoir les messages
+        const toEmail = 'info@swiftride.net';
+
+        // Envoi de l'email
+        await sendEmail(toEmail, `📬 Nouveau message de ${name}`, html);
+
+        return res.json({ message: "Message envoyé avec succès." });
+
+    } catch (error) {
+        console.error("Erreur contactForm:", error);
+        return res.status(500).json({ message: "Une erreur est survenue lors de l'envoi du message." });
+    }
+};
+
 

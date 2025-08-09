@@ -21,6 +21,11 @@ const VideoModel = sequelize.define('VideoModel', {
         type: DataTypes.TEXT,
         allowNull: true
     },
+    status: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+    },
 
 }, {
     tableName: 'videos',

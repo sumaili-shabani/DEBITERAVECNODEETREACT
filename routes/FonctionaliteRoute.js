@@ -11,4 +11,6 @@ router.post('/insert_fonctionalite',auth, FonctionaliteController.postData);
 router.delete('/delete_fonctionalite/:id',auth, FonctionaliteController.deleteData);
 router.get('/fetch_all_fonctionalite', auth, FonctionaliteController.fetchAllDatas);
 
+router.get('/fetch_fonctionalite_data',  FonctionaliteController.fetchDatas);
+
 module.exports = router;

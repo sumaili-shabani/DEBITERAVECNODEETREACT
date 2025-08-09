@@ -26,5 +26,7 @@ router.delete('/delete_galery/:id',auth, GaleryController.deleteData);
 router.get('/fetch_all_galery', auth, GaleryController.fetchAllDatas);
 router.post('/edit_galery_logo', auth, upload.single('avatar'), GaleryController.editLogo);
 
+router.get('/fetch_galery_data', GaleryController.fetchDatas);
+
 
 module.exports = router;

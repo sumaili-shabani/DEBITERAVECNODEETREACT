@@ -104,3 +104,17 @@ exports.deleteData = async (req, res) => {
         res.status(500).json({ err: "Erreur lors de la suppression" });
     }
 };
+
+// 🔹 Récupérer une seule donnée par ID
+exports.fetchSigleDataService = async (req, res) => {
+    try {
+        const datas = await ServiceModel.findAll({
+            where: { slug: req.params.slug },
+            limit:1,
+        });
+        if (!datas) return res.status(404).json({ message: "Donnée introuvable" });
+        res.status(200).json({ data: datas });
+    } catch (err) {
+        res.status(500).json({ err: "Erreur lors de la récupération des Données" });
+    }
+};

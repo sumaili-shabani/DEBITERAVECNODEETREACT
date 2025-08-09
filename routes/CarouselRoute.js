@@ -40,4 +40,6 @@ router.delete('/delete_carousel/:id',auth, CarouselController.deleteData);
 router.get('/fetch_all_carousel', auth, CarouselController.fetchAllDatas);
 router.post('/edit_carousel_logo', auth, upload.single('logo'), CarouselController.editLogo);
 
+router.get('/fetch_carousel_data',  CarouselController.fetchDatas);
+
 module.exports = router;

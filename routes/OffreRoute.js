@@ -39,7 +39,9 @@ router.post('/insert_offre',auth, OffreController.postData);
 router.delete('/delete_offre/:id',auth, OffreController.deleteData);
 router.get('/fetch_all_offre', auth, OffreController.fetchAllDatas);
 router.post('/edit_offre_logo', auth, upload.single('logo'), OffreController.editLogo);
+
+router.get('/fetch_offre_data', OffreController.fetchDatas);
 //par slug
-router.get('/fetch_single_offre_by_slug/:slug', auth, OffreController.fetchDatasBySlug);
+router.get('/fetch_single_offre_by_slug/:slug', OffreController.fetchDatasBySlug);
 
 module.exports = router;

@@ -11,4 +11,6 @@ router.post('/insert_valeur',auth, ValeurController.postData);
 router.delete('/delete_valeur/:id',auth, ValeurController.deleteData);
 router.get('/fetch_all_valeur', auth, ValeurController.fetchAllDatas);
 
+router.get('/fetch_valeur_data', ValeurController.fetchDatas);
+
 module.exports = router;

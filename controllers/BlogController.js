@@ -45,6 +45,56 @@ exports.fetchDatas = async (req, res) => {
     }
 };
 
+
+// 🔹 Récupérer tous les articles par catégorie selon category.slug
+exports.fetchCategoryBlogBySlug = async (req, res) => {
+    const { slug } = req.params; // on récupère le slug passé dans l'URL
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const offset = (page - 1) * limit;
+    const search = req.query.q || '';
+
+    // 🔍 Construction du filtre sur titre et sous titre
+    const searchFilter = search
+        ? {
+            [Op.or]: [
+                { titre: { [Op.like]: `%${search}%` } },
+                { sousTitre: { [Op.like]: `%${search}%` } }
+            ]
+        }
+        : {};
+
+    try {
+        const { count, rows } = await BlogModel.findAndCountAll({
+            where: searchFilter,
+            include: [
+                {
+                    model: CategoryBlogModel,
+                    as: 'category_blog',
+                    attributes: ['id', 'titre', 'slug'],
+                    where: { slug } // ✅ filtre sur category.slug
+                }
+            ],
+            limit,
+            offset,
+            order: [['id', 'DESC']]
+        });
+
+        res.status(200).json({
+            currentPage: page,
+            perPage: limit,
+            total: count,
+            totalPages: Math.ceil(count / limit),
+            data: rows
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            err: "Erreur lors de la récupération des articles pour cette catégorie"
+        });
+    }
+};
+
 // 🔹 Récupérer tous les blogs par rapport au slug
 exports.fetchDatasBySlug = async (req, res) => {
     const slug = req.params.slug;
@@ -71,7 +121,7 @@ exports.fetchDatasBySlug = async (req, res) => {
         res.status(500).json({ message: "Erreur serveur" });
     }
 };
-  
+
 
 // 🔹 Récupérer tous les rôles avec alias : nom → label, id → value
 exports.fetchAllDatas = async (req, res) => {
@@ -131,7 +181,7 @@ exports.postData = async (req, res) => {
 
 // 🔹 Status blog
 exports.editStatus = async (req, res) => {
-    const  id  = req.params.id;
+    const id = req.params.id;
 
     const site = await BlogModel.findByPk(id);
     if (!site) {
@@ -170,8 +220,8 @@ exports.editLogo = async (req, res) => {
     if (!logo) return res.status(400).json({ message: "Aucune image envoyée" });
 
     try {
-       
-       
+
+
 
         //appel de la fonction de suppression de l'ancien fichier
         // ✅ Supprimer l'ancien fichier avant la modification
@@ -182,7 +232,7 @@ exports.editLogo = async (req, res) => {
             path.join(__dirname, '../upload/images'),
             ['logo.png', 'avatar.png'] // fichiers protégés
         );
-  
+
         // 3. Mettre à jour avec le nouveau logo
         await BlogModel.update({ icone: logo }, { where: { id } });
 

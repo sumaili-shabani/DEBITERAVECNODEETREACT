@@ -89,6 +89,41 @@ exports.postData = async (req, res) => {
     }
 };
 
+
+
+// 🔹 Activation de la video
+exports.editStatus = async (req, res) => {
+    const id = req.params.id;
+
+    const site = await VideoModel.findByPk(id);
+    if (!site) {
+        return res.status(404).json({ message: "Vidéo non trouvé" });
+    }
+
+    try {
+
+        if (site.status == 0) {
+            // 🔹 Mise à jour
+            await VideoModel.update({ status: 1 }, { where: { id } });
+
+            res.json({ message: "Vidéo activée avec succès!!!" });
+
+
+        } else {
+            await VideoModel.update({ status: 0 }, { where: { id } });
+
+            res.json({ message: "Vidéo desactivée avec succès!!!" });
+        }
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ err });
+    }
+
+
+
+};
+
 // 🔹 Supprimer un élément
 exports.deleteData = async (req, res) => {
     try {
@@ -100,5 +135,24 @@ exports.deleteData = async (req, res) => {
         }
     } catch (err) {
         res.status(500).json({ err: "Erreur lors de la suppression" });
+    }
+};
+
+// 🔹 Récupérer tous les rôles avec alias : nom → label, id → value
+exports.fetchOneVideoPub = async (req, res) => {
+    try {
+        const datas = await VideoModel.findAll({
+            where:{status:1},
+            limit:1,
+        });
+
+        if (!datas || datas.length === 0) {
+            return res.status(404).json({ data: [] });
+        }
+
+        res.status(200).json({ data: datas });
+    } catch (err) {
+        console.error("Erreur lors de la récupération des données :", err);
+        res.status(500).json({ message: "Erreur serveur" });
     }
 };

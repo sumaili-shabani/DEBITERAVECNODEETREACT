@@ -11,4 +11,8 @@ router.post('/insert_service',auth, ServiceController.postData);
 router.delete('/delete_service/:id',auth, ServiceController.deleteData);
 router.get('/fetch_all_service', auth, ServiceController.fetchAllDatas);
 
+router.get('/fetch_service_data', ServiceController.fetchDatas);
+
+router.get('/fetch_service_sigle/:slug', ServiceController.fetchSigleDataService);
+
 module.exports = router;

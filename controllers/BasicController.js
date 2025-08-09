@@ -102,3 +102,18 @@ exports.deleteData = async (req, res) => {
         res.status(500).json({ err: "Erreur lors de la suppression" });
     }
 };
+
+
+// 🔹 Récupérer une seule donnée 
+exports.fetch_info_basic_data = async (req, res) => {
+    try {
+        const datas = await BasicModel.findAll({
+            order: [['id', 'DESC']], // ✅ syntaxe correcte
+            limit:1,
+        });
+        if (!datas) return res.status(404).json({ message: "Donnée introuvable" });
+        res.status(200).json({ data: datas });
+    } catch (err) {
+        res.status(500).json({ err: "Erreur lors de la récupération des Données" });
+    }
+};

@@ -40,4 +40,6 @@ router.delete('/delete_partenaire/:id', auth, PartenaireController.deleteData);
 router.get('/fetch_all_partenaire', auth, PartenaireController.fetchAllDatas);
 router.post('/edit_partenaire_logo', auth, upload.single('logo'), PartenaireController.editLogo);
 
+router.get('/fetch_partenaire_data', PartenaireController.fetchDatas);
+
 module.exports = router;

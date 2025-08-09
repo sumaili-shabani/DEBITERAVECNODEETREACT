@@ -11,4 +11,6 @@ router.post('/insert_faq',auth, FaqController.postData);
 router.delete('/delete_faq/:id',auth, FaqController.deleteData);
 router.get('/fetch_all_faq', auth, FaqController.fetchAllDatas);
 
+router.get('/fetch_faq_data', FaqController.fetchDatas);
+
 module.exports = router;

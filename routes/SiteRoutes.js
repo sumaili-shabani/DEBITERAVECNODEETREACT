@@ -40,4 +40,6 @@ router.post('/insert_site', auth, SiteController.postSite);
 router.delete('/delete_site/:id', auth, SiteController.deleteSite);
 router.post('/edit_site_logo', auth, upload.single('logo'), SiteController.editLogo);
 
+router.get('/fetch_data_site', SiteController.fetchDataSite);
+
 module.exports = router;

@@ -11,4 +11,6 @@ router.post('/insert_basic',auth, BasicController.postData);
 router.delete('/delete_basic/:id',auth, BasicController.deleteData);
 router.get('/fetch_all_basic', auth, BasicController.fetchAllDatas);
 
+router.get('/fetch_info_basic_data', BasicController.fetch_info_basic_data);
+
 module.exports = router;

@@ -13,4 +13,6 @@ router.get('/fetch_all_category_blog', auth, CategoryBlogController.fetchAllData
 //par slug
 router.get('/fetch_single_category_blog_by_slug/:slug', auth, CategoryBlogController.fetchDatasBySlug);
 
+router.get('/fetch_category_blog_data', CategoryBlogController.fetchDatas);
+
 module.exports = router;
