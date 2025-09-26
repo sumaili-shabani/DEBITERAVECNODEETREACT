@@ -117,3 +117,5 @@ exports.fetch_info_basic_data = async (req, res) => {
         res.status(500).json({ err: "Erreur lors de la récupération des Données" });
     }
 };
+
+

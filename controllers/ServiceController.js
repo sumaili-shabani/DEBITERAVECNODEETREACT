@@ -71,7 +71,7 @@ exports.fetchSigleData = async (req, res) => {
 // 🔹 Ajouter ou modifier un élément
 exports.postData = async (req, res) => {
     const { id, titre, description, icone, nom } = req.body;
-    const mySlug = generateSlug(titre);
+    const mySlug = generateSlug(nom);
     try {
         if (!id || id === "") {
             // 🔸 Insertion
@@ -79,7 +79,7 @@ exports.postData = async (req, res) => {
             res.status(200).json({ message: "Insertion avec succès !!!" });
         } else {
             // 🔸 Mise à jour
-            const [updated] = await ServiceModel.update({ titre, description, icone, nom }, { where: { id } });
+            const [updated] = await ServiceModel.update({ titre, description, icone, nom, slug: mySlug }, { where: { id } });
             if (updated) {
                 res.status(200).json({ message: "Modification avec succès !!!" });
             } else {

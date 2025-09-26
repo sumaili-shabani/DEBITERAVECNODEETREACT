@@ -102,7 +102,7 @@ exports.postUser = async (req, res) => {
                 telephone,
                 avatar: avatar || "avatar.png",
                 passwords: hashedPassword,
-                idRole:2,
+                idRole: 2,
                 sexe,
             });
             res.status(201).json({ message: "Utilisateur ajouté avec succès", data: newUser });
@@ -453,32 +453,67 @@ exports.contactForm = async (req, res) => {
     const { name, email, telephone, subject, message } = req.body;
 
     try {
-        // Vérification simple
         if (!name || !email || !subject || !message) {
-            return res.status(400).json({ message: "Tous les champs obligatoires doivent être remplis." });
+            return res.status(400).json({
+                message: "Tous les champs obligatoires doivent être remplis.",
+            });
         }
 
-        // Contenu HTML de l'email
+        // Contenu HTML
         const html = `
-            <h3>📩 Nouveau message de contact</h3>
-            <p><strong>Nom :</strong> ${name}</p>
-            <p><strong>Email :</strong> ${email}</p>
-            <p><strong>Téléphone :</strong> ${telephone || 'Non fourni'}</p>
-            <p><strong>Sujet :</strong> ${subject}</p>
-            <p><strong>Message :</strong><br/>${message}</p>
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4f4f4;padding:20px 0;">
+            <tr>
+                <td align="center">
+                <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.1);font-family:Arial,Helvetica,sans-serif;">
+                    
+                    <!-- Header -->
+                    <tr>
+                    <td style="background-color:#28a745;color:#ffffff;padding:20px;text-align:center;font-size:20px;font-weight:bold;">
+                        📩 Nouveau message de contact - Swiftride
+                    </td>
+                    </tr>
+
+                    <!-- Body -->
+                    <tr>
+                    <td style="padding:20px;color:#333333;font-size:14px;line-height:1.6;">
+                        <p><strong style="color:#28a745;">Nom :</strong> ${name}</p>
+                        <p><strong style="color:#28a745;">Email :</strong> ${email}</p>
+                        <p><strong style="color:#28a745;">Téléphone :</strong> ${telephone || "Non fourni"}</p>
+                        <p><strong style="color:#28a745;">Sujet :</strong> ${subject}</p>
+                        <p><strong style="color:#28a745;">Message :</strong></p>
+                        <div style="background-color:#f1f1f1;padding:12px;border-radius:6px;margin-top:8px;color:#000000;">
+                        ${message}
+                        </div>
+                    </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                    <td style="background-color:#28a745;color:#ffffff;text-align:center;padding:15px;font-size:12px;">
+                        🚖 Swiftride – Votre mobilité, notre priorité
+                    </td>
+                    </tr>
+
+                </table>
+                </td>
+            </tr>
+        </table>
         `;
 
-        // Adresse où tu veux recevoir les messages
-        const toEmail = 'info@swiftride.net';
 
-        // Envoi de l'email
+        // Email de réception
+        const toEmail = "swiftride@dreamofdrc.com";
+
+        // Envoi
         await sendEmail(toEmail, `📬 Nouveau message de ${name}`, html);
 
-        return res.json({ message: "Message envoyé avec succès." });
-
+        return res.json({ message: "Message envoyé avec succès ✅" });
     } catch (error) {
         console.error("Erreur contactForm:", error);
-        return res.status(500).json({ message: "Une erreur est survenue lors de l'envoi du message." });
+        return res.status(500).json({
+            message: "Erreur lors de l'envoi du message ❌",
+            error: error.message,
+        });
     }
 };
 

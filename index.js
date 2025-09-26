@@ -3,6 +3,11 @@ const app = express();
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config(); // 🔑 Charge les variables depuis .env
+
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.json()); // pour JSON
+app.use(bodyParser.urlencoded({ extended: true })); // pour formulaires
 //sequelize
 const sequelize = require('./config/sequelize');
 
@@ -35,7 +40,7 @@ const RapportRoute = require('./routes/RapportRoute');//✅
 const FaqRoute = require('./routes/FaqRoute');//✅
 const FonctionaliteRoute = require('./routes/FonctionaliteRoute');//✅
 
-
+const DonationRoute = require('./routes/DonationRoute');//✅
 
 // Middlewares
 app.use(cors());
@@ -73,6 +78,7 @@ app.use('/api', CarouselRoute);
 app.use('/api', RapportRoute);
 app.use('/api', FaqRoute);
 app.use('/api', FonctionaliteRoute);
+app.use('/api', DonationRoute);
 
 
 sequelize.authenticate()
