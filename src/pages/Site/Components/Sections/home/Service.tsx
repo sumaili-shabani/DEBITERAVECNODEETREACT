@@ -5,6 +5,7 @@ import LoaderAndError from '../../../../../components/LoaderAndError';
 import { useTranslation } from 'react-i18next';
 import { usePagination } from '../../../../../hooks/usePagination';
 import Pagination from '../../../../../components/Pagination';
+import SEO from '../about/SEO';
 
 interface UiService {
     id?: number;
@@ -59,15 +60,20 @@ export default function Service() {
         }
     };
 
-    
+
 
     useEffect(() => {
-        document.title = "Nos services - Swiftride";
         loadlistData();
     }, [search, currentPage, limit]);
     return (
 
         <div className="container-fluid py-2">
+            <SEO
+                title="Nos services - Swiftride"
+                description="Découvrez nos services de mobilité urbaine sur-mesure."
+                keywords="services, mobilité urbaine, Swiftride"
+                author="SwiftRide"
+            />
             <div className="container">
                 <div className="text-center mb-5">
                     <h2 className="display-5 fw-bold mb-3">Nos <span className="text-success">Solutions Clés</span></h2>

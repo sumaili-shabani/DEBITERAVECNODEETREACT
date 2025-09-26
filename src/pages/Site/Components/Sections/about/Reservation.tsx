@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react'
+import SEO from './SEO';
 
 export default function Reservation() {
-    useEffect(() => {
-        document.title = "Réservation à l'avance & Planification - Swiftride";
-    
-        }, []);
+   
   return (
       <section className="py-5" id="reservation-future">
+         <SEO
+                title="Réservation à l'avance & Planification - SwiftRide"
+                description="Planifiez vos trajets à l'avance avec SwiftRide."
+                keywords="Réservation, Planification, SwiftRide, taxi, CDF"
+                author="SwiftRide"
+              />
           <div className="container">
               <div className="row align-items-center">
                   <div className="col-lg-6">

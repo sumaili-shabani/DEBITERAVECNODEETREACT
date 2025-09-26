@@ -6,6 +6,7 @@ import { usePagination } from '../../../../../hooks/usePagination';
 import LoaderAndError from '../../../../../components/LoaderAndError';
 import BlogCard from './BlogCard';
 import Pagination from '../../../../../components/Pagination';
+import SEO from '../about/SEO';
 
 
 export default function BlogListByCategory() {
@@ -49,11 +50,17 @@ export default function BlogListByCategory() {
     };
 
     useEffect(() => {
-        document.title = "Articles Récents par catégorie - Swiftride";
+      
         loadlistData();
     }, [slug, search, currentPage, limit]);
     return (
         <div className="container py-5">
+            <SEO
+                title="Articles Récents par catégorie - Swiftride"
+                description="Découvrez nos articles récents sur la mobilité urbaine, classés par catégorie."
+                keywords="mobilité urbaine, articles récents, catégorie, Swiftride"
+                author="SwiftRide"
+            />
             <div className="text-center mb-4">
                 <h2 className="display-5 fw-bold mb-3">
                     Nos <span className="text-success">Articles Récents</span>

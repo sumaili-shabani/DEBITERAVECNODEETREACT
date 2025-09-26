@@ -6,6 +6,7 @@ import LoaderAndError from '../../../../../components/LoaderAndError';
 import { fileUrl } from '../../../../../api/config';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
+import SEO from './SEO';
 
 interface UiPhoto {
     id?: number;
@@ -55,7 +56,6 @@ export default function Galery() {
 
     // Reset photoIndex quand listData change
     useEffect(() => {
-        document.title = "Explorez nos moments forts en images - Swiftride";
         setPhotoIndex(0);
     }, [listData]);
 
@@ -69,6 +69,12 @@ export default function Galery() {
 
     return (
         <section className="py-1" id="galerie">
+            <SEO
+                title="Galerie - SwiftRide"
+                description="Explorez notre galerie d'images et découvrez les moments forts de SwiftRide."
+                keywords="Galerie, SwiftRide, images, moments forts"
+                author="SwiftRide"
+            />
             <div className="container">
                 <div className="text-center mb-2">
                     <h2 className="fw-bold">Galerie <span className="text-success">SwiftRide</span></h2>

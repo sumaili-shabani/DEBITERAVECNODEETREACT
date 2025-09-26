@@ -456,3 +456,22 @@ body.dark .text-dark {
 .text-justify {
     text-align: justify;
 }
+
+body.dark .chatbot-body{
+    background-color: #2e2e42;
+}
+
+body.dark .form-control {
+    background-color: #3a3a4f;
+    color: #ffffff;
+    border-color: #555;
+}
+body.dark .form-group .input-group-text {
+    background-color: #3a3a4f;
+    color: #ffffff;
+    border-color: #555;
+}
+
+body.dark .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.8) !important;
+}

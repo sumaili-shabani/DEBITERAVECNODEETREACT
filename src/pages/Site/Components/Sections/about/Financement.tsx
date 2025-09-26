@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { fetchListItems } from '../../../../../hooks/useCrud';
 import LoaderAndError from '../../../../../components/LoaderAndError';
 import DOMPurify from 'dompurify';
+import SEO from './SEO';
 interface UiBasic {
   id?: number;
   apropos?: string;
@@ -77,7 +78,6 @@ export default function Financement() {
   }
 
   useEffect(() => {
-    document.title = "Financement - Swiftride";
     fetchListBasic();
     fetchData();
   }, []);
@@ -86,6 +86,12 @@ export default function Financement() {
 
 
     <div className='col-md-12 col-lg-12 col-sm-12 col-12'>
+       <SEO
+          title="Financement - SwiftRide"
+          description="Découvrez nos options de financement pour votre projet avec SwiftRide."
+          keywords="Financement, SwiftRide, support, taxi, CDF"
+          author="SwiftRide"
+        />
 
       {
         basic.length === 0 ? (

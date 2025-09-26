@@ -5,6 +5,7 @@ import LoaderAndError from '../../../../../components/LoaderAndError';
 import DOMPurify from 'dompurify';
 import Partenaire from '../home/Partenaire';
 import { Link } from 'react-router-dom';
+import SEO from './SEO';
 interface UiBasic {
   id?: number;
   apropos?: string;
@@ -80,7 +81,7 @@ export default function PartenariatShip() {
   }
 
   useEffect(() => {
-    document.title = "Partenariat - Swiftride";
+  
     fetchListBasic();
     fetchData();
   }, []);
@@ -89,6 +90,12 @@ export default function PartenariatShip() {
 
 
     <div className='col-md-12 col-lg-12 col-sm-12 col-12'>
+      <SEO
+        title="Partenariat - SwiftRide"
+        description="Découvrez nos opportunités de partenariat avec SwiftRide."
+        keywords="Partenariat, SwiftRide, collaboration, taxi, CDF"
+        author="SwiftRide"
+      />
 
       {
         basic.length === 0 ? (
@@ -182,7 +189,7 @@ export default function PartenariatShip() {
                 </div>
 
 
-                
+
 
                 <Partenaire />
 
@@ -191,7 +198,7 @@ export default function PartenariatShip() {
               </div>
 
 
-             
+
             </div >
 
           ))

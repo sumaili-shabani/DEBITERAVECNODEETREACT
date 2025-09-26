@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { fetchListItems } from '../../../../../hooks/useCrud';
 import LoaderAndError from '../../../../../components/LoaderAndError';
 import DOMPurify from 'dompurify';
+import SEO from './SEO';
 interface UiBasic {
   id?: number;
   apropos?: string;
@@ -77,7 +78,6 @@ export default function Secteur() {
   }
 
   useEffect(() => {
-    document.title = "Le secteur numérique - Swiftride";
     fetchListBasic();
     fetchData();
   }, []);
@@ -86,6 +86,12 @@ export default function Secteur() {
 
 
     <div className='col-md-12 col-lg-12 col-sm-12 col-12'>
+      <SEO
+        title="Le secteur numérique - SwiftRide"
+        description="Découvrez notre engagement envers le secteur numérique avec SwiftRide."
+        keywords="Secteur numérique, SwiftRide, innovation, technologie, CDF"
+        author="SwiftRide"
+      />
 
       {
         basic.length === 0 ? (
@@ -107,12 +113,12 @@ export default function Secteur() {
                     <h2 className="display-4 fw-bold mb-4">
                       <span className="text-success">Le secteur </span>numérique
                     </h2>
-                    
+
 
                   </div>
 
                 </div>
-     
+
 
 
 

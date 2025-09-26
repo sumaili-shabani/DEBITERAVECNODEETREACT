@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react'
+import SEO from './SEO';
 
 export default function Partagetrajet() {
-    useEffect(() => {
-        document.title = "Partage de Trajet - Swiftride";
-
-    }, []);
+  
     return (
 
         <section className="py-5" id="partage-trajet">
+            <SEO
+                title="Partage de Trajet - SwiftRide"
+                description="Découvrez comment partager votre trajet en toute sécurité avec SwiftRide."
+                keywords="Partage, Trajet, SwiftRide, sécurité"
+                author="SwiftRide"
+            />
             <div className="container">
                 <div className="text-center mb-4">
                     <h2 className="fw-bold text-success">

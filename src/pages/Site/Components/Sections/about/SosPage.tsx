@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react'
+import SEO from './SEO';
 
 export default function SosPage() {
-    useEffect(() => {
-        document.title = "Assistance d'Urgence (SOS) - Swiftride";
-
-    }, []);
+  
     return (
         // < !--Bloc Interface SOS-- >
         <section className="py-5 bg-opacity-10" id="sos">
+            <SEO
+                title={`Assistance d'Urgence (SOS) - Swiftride`}
+                description={`Restez en sécurité à tout moment avec notre bouton SOS intelligent.`}
+                keywords={`SOS, sécurité, assistance, Swiftride`}
+                author={`SwiftRide`}
+            />
             <div className="container">
                 <div className="text-center mb-4">
                     <h2 className="fw-bold text-danger">

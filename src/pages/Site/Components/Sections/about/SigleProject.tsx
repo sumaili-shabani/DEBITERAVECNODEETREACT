@@ -4,6 +4,7 @@ import { fetchListItems } from '../../../../../hooks/useCrud';
 import LoaderAndError from '../../../../../components/LoaderAndError';
 import { fileUrl } from '../../../../../api/config';
 import DOMPurify from 'dompurify';
+import SEO from './SEO';
 interface UiSecteur {
     id?: number;
     nomSecteur?: string;
@@ -80,7 +81,7 @@ export default function SigleProject() {
     }
 
     useEffect(() => {
-        document.title = `Détail de projet:${slug} - Swiftride`;
+        // document.title = `Détail de projet:${slug} - Swiftride`;
         getSigleData();
 
     }, [slug]);
@@ -88,6 +89,12 @@ export default function SigleProject() {
 
     return (
         <div className="col-md-12 py-5">
+            <SEO
+                title={`Détail de projet:${slug} - Swiftride`}
+                description={`Découvrez le détail du projet ${slug} sur SwiftRide.`}
+                keywords={`Projet, ${slug}, SwiftRide`}
+                author="SwiftRide"
+            />
             <div className="row justify-content-center">
 
                 {
@@ -125,7 +132,7 @@ export default function SigleProject() {
                                             <i className="fas fa-crown me-2"></i> {item.secteur_projet?.nomSecteur}
                                         </span>
                                     </div>
-                                    
+
                                 </div>
 
 
@@ -138,7 +145,7 @@ export default function SigleProject() {
                                     </div>
 
                                     <div className="text-justify col-md-12">
-                                         <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.description ?? '') }} />
+                                        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.description ?? '') }} />
                                     </div>
 
 

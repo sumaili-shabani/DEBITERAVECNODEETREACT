@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react'
+import SEO from './SEO';
 
 export default function CodePromo() {
-    useEffect(() => {
-        document.title = "Code promo - Swiftride";
-
-    }, []);
+    
     return (
 
         <section className="py-5" id="promo">
+            <SEO
+                title="Code promo - SwiftRide"
+                description="Découvrez nos codes promotionnels et économisez sur vos trajets avec SwiftRide."
+                keywords="code promo, SwiftRide, réduction, taxi, CDF"
+                author="SwiftRide"
+            />
             <div className="container">
                 <div className="text-center mb-4">
                     <h2 className="fw-bold"><i className="fas fa-gift text-success me-2"></i>Codes Promo</h2>

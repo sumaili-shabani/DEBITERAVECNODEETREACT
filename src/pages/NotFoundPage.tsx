@@ -1,10 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import SEO from './Site/Components/Sections/about/SEO';
 
 export default function NotFoundPage() {
   return (
 
     <div className="container">
+      <SEO
+        title="Page non trouvée - SwiftRide"
+        description="La page que vous recherchez n'existe pas."
+        keywords="404, Page non trouvée, SwiftRide"
+        author="SwiftRide"
+      />
       {/* Outer Row */}
       <div className="row justify-content-center">
         <div className="col-xl-3 col-lg-3 col-md-3"></div>

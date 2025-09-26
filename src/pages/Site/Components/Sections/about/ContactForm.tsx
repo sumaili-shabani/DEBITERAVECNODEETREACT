@@ -25,7 +25,7 @@ export default function ContactFormulaire() {
         try {
             await saveItem('/contact_form', formData);
             // alert("Votre message a été envoyé avec succès !");
-            setFormData({});
+            // setFormData({});
         } catch (err: any) {
             console.error(err);
             setError("Erreur lors de l'envoi du message.");

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { fetchListItems } from '../../../../../hooks/useCrud';
 import LoaderAndError from '../../../../../components/LoaderAndError';
 import DOMPurify from 'dompurify';
+import SEO from './SEO';
 interface UiBasic {
   id?: number;
   apropos?: string;
@@ -78,7 +79,7 @@ export default function StructureGestion() {
   }
 
   useEffect(() => {
-    document.title = "Structure de gestion - Swiftride";
+    
     fetchListBasic();
     fetchData();
   }, []);
@@ -87,6 +88,12 @@ export default function StructureGestion() {
 
 
     <div className='col-md-12 col-lg-12 col-sm-12 col-12'>
+      <SEO
+        title="Structure de gestion - Swiftride"
+        description="Découvrez comment notre organisation est structurée pour garantir une gestion efficace et transparente."
+        keywords="Structure, gestion, Swiftride"
+        author="SwiftRide"
+      />
 
       {
         basic.length === 0 ? (
@@ -158,7 +165,7 @@ export default function StructureGestion() {
                     </div>
                   </div>
 
-                 
+
 
 
                 </div>
@@ -173,7 +180,7 @@ export default function StructureGestion() {
               </div>
 
 
-             
+
             </div >
 
           ))

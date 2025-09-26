@@ -5,6 +5,7 @@ import { usePagination } from '../../../../../hooks/usePagination';
 import LoaderAndError from '../../../../../components/LoaderAndError';
 import Pagination from '../../../../../components/Pagination';
 import { extractTime, formatDateFR } from '../../../../../api/callApi';
+import SEO from './SEO';
 
 interface UiOffre {
     id?: number;
@@ -68,12 +69,18 @@ export default function Vacancy() {
     };
 
     useEffect(() => {
-        document.title = "Nos offres d'emploi - Swiftride";
+        // document.title = "Nos offres d'emploi - Swiftride";
         loadlistData();
 
     }, [search, currentPage, limit]);
     return (
         <section className="py-5" id="offres-emploi">
+            <SEO
+                title="Nos offres d'emploi - Swiftride"
+                description="Découvrez nos offres d'emploi et rejoignez notre équipe."
+                keywords="offres d'emploi, recrutement, Swiftride"
+                author="SwiftRide"
+            />
             <div className="container">
                 <div className="text-center mb-4">
                     <i className="fas fa-briefcase fa-2x text-success mb-2"></i>
@@ -123,9 +130,9 @@ export default function Vacancy() {
                                                 <div>
                                                     <i className="fas fa-map-marker-alt me-1 text-success"></i> Lieu d'affectation: {item.lieu}
                                                 </div>
-                                               <div>
+                                                <div>
                                                     <i className="fas fa-home fa-sm me-1 text-success"></i>Organisation: {item.organisation}
-                                               </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <p className="text-muted mb-1">

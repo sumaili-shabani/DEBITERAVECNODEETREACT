@@ -272,7 +272,7 @@ export default function SiderBar() {
                         <a href="https://play.google.com/store/apps/details?id=com.dreamofdrc.liftiapp" className="download-btn me-2 mb-2 linkbtn" target="_blank">
                             <i className="fab fa-google-play me-2"></i>Android
                         </a>
-                        <a href="#" className="download-btn mb-2 linkbtn">
+                        <a href="https://apps.apple.com/us/app/swiftride/id6749850003" className="download-btn mb-2 linkbtn" target="_blank">
                             <i className="fab fa-apple me-2"></i>iOS
                         </a>
                     </div>

@@ -91,9 +91,9 @@ export default function Carousel() {
                         <a href='https://play.google.com/store/apps/details?id=com.dreamofdrc.liftiapp' target='_blank' className="btn btn-success btn-lg rounded-pill px-4">
                             <i className="fab fa-google-play me-2"></i> Android
                         </a>
-                        <button className="btn btn-success btn-lg rounded-pill px-4">
+                        <a href='https://apps.apple.com/us/app/swiftride/id6749850003' target='_blank' className="btn btn-success btn-lg rounded-pill px-4">
                             <i className="fab fa-apple me-2"></i> iOS
-                        </button>
+                        </a>
                         <button type='button' onClick={() => setShow(true)} className="btn btn-outline-success btn-lg rounded-pill px-4">
                             <i className="fas fa-play-circle me-2"></i> Voir la démo
                         </button>
@@ -137,7 +137,7 @@ export default function Carousel() {
                                             style={{ height: "600px", objectFit: "cover" }}
                                             alt={item.titre || "Image"}
                                         />
-                                        <div className="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                                        <div className="carousel-caption  d-md-block bg-dark bg-opacity-50 rounded p-3">
                                             <h5>{item.titre}</h5>
                                             <p>{item.description}</p>
                                         </div>

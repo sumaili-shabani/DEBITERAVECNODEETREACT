@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { fetchListItems } from '../../../../../hooks/useCrud';
 import LoaderAndError from '../../../../../components/LoaderAndError';
+import SEO from './SEO';
 
 
 interface Site {
@@ -71,7 +72,7 @@ export default function Commentcamarche() {
     }
 
     useEffect(() => {
-        document.title = "Comment ça marche - Swiftride";
+        
         fetchData();
         fetchListCategorie();
     }, []);
@@ -79,6 +80,12 @@ export default function Commentcamarche() {
 
     return (
         <section className="container py-5">
+            <SEO
+                title="Simplifiez vos déplacements en toute sécurité. Commandez votre taxi ou moto en un clic, à tout moment. - Swiftride"
+                description="Contactez-nous pour toute question ou information sur SwiftRide."
+                keywords="Swiftride kwetu, kwetu, Contact, SwiftRide, support, taxi, CDF, swiftride, mobilité urbaine, transport, réservation en ligne, application mobile, sécurité, confort"
+                author="SwiftRide"
+            />
             <div className="text-center mb-4">
                 <h2 className="fw-bold text-success">Comment ça marche ?</h2>
                 <p className="text-muted">Découvrez toutes les étapes pour utiliser <strong>SwiftRide</strong> facilement.</p>

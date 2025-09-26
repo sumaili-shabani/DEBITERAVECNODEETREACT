@@ -5,6 +5,7 @@ import LoaderAndError from '../../../../../components/LoaderAndError';
 import { extractTime, formatDateFR } from '../../../../../api/callApi';
 import DOMPurify from 'dompurify';
 import { fileUrl } from '../../../../../api/config';
+import SEO from './SEO';
 
 interface UiOffre {
     id?: number;
@@ -40,7 +41,7 @@ export default function SigleVacancy() {
     };
 
     useEffect(() => {
-        document.title = `Détail de l'offre:${slug} - Swiftride`;
+        // document.title = `Détail de l'offre:${slug} - Swiftride`;
         getSigleData();
     }, [slug]);
 
@@ -56,6 +57,12 @@ export default function SigleVacancy() {
 
     return (
         <section className="py-1" id="detail-offre-emploi">
+            <SEO
+                title={`Détail de l'offre:${slug} - Swiftride`}
+                description={`Découvrez le détail de l'offre ${slug} sur SwiftRide.`}
+                keywords={`Offre, ${slug}, SwiftRide`}
+                author="SwiftRide"
+            />
             <div className="container">
                 <div className="mb-2">
                     <Link to="/vacancy" className="btn btn-outline-secondary btn-sm">

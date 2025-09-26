@@ -106,18 +106,8 @@ export default function SideBarInfo() {
                 <div className="card-header bg-primary text-white">
                     <i className="fab fa-facebook me-2"></i> Dernière publication Facebook
                 </div>
-                {/* <iframe
-                    src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fweb.facebook.com%2Fdreamofdrc&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=1153717905395954"
-                    width="340"
-                    height="400"
-                    style={{ border: 'none', overflow: 'hidden' }}
-                    scrolling="no"
-                    frameBorder="0"
-                    allowFullScreen={true}
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                    title="Facebook Page Embed - Dream of DRC"
-                    className='col-md-12 col-lg-12 col-sm-12 col-12'
-                ></iframe> */}
+                <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fweb.facebook.com%2Fprofile.php%3Fid%3D61578260812608&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=1153717905395954" 
+                    width="340" height="500" style={{ border: 'none', overflow: 'hidden' }} scrolling="no" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
             </div>
 
 

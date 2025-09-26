@@ -9,17 +9,21 @@ import ServiceHome from './home/ServiceHome'
 import Valeur from './about/Valeur'
 import Commentcamarche from './about/Commentcamarche'
 import Carousel from './about/Carouse'
+import SEO from './about/SEO'
 
 
 
 
 export default function HiroPage() {
-      useEffect(() => {
-          document.title = "Simplifiez vos déplacements en toute sécurité. Commandez votre taxi ou moto en un clic, à tout moment. - Swiftride";
-    
-        }, []);
+   
     return (
         <div>
+            <SEO
+                title="Simplifiez vos déplacements en toute sécurité. Commandez votre taxi ou moto en un clic, à tout moment. - Swiftride"
+                description="Contactez-nous pour toute question ou information sur SwiftRide."
+                keywords="Swiftride kwetu, kwetu, Contact, SwiftRide, support, taxi, CDF, swiftride, mobilité urbaine, transport, réservation en ligne, application mobile, sécurité, confort"
+                author="SwiftRide"
+            />
             {/* carousel */}
             <Carousel />
             {/* fin carousel */}

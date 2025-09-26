@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { fetchListItems } from '../../../../../hooks/useCrud';
 import LoaderAndError from '../../../../../components/LoaderAndError';
 import DOMPurify from 'dompurify';
+import SEO from './SEO';
 interface UiBasic {
   id?: number;
   apropos?: string;
@@ -77,7 +78,6 @@ export default function About() {
   }
 
   useEffect(() => {
-    document.title = "À propos - Swiftride";
     fetchListBasic();
     fetchData();
   }, []);
@@ -86,6 +86,13 @@ export default function About() {
 
 
     <div className='col-md-12 col-lg-12 col-sm-12 col-12'>
+
+      <SEO
+        title="À propos - SwiftRide"
+        description="Découvrez SwiftRide, notre mission et notre vision pour l'avenir de la mobilité urbaine."
+        keywords="À propos, SwiftRide, mobilité, taxi, CDF"
+        author="SwiftRide"
+      />
 
       {
         basic.length === 0 ? (

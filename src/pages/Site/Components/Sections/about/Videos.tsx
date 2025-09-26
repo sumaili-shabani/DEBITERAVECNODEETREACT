@@ -3,6 +3,7 @@ import { usePagination } from '../../../../../hooks/usePagination';
 import { fetchItems } from '../../../../../hooks/useCrud';
 import LoaderAndError from '../../../../../components/LoaderAndError';
 import Pagination from '../../../../../components/Pagination';
+import SEO from './SEO';
 interface UiVideo {
     id?: number;
     titre?: string;
@@ -52,11 +53,17 @@ export default function Videos() {
     };
 
     useEffect(() => {
-        document.title = "Nos vidéos - Swiftride";
+        // document.title = "Nos vidéos - Swiftride";
         loadlistData();
     }, [search, currentPage, limit]);
     return (
         <section className="py-2" id="videos">
+            <SEO
+                title="Nos vidéos - Swiftride"
+                description="Découvrez nos vidéos et apprenez-en plus sur nos services."
+                keywords="vidéos, Swiftride, taxi, CDF"
+                author="SwiftRide"
+            />
             <div className="container">
                 <div className="text-center mb-5">
                     <h2 className="fw-bold">Nos <span className="text-success">Vidéos</span></h2>

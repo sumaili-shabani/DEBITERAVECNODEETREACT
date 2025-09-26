@@ -5,6 +5,7 @@ import { fetchListItems } from '../../../../../hooks/useCrud';
 import LoaderAndError from '../../../../../components/LoaderAndError';
 import { fileUrl } from '../../../../../api/config';
 import { getRelativeTime } from '../../../../../api/callApi';
+import SEO from './SEO';
 
 export default function SingleBlog() {
     const { slug } = useParams<{ slug: string }>();
@@ -55,7 +56,7 @@ export default function SingleBlog() {
     }
 
     useEffect(() => {
-        document.title = `Détail de l'article:${slug} - Swiftride`;
+        // document.title = `Détail de l'article:${slug} - Swiftride`;
         getSigleData();
 
     }, [slug]);
@@ -65,6 +66,12 @@ export default function SingleBlog() {
 
     return (
         <div className="col-md-12 py-5">
+            <SEO
+                title={`Détail de l'article:${slug} - Swiftride`}
+                description={`Découvrez le détail de l'article ${slug} sur SwiftRide.`}
+                keywords={`Article, ${slug}, SwiftRide`}
+                author="SwiftRide"
+            />
 
             {
                 dataInfo.length === 0 ? (
@@ -78,7 +85,7 @@ export default function SingleBlog() {
 
                     dataInfo.map((article, index) => (
                         <div className="container py-5" key={index}>
-                            
+
                             <h1 className="display-5 fw-bold text-success mb-3">
 
                                 {article.titre}
@@ -105,7 +112,7 @@ export default function SingleBlog() {
                                             minWidth: "100%"
                                         }}
                                     />
-                                    
+
 
                                 </div>
                             )}

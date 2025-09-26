@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react'
+import SEO from './SEO';
 
 export default function OffrePromotion() {
-    useEffect(() => {
-        document.title = "Offres & Récompenses Hebdomadaires - Swiftride";
-
-    }, []);
+ 
     return (
         <div className="container-fluid  py-6">
+            <SEO
+                title="Offres & Récompenses Hebdomadaires - SwiftRide"
+                description="Découvrez nos offres et récompenses hebdomadaires chez SwiftRide."
+                keywords="Offres, Récompenses, SwiftRide, taxi, CDF"
+                author="SwiftRide"
+            />
             <div className="container">
                 {/* Titre Section */}
                 <div className="row align-items-center mb-5">

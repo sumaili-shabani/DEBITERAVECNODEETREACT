@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react'
+import SEO from './SEO';
 
 export default function IdentificationChauffeur() {
-    useEffect(() => {
-        document.title = "Identification des Chauffeurs - Swiftride";
-
-    }, []);
+    
     return (
 
         <section className="py-5" id="identification-chauffeurs">
+            <SEO
+                title="Identification des Chauffeurs - SwiftRide"
+                description="Découvrez comment nous identifions et vérifions nos chauffeurs chez SwiftRide."
+                keywords="Identification, Chauffeurs, SwiftRide, sécurité"
+                author="SwiftRide"
+            />
             <div className="container">
                 <div className="text-center mb-4">
                     <h2 className="fw-bold text-success">

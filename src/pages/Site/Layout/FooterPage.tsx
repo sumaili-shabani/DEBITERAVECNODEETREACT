@@ -5,6 +5,12 @@ import DOMPurify from 'dompurify';
 import GoogleTranslate from '../../../components/GoogleTranslate';
 import GoogleTranslate2 from '../../../components/GoogleTranslate2';
 import logoApp from '../../../assets/logos/logo_swift_ride_green.png';
+import SwiftRideChatbot from '../Components/Sections/chatbot/SwiftRideChatbot';
+import Chatbot from '../Components/Sections/chatbot/Chatbot';
+
+// import Chatbot from '../Components/Sections/chatbot/Chatbot';
+
+
 
 interface Site {
     id?: number;
@@ -57,8 +63,10 @@ export default function FooterPage() {
     }, []);
 
     return (
+         
         <div className='col-lg-12 col-md-12 col-12 col-sm-12 mt-4'>
-
+            
+            <SwiftRideChatbot />
             <footer className="bg-dark text-light pt-5 mt-4 pb-4 mt-auto">
                 <div className="container">
                     <div className="row">
@@ -98,6 +106,10 @@ export default function FooterPage() {
                                 <li className="mb-2"><Link to="/sos" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Bouton SOS</Link></li>
                                 <li className="mb-2"><Link to="/partage" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Partage trajet</Link></li>
                                 <li className="mb-2"><Link to="/projects" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Nos Projets</Link></li>
+                                <li className="mb-2">
+                                    <Link to="/don" className="text-light text-decoration-none">
+                                        <i className="fas fa-angle-right me-2"></i>Nous faire un don</Link>
+                                </li>
                             </ul>
                         </div>
 
@@ -106,11 +118,9 @@ export default function FooterPage() {
                             <h6 className="mb-4">Télécharger</h6>
                             <ul className="list-unstyled footer-links">
                                 <li className="mb-2"><a href="https://play.google.com/store/apps/details?id=com.dreamofdrc.liftiapp" target='_blank' className="text-light text-decoration-none"><i className="fab fa-google-play me-2"></i>Android</a></li>
-                                <li className="mb-2"><a href="#" className="text-light text-decoration-none"><i className="fab fa-apple me-2"></i>iOS</a></li>
+                                <li className="mb-2"><a href="https://apps.apple.com/us/app/swiftride/id6749850003" target='_blank' className="text-light text-decoration-none"><i className="fab fa-apple me-2"></i>iOS</a></li>
 
-                                <li className="mb-2 d-md-none">
-                                    <GoogleTranslate2 />
-                                </li>
+                               
                             </ul>
                         </div>
 
@@ -136,6 +146,8 @@ export default function FooterPage() {
                     </div>
 
                     <hr className="my-4 border-light" />
+                   
+                  
 
                     {/* <!-- Bas de page --> */}
                     <div className="row">
@@ -150,5 +162,6 @@ export default function FooterPage() {
             </footer>
 
         </div>
+        
     )
 }

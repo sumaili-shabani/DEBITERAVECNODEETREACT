@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react'
+import SEO from './SEO';
 
 export default function LocationVehicule() {
-    useEffect(() => {
-        document.title = "Location de véhicules - Swiftride";
-
-    }, []);
+   
     return (
         <section className="py-5" id="location-vehicule">
+            <SEO
+                title="Location de véhicules - SwiftRide"
+                description="Découvrez nos options de location de véhicules chez SwiftRide."
+                keywords="Location, Véhicules, SwiftRide, taxi, CDF"
+                author="SwiftRide"
+            />
             <div className="container">
                 <div className="row align-items-center">
                     <div className="col-lg-6 mb-4 mb-lg-0">

@@ -5,6 +5,7 @@ import { usePagination } from '../../../../../hooks/usePagination';
 import LoaderAndError from '../../../../../components/LoaderAndError';
 import Pagination from '../../../../../components/Pagination';
 import { fileUrl } from '../../../../../api/config';
+import SEO from './SEO';
 
 interface UiTeam {
     id?: number;
@@ -68,12 +69,17 @@ export default function Team() {
     };
 
     useEffect(() => {
-        document.title = "Les talents derrière la révolution - Swiftride";
         loadlistData();
 
     }, [search, currentPage, limit]);
     return (
         <div className="container py-6">
+            <SEO
+                title="Les talents derrière la révolution - Swiftride"
+                description="Découvrez notre équipe de professionnels dédiés à la transformation de l'industrie du transport."
+                keywords="équipe, talents, Swiftride, transport, innovation"
+                author="SwiftRide"
+            />
             {/* Titre Section */}
             <div className="text-center mb-6">
                 <h2 className="display-5 fw-bold text-success">

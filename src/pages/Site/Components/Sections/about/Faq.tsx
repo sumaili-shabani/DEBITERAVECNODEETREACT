@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { fetchItems, fetchListItems } from '../../../../../hooks/useCrud';
 import LoaderAndError from '../../../../../components/LoaderAndError';
 import DOMPurify from 'dompurify';
+import SEO from './SEO';
 
 interface Site {
     id?: number;
@@ -97,13 +98,18 @@ export default function Faq() {
 
 
     useEffect(() => {
-        document.title = "Foire Aux Questions - Swiftride";
         loadlistData();
         fetchData();
     }, [search, currentPage, limit]);
 
     return (
         <div className="container-fluid">
+            <SEO
+                title="Foire Aux Questions - SwiftRide"
+                description="Trouvez rapidement des réponses à vos questions les plus fréquentes."
+                keywords="FAQ, SwiftRide, support, taxi, CDF"
+                author="SwiftRide"
+            />
             {/* Hero Section */}
             <div className="row g-0 align-items-center bg-success bg-opacity-10 py-5 rounded-4">
                 <div className="container py-5 text-center">
@@ -148,8 +154,8 @@ export default function Faq() {
                             </div>
                             <div className="accordion accordion-flush" id="accordionCompte">
 
-                               <div className="col-md-12">
-                                <div className="row">
+                                <div className="col-md-12">
+                                    <div className="row">
                                         {
                                             listData.length === 0 ? (
                                                 <LoaderAndError
@@ -185,8 +191,8 @@ export default function Faq() {
                                                     ))
                                                 )
                                         }
+                                    </div>
                                 </div>
-                               </div>
 
 
                             </div>

@@ -8,6 +8,7 @@ import LoaderAndError from '../../../../../components/LoaderAndError';
 import { usePagination } from '../../../../../hooks/usePagination';
 import BlogCard from './BlogCard';
 import { UiBlog } from '../../../../../api/types';
+import SEO from '../about/SEO';
 
 
 
@@ -52,14 +53,19 @@ export default function BlogList() {
     };
 
     useEffect(() => {
-        document.title = "Découvrez nos conseils et actualités sur la mobilité urbaine - Swiftride";
-          
+
         loadlistData();
 
     }, [search, currentPage, limit]);
 
     return (
         <div className="container py-5">
+            <SEO
+                title="Découvrez nos conseils et actualités sur la mobilité urbaine - Swiftride"
+                description="Restez informé sur les dernières tendances et conseils en matière de mobilité urbaine."
+                keywords="mobilité urbaine, conseils, actualités, Swiftride"
+                author="SwiftRide"
+            />
             <div className="text-center mb-4">
                 <h2 className="display-5 fw-bold mb-3">
                     Nos <span className="text-success">Articles Récents</span>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { fetchListItems } from '../../../../../hooks/useCrud';
 import LoaderAndError from '../../../../../components/LoaderAndError';
 import DOMPurify from 'dompurify';
+import SEO from './SEO';
 interface UiBasic {
   id?: number;
   apropos?: string;
@@ -77,7 +78,6 @@ export default function Work() {
   }
 
   useEffect(() => {
-    document.title = "Ce que nous faisons - Swiftride";
     fetchListBasic();
     fetchData();
   }, []);
@@ -86,6 +86,12 @@ export default function Work() {
 
 
     <div className='col-md-12 col-lg-12 col-sm-12 col-12'>
+      <SEO
+        title="Ce que nous faisons - Swiftride"
+        description="Découvrez nos activités et comment nous apportons un impact positif."
+        keywords="activités, services, impact, Swiftride"
+        author="SwiftRide"
+      />
 
       {
         basic.length === 0 ? (
@@ -107,7 +113,7 @@ export default function Work() {
                     <h2 className="display-4 fw-bold mb-4">
                       <span className="text-success">Ce que</span>  nous faisons
                     </h2>
-                    
+
                   </div>
 
 

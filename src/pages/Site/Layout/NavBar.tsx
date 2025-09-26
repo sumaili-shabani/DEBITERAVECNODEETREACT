@@ -335,7 +335,7 @@ export default function NavBar() {
                                                             <a style={{ textDecoration: 'none' }} href='https://play.google.com/store/apps/details?id=com.dreamofdrc.liftiapp' target='_blank' className="download-btn me-2 mb-2">
                                                                 <i className="fab fa-google-play me-2"></i> Android
                                                             </a>
-                                                            <a style={{ textDecoration: 'none' }} href='#' className="download-btn mb-2">
+                                                            <a style={{ textDecoration: 'none' }} href='https://apps.apple.com/us/app/swiftride/id6749850003' target='_blank' className="download-btn mb-2">
                                                                 <i className="fab fa-apple me-2"></i> iOS
                                                             </a>
                                                         </div>
@@ -380,7 +380,7 @@ export default function NavBar() {
                                 <GoogleTranslate />
                             </div>
 
-                            <a className="btn btn-outline-success me-3" href="#login"> <i className='fas fa-sign-in-alt'></i> Connexion</a>
+                            <a className="btn btn-outline-success me-3" href="https://app.swiftride-kwetu.com" target='_blank'> <i className='fas fa-sign-in-alt'></i> Connexion</a>
                         </div>
 
 

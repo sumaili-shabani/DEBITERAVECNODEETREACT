@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import ContactFormulaire from './ContactForm';
 import { Link } from 'react-router-dom';
 import { fetchItems, fetchListItems } from '../../../../../hooks/useCrud';
+import SEO from './SEO';
 
 
 interface Site {
@@ -52,7 +53,6 @@ export default function Contact() {
   }
 
   useEffect(() => {
-    document.title = "Contactactez-nous pour information - Swiftride";
     fetchData();
   }, []);
 
@@ -60,6 +60,12 @@ export default function Contact() {
 
   return (
     <div className="col-md-12">
+      <SEO
+        title="Contact - SwiftRide"
+        description="Contactez-nous pour toute question ou information sur SwiftRide."
+        keywords="Contact, SwiftRide, support, taxi, CDF"
+        author="SwiftRide"
+      />
       {/* Hero Section */}
       <div className="row g-0 align-items-center bg-success bg-opacity-10 mb-4">
         <div className="col-lg-12 p-5 p-lg-12">
@@ -196,7 +202,7 @@ export default function Contact() {
       <div className="container-fluid px-0 mt-2" style={{ height: "400px" }}>
 
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.0667769646507!2d29.242180274485666!3d-1.6978034362133148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dd059cc8aaf625%3A0xe83cf3ef837fc417!2sGrande%20Barri%C3%A8re%20de%20goma!5e0!3m2!1sfr!2scd!4v1753290413282!5m2!1sfr!2scd"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63656.410197798046!2d15.226670005503715!3d-4.311834928301815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1a6a317b816515b9%3A0x7eeb5b3e73ad44aa!2sGombe%2C%20Kinshasa!5e0!3m2!1sfr!2scd!4v1758886182746!5m2!1sfr!2scd"
           width="100%"
           height="100%"
           style={{ border: 0 }}
@@ -205,6 +211,8 @@ export default function Contact() {
           referrerPolicy="no-referrer-when-downgrade">
 
         </iframe>
+
+       
       </div>
     </div>
   );

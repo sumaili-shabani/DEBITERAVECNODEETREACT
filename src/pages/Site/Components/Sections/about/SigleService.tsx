@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { fetchListItems } from '../../../../../hooks/useCrud';
 import LoaderAndError from '../../../../../components/LoaderAndError';
 import DOMPurify from 'dompurify';
+import SEO from './SEO';
 interface UiService {
     id?: number;
     nom?: string;
@@ -62,13 +63,19 @@ export default function SingleService() {
     }
 
     useEffect(() => {
-        document.title = `Détail de service:${slug} - Swiftride`;
+        // document.title = `Détail de service:${slug} - Swiftride`;
         getSigleData();
 
     }, [slug]);
 
     return (
         <div className="col-md-12 py-5">
+            <SEO
+                title={`Détail de service:${slug} - Swiftride`}
+                description={`Découvrez le détail du service ${slug} sur SwiftRide.`}
+                keywords={`Service, ${slug}, SwiftRide`}
+                author="SwiftRide"
+            />
             <div className="row justify-content-center">
 
                 {
@@ -95,10 +102,10 @@ export default function SingleService() {
                                 <div className="article-content mb-5">
                                     <h2 className="h4 fw-bold mb-3">{item.titre}</h2>
                                     <div className="lead">
-                                       <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.description ?? '') }} />
+                                        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.description ?? '') }} />
                                     </div>
 
-                                    
+
 
 
                                 </div>

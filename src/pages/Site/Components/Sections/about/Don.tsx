@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { fetchListItems } from '../../../../../hooks/useCrud';
 import LoaderAndError from '../../../../../components/LoaderAndError';
 import DOMPurify from 'dompurify';
+import DonationForm from './DonationForm';
+import SEO from './SEO';
 interface UiBasic {
   id?: number;
   apropos?: string;
@@ -77,7 +79,7 @@ export default function Don() {
   }
 
   useEffect(() => {
-    document.title = "Nous faire un don - Swiftride";
+    
     fetchListBasic();
     fetchData();
   }, []);
@@ -86,6 +88,12 @@ export default function Don() {
 
 
     <div className='col-md-12 col-lg-12 col-sm-12 col-12'>
+      <SEO
+        title="Faites un don - SwiftRide"
+        description="Contribuez à SwiftRide et soutenez notre projet pour améliorer la mobilité urbaine."
+        keywords="don, SwiftRide, mobilité, taxi, CDF"
+        author="SwiftRide"
+      />
 
       {
         basic.length === 0 ? (
@@ -120,6 +128,11 @@ export default function Don() {
                 <div className="col-lg-12 p-lg-12 mt-4 text-justify">
 
                   <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.don ?? '') }} />
+
+                </div>
+
+                <div className="col-md-12 mt-4">
+                  <DonationForm />
 
                 </div>
               </div>
