@@ -5,6 +5,7 @@ import DOMPurify from 'dompurify';
 import GoogleTranslate from '../../../components/GoogleTranslate';
 import GoogleTranslate2 from '../../../components/GoogleTranslate2';
 import logoApp from '../../../assets/logos/logo_swift_ride_green.png';
+import FooterGalery from '../Components/Sections/about/FooterGalery';
 
 interface Site {
     id?: number;
@@ -57,98 +58,100 @@ export default function FooterPage() {
     }, []);
 
     return (
-        <div className='col-lg-12 col-md-12 col-12 col-sm-12 mt-4'>
 
-            <footer className="bg-dark text-light pt-5 mt-4 pb-4 mt-auto">
+        <footer id="sportsmagazine-footer" className="sportsmagazine-footer-one">
+
+            {/*// Footer Widget \\*/}
+            <div className="sportsmagazine-footer-widget">
                 <div className="container">
                     <div className="row">
-                        {/* <!-- Bloc 1 : Logo et slogan --> */}
-                        <div className="col-lg-4 mb-4 mb-lg-0">
-                            {/* <h4 className="mb-3">
-                                <i className="fas fa-taxi me-2"></i> SwiftRide
-                            </h4> */}
-                            <p>
+                        {/*// Widget Contact Info \\*/}
 
-                                <img src={logoApp} alt="logo app"
-                                    className='img-fluid object-fit-cover' width={200} height={200} />
 
-                            </p>
-                            {sites.map((item, index) => (
-                                <div key={index} className='text-justify'>
-                                    <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.about ?? '') }} />
-                                </div>
-                            ))}
-                        </div>
+                        {sites.map((item, index) => (
 
-                        {/* <!-- Bloc 2 : Navigation --> */}
-                        <div className="col-lg-2 col-md-4 mb-4 mb-md-0">
-                            <h6 className="mb-4">Navigation</h6>
-                            <ul className="list-unstyled footer-links">
-                                <li className="mb-2"><Link to="/" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Accueil</Link></li>
-                                <li className="mb-2"><Link to="/services" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Nos services</Link></li>
-                                <li className="mb-2"><Link to="/faq" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>FAQ</Link></li>
-                                <li className="mb-2"><Link to="/contact" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Contact</Link></li>
+                            <aside className="col-md-4 widget widget_contact_info" key={index}>
+
+
+                                <Link to="/" className="footer-logo"><img src={logoApp} alt="" /></Link>
+
+                                {sites.map((item, index) => (
+                                    <div key={index} className='text-justify'>
+                                        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.about ?? '') }} />
+                                    </div>
+                                ))}
+
+
+
+                                <ul className="sportsmagazine-social-network">
+                                    <li><a href={item.facebook ?? '#'} target='_blank' className="sportsmagazine-colorhover fab fa-facebook" title="Facebook"></a></li>
+                                    <li><a href={item.twitter ?? '#'} target='_blank' className="sportsmagazine-colorhover fab fa-twitter" title="Twitter"></a></li>
+                                    <li><a href={item.linkedin ?? '#'} target='_blank' className="sportsmagazine-colorhover fab fa-linkedin" title="linkedin"></a></li>
+                                    <li><a href={item.youtube ?? '#'} target='_blank' className="sportsmagazine-colorhover fab fa-youtube" title="YouTube"></a></li>
+                                </ul>
+                                <ul className="sportsmagazine-info-list">
+                                    <li><i className="fa fa-map-marker"></i> <span>{item.adresse ?? 'Adresse non spécifiée'}</span></li>
+                                    <li><i className="fa fa-phone"></i> <span>{item.tel1 ?? '+243 817883541'}</span></li>
+                                    <li><i className="fa fa-envelope"></i> <span><a href={`mailto:${item.email ?? 'info@eubabu.org'}`}>{item.email ?? 'info@eubabu.org'}</a></span></li>
+                                </ul>
+                            </aside>
+
+
+                        ))}
+
+                        {/*// Widget Contact Info \\*/}
+
+                        {/*// Widget Liens Rapides \\*/}
+                        <aside className="col-md-4 widget widget_quick_links">
+                            <div className="footer-widget-title"><h2>Liens Rapides</h2></div>
+                            <ul className="sportsmagazine-megalist">
+                                <li><Link to="/" style={{ color: '#ffffff' }}>Accueil</Link></li>
+                                <li><Link to="/about" style={{ color: '#ffffff' }}>À propos</Link></li>
+                                <li><Link to="/team" style={{ color: '#ffffff' }}>Notre Équipe</Link></li>
+                                <li><Link to="/realisations" style={{ color: '#ffffff' }}>Réalisation</Link></li>
+                                <li><Link to="/blogs" style={{ color: '#ffffff' }}>Actualités</Link></li>
+                                <li><Link to="/contact" style={{ color: '#ffffff' }}>Contact</Link></li>
+                                <li><Link to="/don" style={{ color: '#ffffff' }}>Faire un don</Link></li>
                             </ul>
-                        </div>
+                        </aside>
+                        {/*// Widget Liens Rapides \\*/}
 
-                        {/* <!-- Bloc 3 : Sécurité --> */}
-                        <div className="col-lg-2 col-md-4 mb-4 mb-md-0">
-                            <h6 className="mb-4">Sécurité</h6>
-                            <ul className="list-unstyled footer-links">
-                                <li className="mb-2"><Link to="/sos" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Bouton SOS</Link></li>
-                                <li className="mb-2"><Link to="/partage" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Partage trajet</Link></li>
-                                <li className="mb-2"><Link to="/projects" className="text-light text-decoration-none"><i className="fas fa-angle-right me-2"></i>Nos Projets</Link></li>
-                            </ul>
-                        </div>
+                        {/*// Widget Gallery \\*/}
+                        <aside className="col-md-4 widget widget_gallery">
+                            <div className="footer-widget-title"><h2>Galerie Photos</h2></div>
 
-                        {/* <!-- Bloc 4 : Téléchargement --> */}
-                        <div className="col-lg-2 col-md-4 mb-4 mb-md-0">
-                            <h6 className="mb-4">Télécharger</h6>
-                            <ul className="list-unstyled footer-links">
-                                <li className="mb-2"><a href="https://play.google.com/store/apps/details?id=com.dreamofdrc.liftiapp" target='_blank' className="text-light text-decoration-none"><i className="fab fa-google-play me-2"></i>Android</a></li>
-                                <li className="mb-2"><a href="#" className="text-light text-decoration-none"><i className="fab fa-apple me-2"></i>iOS</a></li>
-
-                                <li className="mb-2 d-md-none">
-                                    <GoogleTranslate2 />
-                                </li>
-                            </ul>
-                        </div>
-
-                        {/* <!-- Bloc 5 : Réseaux sociaux --> */}
-                        <div className="col-lg-2">
-                            <h6 className="mb-4">Suivez-nous</h6>
-                            {sites.map((item, index) => (
-
-
-                                <div className="d-flex gap-3" key={index}>
-                                    <a href={item.facebook??'#'} target='_blank' aria-label="Facebook" className="text-light"><i className="fab fa-facebook-f"></i></a>
-                                    <a href={item.twitter??'#'} target='_blank' aria-label="Twitter" className="text-light"><i className="fab fa-x-twitter"></i></a>
-                                    <a href={item.youtube??'#'} target='_blank' aria-label="Youtube" className="text-light"><i className="fab fa-youtube"></i></a>
-                                    <a href={item.linkedin??'#'} target='_blank' aria-label="LinkedIn" className="text-light"><i className="fab fa-linkedin-in"></i></a>
-                                    <a href={'https://wa.me/' + item.tel1} target='_blank' className="text-light">
-                                        <i className="fab fa-whatsapp"></i>
-                                    </a>
-                                    
-                                </div>
-                            ))}
-
-                        </div>
-                    </div>
-
-                    <hr className="my-4 border-light" />
-
-                    {/* <!-- Bas de page --> */}
-                    <div className="row">
-                        <div className="col-md-6 text-center text-md-start">
-                            <p className="mb-0">&copy; <script>document.write(new Date().getFullYear())</script> SwiftRide. Tous droits réservés.</p>
-                        </div>
-                        <div className="col-md-6 text-center text-md-end">
-                            <p className="mb-0">Conçu avec ❤️ pour une mobilité plus sûre.</p>
-                        </div>
+                            <FooterGalery />
+                            <div className="text-center mt-4" style={{ marginTop: '10px' }}>
+                                <Link to="/galery" className="sportsmagazine-banner-btn">Voir toute la galerie</Link>
+                            </div>
+                        </aside>
+                        {/*// Widget Gallery \\*/}
                     </div>
                 </div>
-            </footer>
+                <a href="#" className="sportsmagazine-back-top"><i className="fa fa-angle-up"></i></a>
+            </div>
+            {/*// Footer Widget \\*/}
 
-        </div>
+            {/*// CopyRight \\*/}
+            <div className="sportsmagazine-copyright">
+                <div className="container">
+                    <div className="row">
+                        <aside className="col-md-6 sportsmagazine-copyright-left">
+                            <p>© {new Date().getFullYear()} EUBABU. Tous droits réservés.</p>
+                        </aside>
+                        <aside className="col-md-6 sportsmagazine-copyright-right">
+                            <ul className="sportsmagazine-copyright-link">
+
+                                <li><Link to="/politique-confidentialite" className="sportsmagazine-colorhover">Politique de confidentialité</Link></li>
+                                <li><Link to="/conditions-utilisation" className="sportsmagazine-colorhover">Conditions d'utilisation</Link></li>
+                            </ul>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+            {/*// CopyRight \\*/}
+
+        </footer>
+
     )
 }

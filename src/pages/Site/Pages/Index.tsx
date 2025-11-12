@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../context/ThemeContext';
 import { Link } from 'react-router-dom';
 import HiroPage from '../Components/Sections/HiroPage';
+import EubabuIndex from './EubabuIndex';
+import Intro from './Intro';
 
 
 
@@ -20,7 +22,9 @@ export default function Index() {
     return (
         <div>
             {/* HiroPage  */}
-            <HiroPage />
+            {/* <HiroPage /> */}
+            {/* <EubabuIndex /> */}
+            <Intro />
         </div>
     )
 }

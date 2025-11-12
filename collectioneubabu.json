@@ -1,0 +1,264 @@
+{
+    "info": {
+        "name": "MPGS Test - FEBACO",
+        "_postman_id": "febaco-mpgs-collection",
+        "description": "Collection Postman pour tester les flux de paiement 3DS et Non-3DS avec Mastercard Payment Gateway Services (MPGS)",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "1 - Initiate Authentication",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "auth": {
+                    "type": "basic",
+                    "basic": [
+                        {
+                            "key": "username",
+                            "value": "{{username}}",
+                            "type": "string"
+                        },
+                        {
+                            "key": "password",
+                            "value": "{{password}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/version/{{version}}/merchant/{{merchantId}}/order/{{orderId}}/transaction/{{transactionId}}",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "version",
+                        "{{version}}",
+                        "merchant",
+                        "{{merchantId}}",
+                        "order",
+                        "{{orderId}}",
+                        "transaction",
+                        "{{transactionId}}"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"apiOperation\": \"INITIATE_AUTHENTICATION\",\n    \"authentication\": {\n        \"acceptVersions\": \"3DS2,3DS1\",\n        \"channel\": \"PAYER_BROWSER\",\n        \"purpose\": \"PAYMENT_TRANSACTION\"\n    },\n    \"order\": { \"currency\": \"USD\" },\n    \"sourceOfFunds\": {\n        \"provided\": { \"card\": { \"number\": \"5123450000000008\" } }\n    }\n}"
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 200\", function () {",
+                            "    pm.response.to.have.status(200);",
+                            "});",
+                            "",
+                            "var jsonData = pm.response.json();",
+                            "pm.test(\"Initiate Authentication successful\", function () {",
+                            "    pm.expect(jsonData.result).to.eql(\"SUCCESS\");",
+                            "});",
+                            "",
+                            "// Stocker transaction ID",
+                            "pm.environment.set(\"authTransactionId\", jsonData.transaction.id);",
+                            "",
+                            "if (jsonData.response.gatewayRecommendation === \"PROCEED\" && jsonData.response.gatewayCode === \"AUTHENTICATION_IN_PROGRESS\") {",
+                            "    pm.environment.set(\"requires3DS\", \"true\");",
+                            "} else {",
+                            "    pm.environment.set(\"requires3DS\", \"false\");",
+                            "}"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "2 - Authenticate Payer (3DS only)",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "auth": {
+                    "type": "basic",
+                    "basic": [
+                        {
+                            "key": "username",
+                            "value": "{{username}}",
+                            "type": "string"
+                        },
+                        {
+                            "key": "password",
+                            "value": "{{password}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/version/{{version}}/merchant/{{merchantId}}/order/{{orderId}}/transaction/{{transactionId}}",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "version",
+                        "{{version}}",
+                        "merchant",
+                        "{{merchantId}}",
+                        "order",
+                        "{{orderId}}",
+                        "transaction",
+                        "{{transactionId}}"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"apiOperation\": \"AUTHENTICATE_PAYER\",\n    \"order\": { \"amount\": \"10.00\", \"currency\": \"USD\" },\n    \"sourceOfFunds\": {\n        \"provided\": { \"card\": { \"number\": \"5123450000000008\", \"expiry\": { \"month\": \"12\", \"year\": \"25\" } } }\n    },\n    \"device\": {\n        \"browserDetails\": {\n            \"3DSecureChallengeWindowSize\": \"FULL_SCREEN\",\n            \"acceptHeaders\": \"application/json\",\n            \"colorDepth\": 24,\n            \"javaEnabled\": true,\n            \"language\": \"en-US\",\n            \"screenHeight\": 640,\n            \"screenWidth\": 480,\n            \"timeZone\": 273\n        },\n        \"browser\": \"MOZILLA\",\n        \"ipAddress\": \"127.0.0.1\"\n    },\n    \"authentication\": { \"redirectResponseUrl\": \"https://your-website.com/payment-callback\" }\n}"
+                }
+            }
+        },
+        {
+            "name": "3 - Process Payment (with 3DS)",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "auth": {
+                    "type": "basic",
+                    "basic": [
+                        {
+                            "key": "username",
+                            "value": "{{username}}",
+                            "type": "string"
+                        },
+                        {
+                            "key": "password",
+                            "value": "{{password}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/version/{{version}}/merchant/{{merchantId}}/order/{{orderId}}/transaction/PAY_{{transactionId}}",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "version",
+                        "{{version}}",
+                        "merchant",
+                        "{{merchantId}}",
+                        "order",
+                        "{{orderId}}",
+                        "transaction",
+                        "PAY_{{transactionId}}"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"apiOperation\": \"PAY\",\n    \"authentication\": { \"transactionId\": \"{{authTransactionId}}\" },\n    \"order\": { \"amount\": \"10.00\", \"currency\": \"USD\", \"description\": \"Test Payment\", \"reference\": \"ORDER_{{orderId}}\" },\n    \"transaction\": { \"reference\": \"TXN_{{transactionId}}\" },\n    \"sourceOfFunds\": {\n        \"type\": \"CARD\",\n        \"provided\": { \"card\": { \"expiry\": { \"month\": \"12\", \"year\": \"25\" }, \"nameOnCard\": \"TEST CARDHOLDER\", \"number\": \"5123450000000008\", \"securityCode\": \"100\" } }\n    }\n}"
+                }
+            }
+        },
+        {
+            "name": "3bis - Process Payment (without 3DS)",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "auth": {
+                    "type": "basic",
+                    "basic": [
+                        {
+                            "key": "username",
+                            "value": "{{username}}",
+                            "type": "string"
+                        },
+                        {
+                            "key": "password",
+                            "value": "{{password}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/version/{{version}}/merchant/{{merchantId}}/order/{{orderId}}/transaction/PAY_{{transactionId}}",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "version",
+                        "{{version}}",
+                        "merchant",
+                        "{{merchantId}}",
+                        "order",
+                        "{{orderId}}",
+                        "transaction",
+                        "PAY_{{transactionId}}"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"apiOperation\": \"PAY\",\n    \"order\": { \"amount\": \"10.00\", \"currency\": \"USD\", \"description\": \"Test Payment\", \"reference\": \"ORDER_{{orderId}}\" },\n    \"transaction\": { \"reference\": \"TXN_{{transactionId}}\" },\n    \"sourceOfFunds\": {\n        \"type\": \"CARD\",\n        \"provided\": { \"card\": { \"expiry\": { \"month\": \"12\", \"year\": \"25\" }, \"nameOnCard\": \"TEST CARDHOLDER\", \"number\": \"5100000000000000\", \"securityCode\": \"100\" } }\n    }\n}"
+                }
+            }
+        },
+        {
+            "name": "4 - Retrieve Transaction Status",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                    "type": "basic",
+                    "basic": [
+                        {
+                            "key": "username",
+                            "value": "{{username}}",
+                            "type": "string"
+                        },
+                        {
+                            "key": "password",
+                            "value": "{{password}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/version/{{version}}/merchant/{{merchantId}}/order/{{orderId}}/transaction/{{transactionId}}",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "version",
+                        "{{version}}",
+                        "merchant",
+                        "{{merchantId}}",
+                        "order",
+                        "{{orderId}}",
+                        "transaction",
+                        "{{transactionId}}"
+                    ]
+                }
+            }
+        }
+    ]
+}

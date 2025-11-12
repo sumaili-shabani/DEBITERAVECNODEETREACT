@@ -1,0 +1,228 @@
+
+.bodyclasse {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+
+    margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+}
+
+.container2 {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 100%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.container2::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.logo {
+    font-size: 2.5em;
+    font-weight: bold;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+.amount-section {
+    margin: 30px 0;
+    padding: 25px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    border: 2px solid #e9ecef;
+}
+
+.amount-label {
+    display: block;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+.amount-input {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    font-size: 1.2em;
+    text-align: center;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.amount-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+.currency-display {
+    margin-top: 10px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.pay-button {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    font-size: 1.3em;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    margin: 20px 0;
+}
+
+.pay-button:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+}
+
+.pay-button:active:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.pay-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.error-message {
+    background: #fee;
+    color: #c33;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #c33;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.payment-section {
+    margin: 20px 0;
+}
+
+.amount-display {
+    background: #e8f5e8;
+    color: #2d5a2d;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px 0;
+    border-left: 4px solid #28a745;
+}
+
+.session-info {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e3f2fd;
+    border-radius: 10px;
+    border-left: 4px solid #2196f3;
+    font-size: 0.9em;
+    color: #1976d2;
+    text-align: left;
+}
+
+.session-info strong {
+    color: #1565c0;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 30px 20px;
+        margin: 10px;
+    }
+
+    .logo {
+        font-size: 2em;
+    }
+
+    .pay-button {
+        padding: 15px 30px;
+        font-size: 1.1em;
+    }
+}
+
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+} 
+
+
+.logo {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #0d6efd;
+   
+}
+
+.subtitle {
+    font-size: 1rem;
+    font-style: italic;
+}
+
+.card {
+    background: #ffffff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+

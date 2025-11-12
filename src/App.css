@@ -739,3 +739,2735 @@ button.navbar-toggle .navbar-toggler-icon {
 
 }
 
+
+
+/*
+*
+*============================================
+*Ajout de css pour l'automatisation du site
+*============================================
+*
+*/
+/* Container principal pour les cartes */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin: 0 -15px;
+}
+
+/* Carte individuelle */
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 350px;
+  min-width: 280px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #fff;
+  margin: 15px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Image de la carte */
+.card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Corps de la carte */
+.card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  min-height: 200px;
+  /* Hauteur minimale pour uniformité */
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.card-text {
+  flex: 1;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+/* Pied de carte */
+.card-footer {
+  padding: 15px 20px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e0e0e0;
+  flex-shrink: 0;
+}
+
+/* Boutons dans la carte */
+.card-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.card-btn:hover {
+  background-color: #0056b3;
+  color: white;
+  text-decoration: none;
+}
+
+/* Variantes de couleurs */
+.card-primary {
+  border-top: 4px solid #007bff;
+}
+
+.card-success {
+  border-top: 4px solid #28a745;
+}
+
+.card-danger {
+  border-top: 4px solid #dc3545;
+}
+
+.card-warning {
+  border-top: 4px solid #ffc107;
+}
+
+/* Layout responsive */
+@media (min-width: 576px) {
+  .cards-container {
+    margin: 0 -10px;
+  }
+
+  .card {
+    flex: 0 0 calc(50% - 30px);
+    max-width: calc(50% - 30px);
+  }
+}
+
+@media (min-width: 768px) {
+  .card {
+    flex: 0 0 calc(33.333% - 30px);
+    max-width: calc(33.333% - 30px);
+  }
+}
+
+@media (min-width: 992px) {
+  .card {
+    flex: 0 0 calc(25% - 30px);
+    max-width: calc(25% - 30px);
+  }
+}
+
+/* Utilitaire pour forcer la même hauteur */
+.equal-height {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.equal-height>.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Badges et labels */
+.card-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff4757;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Overlay pour images */
+.card-img-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Cartes avec overlay */
+.card-with-overlay {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-with-overlay .card-img {
+  transition: transform 0.3s ease;
+}
+
+.card-with-overlay:hover .card-img {
+  transform: scale(1.05);
+}
+
+/* value card */
+.value-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  /* garde toutes les cartes de même hauteur */
+}
+
+.value-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.value-icon {
+  font-size: 48px;
+  color: #e65039;
+  /* couleur principale (tu peux changer) */
+  margin-bottom: 15px;
+}
+
+.value-card h3 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.value-card p {
+  font-size: 1.2rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* ✅ Responsive : sur petits écrans, forcer une seule colonne */
+@media (max-width: 768px) {
+  .value-card {
+    margin-bottom: 25px;
+    padding: 20px 15px;
+  }
+
+  .value-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .value-icon {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .value-card {
+    padding: 18px 12px;
+  }
+
+  .value-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .value-card p {
+    font-size: 0.95rem;
+  }
+
+  .value-icon {
+    font-size: 36px;
+  }
+}
+
+/* chiffre */
+.counter-section {
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #fff;
+  text-align: center;
+}
+
+.counter-item {
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.counter-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.counter-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+  color: #ffcc00;
+}
+
+.counter-number {
+  font-size: 40px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+.counter-label {
+  font-size: 18px;
+  font-weight: 500;
+  color: #ddd;
+}
+
+@media (max-width: 768px) {
+  .counter-number {
+    font-size: 30px;
+  }
+
+  .counter-icon {
+    font-size: 36px;
+  }
+}
+
+/* faire un don */
+.donation-process {
+  background: #f8f9fa;
+  padding: 50px 0;
+}
+
+.process-step {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 30px;
+}
+
+.process-step:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.step-number {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 50%;
+  background: #007bff;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.process-step h3 {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.process-step p {
+  color: #6c757d;
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+
+.donation-process .btn {
+  background: #007bff;
+  color: #fff;
+  border-radius: 50px;
+  padding: 12px 40px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.donation-process .btn:hover {
+  background: #0056b3;
+  text-decoration: none;
+}
+
+@media (max-width: 992px) {
+  .process-step {
+    margin-bottom: 20px;
+  }
+  .step-number {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .process-step {
+    padding: 20px 15px;
+  }
+  .step-number {
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    font-size: 1.1rem;
+  }
+}
+
+/* ==========================================================================
+   SPACING UTILITIES - MARGIN AND PADDING
+   Similaire à Bootstrap: m-, p-, mx-, my-, px-, py-, mt-, mb-, ml-, mr-, etc.
+   ========================================================================== */
+
+/* Margin and Padding for all sides */
+.m-0 {
+  margin: 0 !important;
+}
+
+.m-1 {
+  margin: 0.25rem !important;
+}
+
+.m-2 {
+  margin: 0.5rem !important;
+}
+
+.m-3 {
+  margin: 1rem !important;
+}
+
+.m-4 {
+  margin: 1.5rem !important;
+}
+
+.m-5 {
+  margin: 3rem !important;
+}
+
+.m-auto {
+  margin: auto !important;
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+
+.p-1 {
+  padding: 0.25rem !important;
+}
+
+.p-2 {
+  padding: 0.5rem !important;
+}
+
+.p-3 {
+  padding: 1rem !important;
+}
+
+.p-4 {
+  padding: 1.5rem !important;
+}
+
+.p-5 {
+  padding: 3rem !important;
+}
+
+/* Margin and Padding for X axis (left and right) */
+.mx-0 {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.mx-1 {
+  margin-left: 0.25rem !important;
+  margin-right: 0.25rem !important;
+}
+
+.mx-2 {
+  margin-left: 0.5rem !important;
+  margin-right: 0.5rem !important;
+}
+
+.mx-3 {
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+}
+
+.mx-4 {
+  margin-left: 1.5rem !important;
+  margin-right: 1.5rem !important;
+}
+
+.mx-5 {
+  margin-left: 3rem !important;
+  margin-right: 3rem !important;
+}
+
+.mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.px-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.px-1 {
+  padding-left: 0.25rem !important;
+  padding-right: 0.25rem !important;
+}
+
+.px-2 {
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+}
+
+.px-3 {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+.px-4 {
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+}
+
+.px-5 {
+  padding-left: 3rem !important;
+  padding-right: 3rem !important;
+}
+
+/* Margin and Padding for Y axis (top and bottom) */
+.my-0 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.my-1 {
+  margin-top: 0.25rem !important;
+  margin-bottom: 0.25rem !important;
+}
+
+.my-2 {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.my-3 {
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.my-4 {
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.my-5 {
+  margin-top: 3rem !important;
+  margin-bottom: 3rem !important;
+}
+
+.my-auto {
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+}
+
+.py-0 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.py-1 {
+  padding-top: 0.25rem !important;
+  padding-bottom: 0.25rem !important;
+}
+
+.py-2 {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+.py-3 {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+.py-4 {
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+}
+
+.py-5 {
+  padding-top: 3rem !important;
+  padding-bottom: 3rem !important;
+}
+
+/* Margin and Padding for top */
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+.mt-1 {
+  margin-top: 0.25rem !important;
+}
+
+.mt-2 {
+  margin-top: 0.5rem !important;
+}
+
+.mt-3 {
+  margin-top: 1rem !important;
+}
+
+.mt-4 {
+  margin-top: 1.5rem !important;
+}
+
+.mt-5 {
+  margin-top: 3rem !important;
+}
+
+.mt-auto {
+  margin-top: auto !important;
+}
+
+.pt-0 {
+  padding-top: 0 !important;
+}
+
+.pt-1 {
+  padding-top: 0.25rem !important;
+}
+
+.pt-2 {
+  padding-top: 0.5rem !important;
+}
+
+.pt-3 {
+  padding-top: 1rem !important;
+}
+
+.pt-4 {
+  padding-top: 1.5rem !important;
+}
+
+.pt-5 {
+  padding-top: 3rem !important;
+}
+
+/* Margin and Padding for right */
+.mr-0 {
+  margin-right: 0 !important;
+}
+
+.mr-1 {
+  margin-right: 0.25rem !important;
+}
+
+.mr-2 {
+  margin-right: 0.5rem !important;
+}
+
+.mr-3 {
+  margin-right: 1rem !important;
+}
+
+.mr-4 {
+  margin-right: 1.5rem !important;
+}
+
+.mr-5 {
+  margin-right: 3rem !important;
+}
+
+.mr-auto {
+  margin-right: auto !important;
+}
+
+.pr-0 {
+  padding-right: 0 !important;
+}
+
+.pr-1 {
+  padding-right: 0.25rem !important;
+}
+
+.pr-2 {
+  padding-right: 0.5rem !important;
+}
+
+.pr-3 {
+  padding-right: 1rem !important;
+}
+
+.pr-4 {
+  padding-right: 1.5rem !important;
+}
+
+.pr-5 {
+  padding-right: 3rem !important;
+}
+
+/* Margin and Padding for bottom */
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem !important;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem !important;
+}
+
+.mb-3 {
+  margin-bottom: 1rem !important;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem !important;
+}
+
+.mb-5 {
+  margin-bottom: 3rem !important;
+}
+
+.mb-auto {
+  margin-bottom: auto !important;
+}
+
+.pb-0 {
+  padding-bottom: 0 !important;
+}
+
+.pb-1 {
+  padding-bottom: 0.25rem !important;
+}
+
+.pb-2 {
+  padding-bottom: 0.5rem !important;
+}
+
+.pb-3 {
+  padding-bottom: 1rem !important;
+}
+
+.pb-4 {
+  padding-bottom: 1.5rem !important;
+}
+
+.pb-5 {
+  padding-bottom: 3rem !important;
+}
+
+/* Margin and Padding for left */
+.ml-0 {
+  margin-left: 0 !important;
+}
+
+.ml-1 {
+  margin-left: 0.25rem !important;
+}
+
+.ml-2 {
+  margin-left: 0.5rem !important;
+}
+
+.ml-3 {
+  margin-left: 1rem !important;
+}
+
+.ml-4 {
+  margin-left: 1.5rem !important;
+}
+
+.ml-5 {
+  margin-left: 3rem !important;
+}
+
+.ml-auto {
+  margin-left: auto !important;
+}
+
+.pl-0 {
+  padding-left: 0 !important;
+}
+
+.pl-1 {
+  padding-left: 0.25rem !important;
+}
+
+.pl-2 {
+  padding-left: 0.5rem !important;
+}
+
+.pl-3 {
+  padding-left: 1rem !important;
+}
+
+.pl-4 {
+  padding-left: 1.5rem !important;
+}
+
+.pl-5 {
+  padding-left: 3rem !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE SPACING UTILITIES
+   Similaire à Bootstrap: sm-, md-, lg-, xl-
+   ========================================================================== */
+
+/* Small devices (≥576px) */
+@media (min-width: 576px) {
+  .m-sm-0 {
+    margin: 0 !important;
+  }
+
+  .m-sm-1 {
+    margin: 0.25rem !important;
+  }
+
+  .m-sm-2 {
+    margin: 0.5rem !important;
+  }
+
+  .m-sm-3 {
+    margin: 1rem !important;
+  }
+
+  .m-sm-4 {
+    margin: 1.5rem !important;
+  }
+
+  .m-sm-5 {
+    margin: 3rem !important;
+  }
+
+  .p-sm-0 {
+    padding: 0 !important;
+  }
+
+  .p-sm-1 {
+    padding: 0.25rem !important;
+  }
+
+  .p-sm-2 {
+    padding: 0.5rem !important;
+  }
+
+  .p-sm-3 {
+    padding: 1rem !important;
+  }
+
+  .p-sm-4 {
+    padding: 1.5rem !important;
+  }
+
+  .p-sm-5 {
+    padding: 3rem !important;
+  }
+
+  .mx-sm-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .my-sm-auto {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }
+}
+
+/* Medium devices (≥768px) */
+@media (min-width: 768px) {
+  .m-md-0 {
+    margin: 0 !important;
+  }
+
+  .m-md-1 {
+    margin: 0.25rem !important;
+  }
+
+  .m-md-2 {
+    margin: 0.5rem !important;
+  }
+
+  .m-md-3 {
+    margin: 1rem !important;
+  }
+
+  .m-md-4 {
+    margin: 1.5rem !important;
+  }
+
+  .m-md-5 {
+    margin: 3rem !important;
+  }
+
+  .p-md-0 {
+    padding: 0 !important;
+  }
+
+  .p-md-1 {
+    padding: 0.25rem !important;
+  }
+
+  .p-md-2 {
+    padding: 0.5rem !important;
+  }
+
+  .p-md-3 {
+    padding: 1rem !important;
+  }
+
+  .p-md-4 {
+    padding: 1.5rem !important;
+  }
+
+  .p-md-5 {
+    padding: 3rem !important;
+  }
+
+  .mx-md-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .my-md-auto {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }
+}
+
+/* Large devices (≥992px) */
+@media (min-width: 992px) {
+  .m-lg-0 {
+    margin: 0 !important;
+  }
+
+  .m-lg-1 {
+    margin: 0.25rem !important;
+  }
+
+  .m-lg-2 {
+    margin: 0.5rem !important;
+  }
+
+  .m-lg-3 {
+    margin: 1rem !important;
+  }
+
+  .m-lg-4 {
+    margin: 1.5rem !important;
+  }
+
+  .m-lg-5 {
+    margin: 3rem !important;
+  }
+
+  .p-lg-0 {
+    padding: 0 !important;
+  }
+
+  .p-lg-1 {
+    padding: 0.25rem !important;
+  }
+
+  .p-lg-2 {
+    padding: 0.5rem !important;
+  }
+
+  .p-lg-3 {
+    padding: 1rem !important;
+  }
+
+  .p-lg-4 {
+    padding: 1.5rem !important;
+  }
+
+  .p-lg-5 {
+    padding: 3rem !important;
+  }
+
+  .mx-lg-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .my-lg-auto {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }
+}
+
+/* Extra large devices (≥1200px) */
+@media (min-width: 1200px) {
+  .m-xl-0 {
+    margin: 0 !important;
+  }
+
+  .m-xl-1 {
+    margin: 0.25rem !important;
+  }
+
+  .m-xl-2 {
+    margin: 0.5rem !important;
+  }
+
+  .m-xl-3 {
+    margin: 1rem !important;
+  }
+
+  .m-xl-4 {
+    margin: 1.5rem !important;
+  }
+
+  .m-xl-5 {
+    margin: 3rem !important;
+  }
+
+  .p-xl-0 {
+    padding: 0 !important;
+  }
+
+  .p-xl-1 {
+    padding: 0.25rem !important;
+  }
+
+  .p-xl-2 {
+    padding: 0.5rem !important;
+  }
+
+  .p-xl-3 {
+    padding: 1rem !important;
+  }
+
+  .p-xl-4 {
+    padding: 1.5rem !important;
+  }
+
+  .p-xl-5 {
+    padding: 3rem !important;
+  }
+
+  .mx-xl-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .my-xl-auto {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }
+}
+
+/* ==========================================================================
+   NEGATIVE MARGIN UTILITIES (comme Bootstrap)
+   ========================================================================== */
+
+.m-n1 {
+  margin: -0.25rem !important;
+}
+
+.mt-n1 {
+  margin-top: -0.25rem !important;
+}
+
+.mr-n1 {
+  margin-right: -0.25rem !important;
+}
+
+.mb-n1 {
+  margin-bottom: -0.25rem !important;
+}
+
+.ml-n1 {
+  margin-left: -0.25rem !important;
+}
+
+.mx-n1 {
+  margin-left: -0.25rem !important;
+  margin-right: -0.25rem !important;
+}
+
+.my-n1 {
+  margin-top: -0.25rem !important;
+  margin-bottom: -0.25rem !important;
+}
+
+.m-n2 {
+  margin: -0.5rem !important;
+}
+
+.mt-n2 {
+  margin-top: -0.5rem !important;
+}
+
+.mr-n2 {
+  margin-right: -0.5rem !important;
+}
+
+.mb-n2 {
+  margin-bottom: -0.5rem !important;
+}
+
+.ml-n2 {
+  margin-left: -0.5rem !important;
+}
+
+.mx-n2 {
+  margin-left: -0.5rem !important;
+  margin-right: -0.5rem !important;
+}
+
+.my-n2 {
+  margin-top: -0.5rem !important;
+  margin-bottom: -0.5rem !important;
+}
+
+.m-n3 {
+  margin: -1rem !important;
+}
+
+.mt-n3 {
+  margin-top: -1rem !important;
+}
+
+.mr-n3 {
+  margin-right: -1rem !important;
+}
+
+.mb-n3 {
+  margin-bottom: -1rem !important;
+}
+
+.ml-n3 {
+  margin-left: -1rem !important;
+}
+
+.mx-n3 {
+  margin-left: -1rem !important;
+  margin-right: -1rem !important;
+}
+
+.my-n3 {
+  margin-top: -1rem !important;
+  margin-bottom: -1rem !important;
+}
+
+.m-n4 {
+  margin: -1.5rem !important;
+}
+
+.mt-n4 {
+  margin-top: -1.5rem !important;
+}
+
+.mr-n4 {
+  margin-right: -1.5rem !important;
+}
+
+.mb-n4 {
+  margin-bottom: -1.5rem !important;
+}
+
+.ml-n4 {
+  margin-left: -1.5rem !important;
+}
+
+.mx-n4 {
+  margin-left: -1.5rem !important;
+  margin-right: -1.5rem !important;
+}
+
+.my-n4 {
+  margin-top: -1.5rem !important;
+  margin-bottom: -1.5rem !important;
+}
+
+.m-n5 {
+  margin: -3rem !important;
+}
+
+.mt-n5 {
+  margin-top: -3rem !important;
+}
+
+.mr-n5 {
+  margin-right: -3rem !important;
+}
+
+.mb-n5 {
+  margin-bottom: -3rem !important;
+}
+
+.ml-n5 {
+  margin-left: -3rem !important;
+}
+
+.mx-n5 {
+  margin-left: -3rem !important;
+  margin-right: -3rem !important;
+}
+
+.my-n5 {
+  margin-top: -3rem !important;
+  margin-bottom: -3rem !important;
+}
+
+/* ==========================================================================
+   CARD SYSTEM - Similaire à Bootstrap
+   ========================================================================== */
+
+/* Container pour les cartes */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 0 -0.75rem;
+}
+
+/* Carte de base */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.375rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  transition: box-shadow 0.15s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Image de la carte */
+.card-img {
+  width: 100%;
+  border-top-left-radius: calc(0.375rem - 1px);
+  border-top-right-radius: calc(0.375rem - 1px);
+}
+
+.card-img-top {
+  width: 100%;
+  border-top-left-radius: calc(0.375rem - 1px);
+  border-top-right-radius: calc(0.375rem - 1px);
+}
+
+.card-img-bottom {
+  width: 100%;
+  border-bottom-right-radius: calc(0.375rem - 1px);
+  border-bottom-left-radius: calc(0.375rem - 1px);
+}
+
+/* Overlay d'image */
+.card-img-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1.25rem;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+/* Corps de la carte */
+.card-body {
+  flex: 1 1 auto;
+  padding: 1.25rem;
+  min-height: 1px;
+}
+
+.card-title {
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #212529;
+}
+
+.card-subtitle {
+  margin-top: -0.375rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.card-text {
+  margin-bottom: 1rem;
+  color: #212529;
+  line-height: 1.5;
+}
+
+.card-text:last-child {
+  margin-bottom: 0;
+}
+
+/* Liens dans la carte */
+.card-link {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.card-link:hover {
+  color: #0a58ca;
+  text-decoration: underline;
+}
+
+/* En-tête et pied de carte */
+.card-header {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  font-weight: 600;
+}
+
+.card-header:first-child {
+  border-radius: calc(0.375rem - 1px) calc(0.375rem - 1px) 0 0;
+}
+
+.card-footer {
+  padding: 0.75rem 1.25rem;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card-footer:last-child {
+  border-radius: 0 0 calc(0.375rem - 1px) calc(0.375rem - 1px);
+}
+
+/* Groupes de cartes */
+.card-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.card-group>.card {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+.card-group>.card:first-child {
+  border-top-left-radius: 0.375rem;
+  border-top-right-radius: 0.375rem;
+}
+
+.card-group>.card:last-child {
+  border-bottom-right-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+}
+
+.card-group>.card+.card {
+  border-left: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+/* Variantes de couleurs */
+.card-primary {
+  background-color: #0d6efd;
+  color: white;
+  border-color: #0d6efd;
+}
+
+.card-secondary {
+  background-color: #6c757d;
+  color: white;
+  border-color: #6c757d;
+}
+
+.card-success {
+  background-color: #198754;
+  color: white;
+  border-color: #198754;
+}
+
+.card-danger {
+  background-color: #dc3545;
+  color: white;
+  border-color: #dc3545;
+}
+
+.card-warning {
+  background-color: #ffc107;
+  color: #212529;
+  border-color: #ffc107;
+}
+
+.card-info {
+  background-color: #0dcaf0;
+  color: #000;
+  border-color: #0dcaf0;
+}
+
+.card-light {
+  background-color: #f8f9fa;
+  color: #212529;
+  border-color: #f8f9fa;
+}
+
+.card-dark {
+  background-color: #212529;
+  color: white;
+  border-color: #212529;
+}
+
+/* Bordures colorées */
+.border-primary {
+  border-color: #0d6efd !important;
+}
+
+.border-secondary {
+  border-color: #6c757d !important;
+}
+
+.border-success {
+  border-color: #198754 !important;
+}
+
+.border-danger {
+  border-color: #dc3545 !important;
+}
+
+.border-warning {
+  border-color: #ffc107 !important;
+}
+
+.border-info {
+  border-color: #0dcaf0 !important;
+}
+
+.border-light {
+  border-color: #f8f9fa !important;
+}
+
+.border-dark {
+  border-color: #212529 !important;
+}
+
+/* Header avec bordures colorées */
+.card-header-primary {
+  background-color: #0d6efd;
+  color: white;
+  border-bottom-color: #0a58ca;
+}
+
+.card-header-success {
+  background-color: #198754;
+  color: white;
+  border-bottom-color: #146c43;
+}
+
+/* Disposition des cartes */
+.card-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -0.75rem;
+  margin-left: -0.75rem;
+}
+
+.card-col {
+  flex: 0 0 100%;
+  max-width: 100%;
+  padding: 0 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive */
+@media (min-width: 576px) {
+  .card-col {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .card-group {
+    flex-direction: row;
+  }
+
+  .card-group>.card+.card {
+    border-left: 1px solid rgba(0, 0, 0, 0.125);
+    border-top: 0;
+  }
+
+  .card-group>.card:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .card-group>.card:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-col {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+}
+
+@media (min-width: 992px) {
+  .card-col {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+/* Utilitaires pour les cartes */
+.card-shadow {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.card-shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+.card-shadow-lg {
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+.card-border-0 {
+  border: 0 !important;
+}
+
+.card-rounded {
+  border-radius: 0.5rem !important;
+}
+
+.card-rounded-lg {
+  border-radius: 0.75rem !important;
+}
+
+/* Liste groupée dans les cartes */
+.list-group-flush .list-group-item {
+  border-right: 0;
+  border-left: 0;
+  border-radius: 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+/* Navigation dans les cartes */
+.card-header-tabs {
+  margin-right: -0.625rem;
+  margin-bottom: -0.75rem;
+  margin-left: -0.625rem;
+  border-bottom: 0;
+}
+
+.card-header-pills {
+  margin-right: -0.625rem;
+  margin-left: -0.625rem;
+}
+
+/* Images dans les cartes */
+.card-img-left {
+  border-top-left-radius: calc(0.375rem - 1px);
+  border-bottom-left-radius: calc(0.375rem - 1px);
+  border-top-right-radius: 0;
+}
+
+.card-img-right {
+  border-top-right-radius: calc(0.375rem - 1px);
+  border-bottom-right-radius: calc(0.375rem - 1px);
+  border-top-left-radius: 0;
+}
+
+/* Cartes horizontales */
+.card-horizontal {
+  flex-direction: row;
+}
+
+.card-horizontal .card-img {
+  width: auto;
+  max-width: 40%;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: calc(0.375rem - 1px);
+}
+
+.card-horizontal .card-body {
+  flex: 1;
+}
+
+
+/* ==========================================================================
+   FORM SYSTEM - Similaire à Bootstrap
+   ========================================================================== */
+
+/* Container principal du formulaire */
+.form-container {
+  max-width: 100%;
+  padding: 1rem;
+}
+
+/* Labels */
+.form-label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #212529;
+  font-size: 0.875rem;
+}
+
+/* Champs de formulaire de base */
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.form-control::placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #e9ecef;
+  opacity: 1;
+}
+
+/* Textarea */
+textarea.form-control {
+  min-height: calc(1.5em + 0.75rem + 2px);
+  resize: vertical;
+}
+
+/* Select */
+select.form-control {
+  padding-right: 2.25rem;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  appearance: none;
+}
+
+/* Taille des champs */
+.form-control-sm {
+  min-height: calc(1.5em + 0.5rem + 2px);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  border-radius: 0.25rem;
+}
+
+.form-control-lg {
+  min-height: calc(1.5em + 1rem + 2px);
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  border-radius: 0.5rem;
+}
+
+/* Checkboxes et Radios */
+.form-check {
+  display: block;
+  min-height: 1.5rem;
+  padding-left: 1.5em;
+  margin-bottom: 0.125rem;
+}
+
+.form-check-input {
+  width: 1em;
+  height: 1em;
+  margin-top: 0.25em;
+  margin-left: -1.5em;
+  vertical-align: top;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  appearance: none;
+}
+
+.form-check-input[type="checkbox"] {
+  border-radius: 0.25em;
+}
+
+.form-check-input[type="radio"] {
+  border-radius: 50%;
+}
+
+.form-check-input:checked {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.form-check-input:checked[type="checkbox"] {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+}
+
+.form-check-input:checked[type="radio"] {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
+}
+
+.form-check-input:focus {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.form-check-label {
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+/* Checkboxes inline */
+.form-check-inline {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+/* Switch (toggle) */
+.form-switch {
+  padding-left: 2.5em;
+}
+
+.form-switch .form-check-input {
+  width: 2em;
+  margin-left: -2.5em;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.25%29'/%3e%3c/svg%3e");
+  background-position: left center;
+  border-radius: 2em;
+  transition: background-position 0.15s ease-in-out;
+}
+
+.form-switch .form-check-input:focus {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2386b7fe'/%3e%3c/svg%3e");
+}
+
+.form-switch .form-check-input:checked {
+  background-position: right center;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+}
+
+/* Range slider */
+.form-range {
+  width: 100%;
+  height: 1.5rem;
+  padding: 0;
+  background-color: transparent;
+  appearance: none;
+}
+
+.form-range:focus {
+  outline: 0;
+}
+
+.form-range:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.form-range:focus::-moz-range-thumb {
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.form-range::-webkit-slider-thumb {
+  width: 1rem;
+  height: 1rem;
+  margin-top: -0.25rem;
+  background-color: #0d6efd;
+  border: 0;
+  border-radius: 1rem;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  appearance: none;
+}
+
+.form-range::-moz-range-thumb {
+  width: 1rem;
+  height: 1rem;
+  background-color: #0d6efd;
+  border: 0;
+  border-radius: 1rem;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  appearance: none;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 0.5rem;
+  color: transparent;
+  cursor: pointer;
+  background-color: #dee2e6;
+  border-color: transparent;
+  border-radius: 1rem;
+}
+
+.form-range::-moz-range-track {
+  width: 100%;
+  height: 0.5rem;
+  color: transparent;
+  cursor: pointer;
+  background-color: #dee2e6;
+  border-color: transparent;
+  border-radius: 1rem;
+}
+
+/* File input */
+.form-control-file {
+  display: block;
+  width: 100%;
+}
+
+/* Validation states */
+.form-control.is-valid {
+  border-color: #198754;
+  padding-right: calc(1.5em + 0.75rem);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right calc(0.375em + 0.1875rem) center;
+  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.form-control.is-valid:focus {
+  border-color: #198754;
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+.form-control.is-invalid {
+  border-color: #dc3545;
+  padding-right: calc(1.5em + 0.75rem);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath d='m5.8 3.6.4.4.4-.4'/%3e%3cpath d='M6 7v2'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right calc(0.375em + 0.1875rem) center;
+  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.form-control.is-invalid:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+/* Messages de validation */
+.valid-feedback {
+  display: none;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: #198754;
+}
+
+.invalid-feedback {
+  display: none;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: #dc3545;
+}
+
+.is-valid~.valid-feedback,
+.is-valid~.valid-tooltip {
+  display: block;
+}
+
+.is-invalid~.invalid-feedback,
+.is-invalid~.invalid-tooltip {
+  display: block;
+}
+
+/* Form groups */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -5px;
+  margin-left: -5px;
+}
+
+.form-row>.col {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+/* Input groups */
+.input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+}
+
+.input-group>.form-control {
+  position: relative;
+  flex: 1 1 auto;
+  width: 1%;
+  min-width: 0;
+}
+
+.input-group-text {
+  display: flex;
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+}
+
+.input-group-lg>.form-control,
+.input-group-lg>.input-group-text {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  border-radius: 0.5rem;
+}
+
+.input-group-sm>.form-control,
+.input-group-sm>.input-group-text {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  border-radius: 0.25rem;
+}
+
+.input-group> :not(:first-child):not(.dropdown-menu) {
+  margin-left: -1px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.input-group> :not(:last-child):not(.dropdown-menu) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Floating labels */
+.form-floating {
+  position: relative;
+}
+
+.form-floating>.form-control {
+  height: calc(3.5rem + 2px);
+  padding: 1rem 0.75rem;
+}
+
+.form-floating>.form-control::placeholder {
+  color: transparent;
+}
+
+.form-floating>.form-control:focus,
+.form-floating>.form-control:not(:placeholder-shown) {
+  padding-top: 1.625rem;
+  padding-bottom: 0.625rem;
+}
+
+.form-floating>label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding: 1rem 0.75rem;
+  pointer-events: none;
+  border: 1px solid transparent;
+  transform-origin: 0 0;
+  transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.form-floating>.form-control:focus~label,
+.form-floating>.form-control:not(:placeholder-shown)~label {
+  opacity: 0.65;
+  transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .form-control {
+    background-color: #212529;
+    border-color: #495057;
+    color: #f8f9fa;
+  }
+
+  .form-control:focus {
+    background-color: #212529;
+    border-color: #86b7fe;
+    color: #f8f9fa;
+  }
+
+  .form-label {
+    color: #f8f9fa;
+  }
+}
+
+/*
+*
+*==========================================
+* Adaptation des classes bootstrap
+*==========================================
+*
+*/
+
+/* === Espacements personnalisés === */
+.py-6 {
+  padding-top: 4rem !important;
+  padding-bottom: 4rem !important;
+}
+
+.py-7 {
+  padding-top: 5rem !important;
+  padding-bottom: 5rem !important;
+}
+
+.px-6 {
+  padding-left: 4rem !important;
+  padding-right: 4rem !important;
+}
+
+.mt-6 {
+  margin-top: 4rem !important;
+}
+
+.mb-6 {
+  margin-bottom: 4rem !important;
+}
+
+/* === Règles générales Bootstrap améliorées === */
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Espacement personnalisé (p-6, py-6...) */
+.py-6 {
+  padding-top: 4rem !important;
+  padding-bottom: 4rem !important;
+}
+
+.px-6 {
+  padding-left: 4rem !important;
+  padding-right: 4rem !important;
+}
+
+/* Style des cartes */
+.card {
+  transition: all 0.3s ease;
+  background: #fff;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Texte justifié dans les paragraphes */
+.text-justify {
+  text-align: justify;
+}
+
+/* Icônes colorées */
+.text-success i {
+  color: #198754;
+}
+
+/* Titre principal */
+.display-4 {
+  font-size: 2.8rem;
+  line-height: 1.3;
+}
+
+/* Espacement entre les blocs */
+.g-4>* {
+  margin-top: 1rem;
+}
+
+/* ============================================================
+   ABOUT PAGE - Mise en page indépendante du template
+   ============================================================ */
+
+/* Wrapper général de la page A propos */
+.about-page-wrapper {
+  width: 100%;
+  padding: 40px 0;
+}
+
+/* -------- Hero (Notre Histoire) -------- */
+
+.about-hero {
+  max-width: 1200px;
+  margin: 0 auto 40px auto;
+  padding: 0 20px;
+}
+
+.about-hero-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.about-hero-title .text-success {
+  color: #198754;
+}
+
+.about-hero-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #444;
+  text-align: justify;
+}
+
+.about-hero-text * {
+  margin: 0 0 12px 0;
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+  white-space: normal !important;
+}
+
+/* -------- Section Objectifs & Mission -------- */
+
+.about-section {
+  max-width: 1200px;
+  margin: 0 auto 40px auto;
+  padding: 0 20px;
+}
+
+/* Grille 2 colonnes responsive */
+.about-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+/* Carte */
+.about-card {
+  flex: 1 1 320px;
+  /* min width */
+  background: #ffffff;
+  border: 1px solid #e4e7ed;
+  border-radius: 10px;
+  padding: 24px 22px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+}
+
+/* Icône */
+.about-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #198754;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.about-card-icon i {
+  color: #198754;
+  font-size: 18px;
+}
+
+/* Titre */
+.about-card-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #198754;
+  margin-bottom: 12px;
+}
+
+/* Contenu */
+.about-card-content {
+  font-size: 15px;
+  color: #333;
+  line-height: 1.7;
+  text-align: justify;
+}
+
+/* Sécurise le contenu injecté : toujours horizontal, jamais bizarre */
+.about-card-content *,
+.about-card * {
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+  white-space: normal !important;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  transform: none !important;
+  float: none !important;
+}
+
+/* -------- Responsive -------- */
+
+@media (max-width: 768px) {
+  .about-hero-title {
+    font-size: 26px;
+  }
+
+  .about-section {
+    padding: 0 16px;
+  }
+
+  .about-card {
+    padding: 18px 16px;
+  }
+}
+
+/* ============================================================
+   PAGE CONTACT - Style indépendant, clair et professionnel
+   ============================================================ */
+
+.contact-page {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* ================== HERO ================== */
+.contact-hero {
+  background: #e9f8ef;
+  border-radius: 10px;
+  padding: 60px 40px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.contact-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #198754;
+  margin-bottom: 15px;
+}
+
+.contact-hero p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+.contact-hero .btn {
+  font-size: 1rem;
+  border-radius: 30px;
+  padding: 10px 22px;
+  transition: all 0.3s ease;
+}
+
+.contact-hero .btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ================== FORMULAIRE ================== */
+.contact-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+/* Bloc gauche : formulaire */
+.contact-form-card {
+  flex: 1 1 55%;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  padding: 35px;
+}
+
+.contact-form-card h2 {
+  color: #198754;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+/* Bloc droit : coordonnées */
+.contact-info-card {
+  flex: 1 1 40%;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  padding: 35px;
+}
+
+.contact-info-card h2 {
+  color: #198754;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.contact-info-card .info-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 25px;
+}
+
+.contact-info-card .info-icon {
+  background: #198754;
+  color: #fff;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-right: 15px;
+}
+
+.contact-info-card .info-text h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 4px;
+}
+
+.contact-info-card .info-text p,
+.contact-info-card .info-text a {
+  color: #555;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.contact-info-card .info-text a:hover {
+  color: #198754;
+}
+
+/* ================== GOOGLE MAP ================== */
+.contact-map {
+  width: 100%;
+  height: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  margin-top: 20px;
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 992px) {
+  .contact-grid {
+    flex-direction: column;
+  }
+
+  .contact-form-card,
+  .contact-info-card {
+    flex: 1 1 100%;
+    padding: 25px;
+  }
+
+  .contact-hero {
+    padding: 40px 20px;
+  }
+
+  .contact-hero h1 {
+    font-size: 2rem;
+  }
+}
+
+
+/* ============================================================
+   STYLE MODERNE DES INPUTS ET TEXTAREAS
+   ============================================================ */
+
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #333;
+  background-color: #f9f9f9;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  box-shadow: none;
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  font-family: "Poppins", Arial, sans-serif;
+}
+
+/* 🎯 État au survol */
+textarea:hover,
+input:hover {
+  background-color: #ffffff;
+  border-color: #b5b5b5;
+}
+
+/* ✅ Focus vert moderne */
+textarea:focus,
+input:focus {
+  background-color: #fff;
+  border-color: #198754;
+  box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.15);
+  color: #212529;
+}
+
+/* 🔹 Placeholder élégant */
+textarea::placeholder,
+input::placeholder {
+  color: #9aa0a6;
+  opacity: 1;
+  font-style: italic;
+}
+
+/* 🔸 Désactivation d’un champ */
+input:disabled,
+textarea:disabled {
+  background-color: #e9ecef;
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+/* ✍️ Zone de texte */
+textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+/* 🌈 Apparence unifiée dans les formulaires */
+input,
+textarea,
+select {
+  transition: all 0.25s ease-in-out;
+}
+
+select {
+  padding: 12px 16px;
+  background-color: #f9f9f9;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  color: #333;
+}
+
+select:focus {
+  border-color: #198754;
+  box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.15);
+}
+
+/* 🧩 Alignement visuel */
+.form-control,
+.form-select {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+
+  input,
+  textarea,
+  select {
+    font-size: 0.9rem;
+    padding: 10px 14px;
+  }
+}
+
+/* ============================================================
+   PAGINATION - STYLE SWIFTRIDE / EUBABU
+   ============================================================ */
+
+/* 🧱 Conteneur */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* 🔘 Boutons généraux */
+.page-item {
+  display: inline-block;
+}
+
+.page-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #198754;
+  background-color: #fff;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  padding: 8px 14px;
+  transition: all 0.25s ease;
+  min-width: 38px;
+}
+
+.page-link:hover {
+  background-color: #198754;
+  color: #fff;
+  border-color: #198754;
+  transform: translateY(-2px);
+}
+
+/* ✅ Page active */
+.page-item.active .page-link {
+  background-color: #198754;
+  border-color: #198754;
+  color: #fff;
+  font-weight: 600;
+  cursor: default;
+  box-shadow: 0 4px 10px rgba(25, 135, 84, 0.2);
+}
+
+/* ⛔ Pages désactivées (flèches inactives) */
+.page-item.disabled .page-link {
+  color: #adb5bd;
+  background-color: #f1f3f5;
+  border-color: #e9ecef;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* 👈👉 Icônes de navigation */
+.page-link i {
+  font-size: 0.85rem;
+}
+
+/* 🌈 Espacement et réactivité */
+.pagination .page-item {
+  margin: 0 3px;
+}
+
+/* 📱 Responsive */
+@media (max-width: 576px) {
+  .page-link {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    min-width: 32px;
+  }
+}
+
+/* ============================================================
+   TEXTE "Page X sur Y"
+   ============================================================ */
+.d-flex>span {
+  font-size: 0.95rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.d-flex>span::before {
+  content: "📄 ";
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin-right: 4px;
+}
+
+
+/* ============================================================
+   SPINNER DE CHARGEMENT - STYLE SWIFTRIDE / EUBABU
+   ============================================================ */
+
+/* 🌀 Conteneur principal */
+.text-center.mb-3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+}
+
+/* 🔄 Spinner principal Bootstrap customisé */
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  border-width: 4px;
+  color: #198754;
+  /* vert Swiftride */
+  animation: spin-rotate 0.9s linear infinite;
+  opacity: 0.95;
+}
+
+/* ✅ Effet de rotation douce */
+@keyframes spin-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 🌈 Variante avec halo (optionnel, effet moderne) */
+.spinner-border::after {
+  content: "";
+  position: absolute;
+  border: 2px solid rgba(25, 135, 84, 0.25);
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse-ring 1.5s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* 🔤 Texte "Chargement..." */
+.visually-hidden {
+  display: block !important;
+  position: relative;
+  margin-top: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #198754;
+  opacity: 0.8;
+  animation: fadeText 1.5s ease-in-out infinite;
+}
+
+/* Effet de fondu du texte */
+@keyframes fadeText {
+
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.video-full-width-container {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.video-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.video-iframe-container {
+  width: 100%;
+  flex-grow: 1;
+}
+
+.video-iframe-container iframe {
+  width: 100%;
+  height: 100%;
+}/* Assurer que le conteneur principal prend toute la largeur */
+.video-full-width-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Pour la carte vidéo */
+.video-card {
+  width: 60% !important;
+  max-width: 100% !important;
+}
+
+/* Pour le conteneur de l'iframe */
+.video-iframe-container {
+  width: 100% !important;
+}
+
+
+
+
+

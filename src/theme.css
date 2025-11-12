@@ -102,11 +102,11 @@ body.light .dropdown-menu {
     color: #212529 !important;
 }
 
-body.light .navbar,
+/* body.light .navbar,
 body.light .sidebar {
     background-color: #ffffff !important;
     color: #000000 !important;
-}
+} */
 
 body.light input,
 body.light select,

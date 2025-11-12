@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Sidebar from './layout/Sidebar';
 import Topbar from './layout/Topbar';
 import Footer from './layout/Footer';
@@ -17,6 +17,7 @@ import ResetPassword from './pages/auth/ResetPassword';
 //utilisation des pages de configuration
 import RolePage from './pages/admin/pages/roles/rolePage';
 import './App.css';
+import "./Eubabu.css";
 import './theme.css';
 import Index from './pages/Site/Pages/Index';
 import NavBar from './pages/Site/Layout/NavBar';
@@ -54,6 +55,8 @@ import Galery from './pages/Site/Components/Sections/about/Galery';
 import Videos from './pages/Site/Components/Sections/about/Videos';
 import BlogListByCategory from './pages/Site/Components/Sections/home/BlogListByCategory';
 import PartenariatShip from './pages/Site/Components/Sections/about/PartenariatShip';
+import FebacoComponent from './Febaco/FebacoComponent';
+import BannerHome from './pages/Site/Components/Sections/about/BannerHome';
 
 
 
@@ -66,71 +69,136 @@ function LayoutWrapper({ children }: { children: React.ReactNode }) {
     location.pathname.startsWith('/reset-password') ||
     location.pathname === '*';
 
+
   if (isAuthPage) {
     return (
+      <div className="sportsmagazine-main-wrapper">
 
-      <div id="wrapper">
-
-        {/* NavBar lg */}
+        {/* dateTime// Header \\*/}
         <NavBar />
-        {/* <!-- Navbar Mobile - Offcanvas Menu - Adaptatif --> */}
-        <SiderBar />
 
-        {/* body */}
-        <div className='col-md-12 col-lg-12 col-sm-12 col-12 mt-2'>
+        {/* dateTime// Header \\*/}
 
-          {children}
+        {/* Main Banner */}
+        <BannerHome />
+        {/* Main Banner */}
+
+
+        {/* dateTime// Main Content \\*/}
+        <div className="sportsmagazine-main-content">
+
+          {/* dateTime// Main Section \\*/}
+          <div className="sportsmagazine-main-section">
+            <div className="container">
+              <div className="row">
+
+                {/* dateTime// Content \\*/}
+                <div className="col-md-8">
+
+
+                  {children}
+
+
+                </div>
+                {/* dateTime// Content \\*/}
+
+                {/* dateTime// SideBaar \\*/}
+                <aside className="col-md-4">
+
+                  <SideBarInfo />
+
+
+
+
+
+                </aside>
+                {/* dateTime// SideBaar \\*/}
+
+              </div>
+
+            </div>
+          </div>
+          {/* dateTime// Main Section \\*/}
 
         </div>
-        {/* fin body */}
+        {/* dateTime// Main Content \\*/}
 
-
-        {/* footer */}
+        {/*// Footer \\*/}
+        {/*// Footer \\*/}
         <FooterPage />
+        {/*// Footer \\*/}
 
-        {/* fin footer */}
-
+        <div className="clearfix"></div>
+        {/*// Footer \\*/}
 
       </div>
+
 
     );
   }
 
   return (
 
-    <div id="wrapper">
+    <div className="sportsmagazine-main-wrapper">
 
-      {/* NavBar lg */}
+      {/* dateTime// Header \\*/}
       <NavBar />
-      {/* <!-- Navbar Mobile - Offcanvas Menu - Adaptatif --> */}
-      <SiderBar />
 
-      {/* body */}
-      <div className="container">
-        <div className='col-md-12 col-lg-12 col-sm-12 col-12 mt-2'>
+      {/* dateTime// Header \\*/}
 
-          <div className="row">
-            <div className="col-md-9 col-lg-9 col-sm-12 col-12">
-              {children}
+      {/* Main Banner */}
+      {/* <BannerHome /> */}
+      {/* Main Banner */}
+
+
+      {/* dateTime// Main Content \\*/}
+      <div className="sportsmagazine-main-content">
+
+        {/* dateTime// Main Section \\*/}
+        <div className="sportsmagazine-main-section">
+          <div className="container">
+            <div className="row">
+
+              {/* dateTime// Content \\*/}
+              <div className="col-md-8">
+
+
+                {children}
+
+
+              </div>
+              {/* dateTime// Content \\*/}
+
+              {/* dateTime// SideBaar \\*/}
+              <aside className="col-md-4">
+
+                <SideBarInfo />
+
+
+
+
+
+              </aside>
+              {/* dateTime// SideBaar \\*/}
+
             </div>
-            <div className="col-md-3 col-lg-3 col-sm-12 col-12">
-              <SideBarInfo />
-            </div>
+
           </div>
-
         </div>
+        {/* dateTime// Main Section \\*/}
+
       </div>
-      {/* fin body */}
+      {/* dateTime// Main Content \\*/}
 
-
-      {/* footer */}
+      {/*// Footer \\*/}
+      {/*// Footer \\*/}
       <FooterPage />
+      {/*// Footer \\*/}
 
-      {/* fin footer */}
-
+      <div className="clearfix"></div>
+      {/*// Footer \\*/}
 
     </div>
-
 
 
   );
@@ -138,6 +206,7 @@ function LayoutWrapper({ children }: { children: React.ReactNode }) {
 
 
 function App() {
+
   return (
 
     <Router>
@@ -147,6 +216,10 @@ function App() {
 
 
           {/* Fin Authentification (pas besoin de protection) */}
+
+          <Route
+            path="/donation" element={<FebacoComponent />}
+          />
 
           <Route
             path="/" element={<Index />}
@@ -248,23 +321,26 @@ function App() {
           <Route
             path="/video" element={<Videos />}
           />
+          <Route
+            path="/videos" element={<Videos />}
+          />
 
           <Route
             path="/category/:slug" element={<BlogListByCategory />}
           />
 
-          
-
-          
 
 
-          
 
-          
 
-          
 
-          
+
+
+
+
+
+
+
 
 
 
@@ -320,6 +396,8 @@ function App() {
         <i className="fas fa-angle-up"></i>
       </a> */}
       {/* ajout des notification */}
+
+
       <ToastContainer />
     </Router>
   );

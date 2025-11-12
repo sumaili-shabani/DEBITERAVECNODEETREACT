@@ -53,13 +53,13 @@ export default function BlogList() {
 
     useEffect(() => {
         document.title = "Découvrez nos conseils et actualités sur la mobilité urbaine - Swiftride";
-          
+
         loadlistData();
 
     }, [search, currentPage, limit]);
 
     return (
-        <div className="container py-5">
+        <div className="sportsmagazine-blog sportsmagazine-blog-grid">
             <div className="text-center mb-4">
                 <h2 className="display-5 fw-bold mb-3">
                     Nos <span className="text-success">Articles Récents</span>
@@ -73,7 +73,7 @@ export default function BlogList() {
             <div className="row justify-content-center mb-4">
 
 
-                <div className="col-md-6">
+                <div className="col-md-12">
                     <div className="input-group mb-3 shadow-sm rounded-pill">
                         <input className="form-control border-0 rounded-pill-start py-3 px-4"
                             placeholder="Rechercher un article..." type="text"
@@ -89,7 +89,7 @@ export default function BlogList() {
                 </div>
             </div>
 
-            <div className="row g-4">
+            <div className="row">
                 {
                     listData.length === 0 ? (
                         <LoaderAndError
@@ -100,7 +100,22 @@ export default function BlogList() {
 
                     ) : (
                         listData.map((article) => (
-                            <BlogCard key={article.id} article={article} />
+                            // <BlogCard key={article.id} article={article} />
+
+                            <li className="col-md-6" key={article.id}>
+                                <figure>
+                                    <Link to={"/blog/" + article.slug}><img src={fileUrl + "/images/" + article.icone} alt="" /></Link>
+                                    <figcaption>
+                                        <span><small>{article.titre ?? ''}</small></span>
+                                        <Link to={"/blog/" + article.slug} className="sportsmagazine-link-btn"><i className="fa fa-link"></i></Link>
+                                    </figcaption>
+                                </figure>
+                                <section>
+                                    <h2><Link to={"/blog/" + article.slug}>{article.titre}</Link></h2>
+                                    <p>{article.sousTitre}</p>
+                                </section>
+
+                            </li>
                         ))
                     )
                 }

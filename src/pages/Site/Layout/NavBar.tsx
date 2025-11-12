@@ -90,316 +90,261 @@ export default function NavBar() {
 
     const { theme, toggleTheme } = useTheme();
     return (
-        <div>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-                <div className="container-fluid">
-                    <a className="navbar-brand fw-bold swift-text-green" href="#">
-                        {/* SWIFTRIDE */}
-                        <img src={logoApp} alt="logo app"
-                            className='img-fluid object-fit-cover' width={60} height={60} />
-                    </a>
+        <header id="sportsmagazine-header" className="sportsmagazine-header-one">
 
+            {/*// TopStrip \\*/}
+            <div className="sportsmagazine-topstrip">
+                <div className="container">
 
-                    {/* autre */}
-                    {/* Menu principal (Desktop) */}
-                    <div className="collapse navbar-collapse">
+                    {
+                        sites.map((item, index) => (
 
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/">
-                                    <i className="fas fa-home"></i> Accueil
-                                </Link>
-                            </li>
+                            <div key={index}>
 
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/about">
-                                    <i className="fas fa-info-circle"></i> A propos
-                                </Link>
-                            </li>
+                                <div className="row">
 
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/services">
-                                    <i className="fas fa-concierge-bell"></i> Nos services
-                                </Link>
-                            </li>
+                                    <aside className="col-md-6">
+                                        <ul className="sportsmagazine-social-network">
+                                            <li><a href={item.facebook} target='_blank' className="sportsmagazine-colorhover fab fa-facebook" title="Facebook"></a></li>
+                                            <li><a href={item.twitter} target='_blank' className="sportsmagazine-colorhover fab fa-twitter" title="Twitter"></a></li>
+                                            <li><a href={item.linkedin} target='_blank' className="sportsmagazine-colorhover fab fa-linkedin" title="Instagram"></a></li>
+                                            <li><a href={item.youtube} target='_blank' className="sportsmagazine-colorhover fab fa-youtube me-4" title="YouTube"></a></li>
+                                            {/* <li><Link to="/donation">Nous faire un don</Link></li> */}
+                                        </ul>
+                                    </aside>
+                                    <aside className="col-md-6">
+                                        <ul className="sportsmagazine-user-section">
+                                            
+                                            <li><i className="fa fa-phone"></i> <a href={`tel:${item.tel1}`}>{item.tel1}</a></li>
+                                            <li><i className="fa fa-envelope"></i> <a href={`mailto:${item.email}`}>{item.email}</a></li>
+                                            <li><i className="fas fa-sign-in-alt"></i> <a href="https://app.eubabutrdc.com" target='_blank'>Connexion</a></li>
+                                        </ul>
+                                    </aside>
+                                </div>
 
-
-                            <li className="nav-item dropdown mega-menu">
-                                <a className="nav-link dropdown-toggle" href="#" id="formationsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i className="fas fa-ellipsis-h"></i> Supplémentaire
-                                </a>
-                                <ul className="dropdown-menu" aria-labelledby="formationsDropdown">
-                                    <div className="container">
-                                        <div className="row">
-                                            {/* ✅ Colonne 1 */}
-                                            <div className="col-lg-4">
-                                                <div className="mega-category border-end">
-                                                    <h5><i className="fas fa-home me-2 swift-text-green"></i> Accueil</h5>
-                                                    <div className="list-group">
-                                                        <Link to="/services" className="list-group-item list-group-item-action">
-                                                            <i className="fas fa-concierge-bell swift-text-green"></i> Nos services
-                                                        </Link>
-                                                        <a href="https://play.google.com/store/apps/details?id=com.dreamofdrc.liftiapp" target='_blank' className="list-group-item list-group-item-action">
-                                                            <i className="fas fa-taxi swift-text-green"></i> Commander un taxi
-                                                        </a>
-                                                        <a href="https://play.google.com/store/apps/details?id=com.dreamofdrc.liftiapp" target='_blank' className="list-group-item list-group-item-action">
-                                                            <i className="fas fa-motorcycle swift-text-green"></i> Commander une moto
-                                                        </a>
-                                                        <Link to="/location-vehicule" className="list-group-item list-group-item-action">
-                                                            <i className="fas fa-car-side swift-text-green"></i> Location des véhicules
-                                                        </Link>
-                                                        <Link to="/reservation-future" className="list-group-item list-group-item-action">
-                                                            <i className="fas fa-calendar-check swift-text-green"></i> Réservation future
-                                                        </Link>
-                                                    </div>
-                                                </div>
-
-                                                <div className="mega-category mt-1 border-end border-top">
-                                                    <h5><i className="fas fa-shield-alt me-2 swift-text-green"></i> Sécurité</h5>
-                                                    <div className="list-group">
-                                                        <Link to="/sos" className="list-group-item list-group-item-action">
-                                                            <i className="fas fa-exclamation-triangle swift-text-green"></i> Bouton SOS
-                                                        </Link>
-                                                        <Link to="/partage" className="list-group-item list-group-item-action">
-                                                            <i className="fas fa-share-square swift-text-green"></i> Partage de trajet
-                                                        </Link>
-                                                        <Link to="/chauffeur" className="list-group-item list-group-item-action">
-                                                            <i className="fas fa-id-badge swift-text-green"></i> Identification chauffeur
-                                                        </Link>
-                                                    </div>
-                                                </div>
-
-                                                {/* ✅ Réseaux sociaux */}
-                                                <div className="text-start py-3 border-end border-top">
-                                                    <h5><i className="fas fa-link me-2 swift-text-green"></i> Rejoignez-nous sur les réseaux</h5>
-
-
-                                                    <div className="text-muted fst-italic mb-3">
-                                                        Restez informé des nouveautés et offres exclusives.
-                                                    </div>
-                                                    {
-                                                        sites.map((item, index) => (
-
-                                                            <div key={index}>
-                                                                <a href={item.facebook} target='_blank' className="me-3 text-decoration-none">
-                                                                    <i className="fab fa-facebook-f fa-lg swift-text-green"></i>
-                                                                </a>
-
-
-                                                                <a href={item.twitter} target='_blank'  className="me-3 text-decoration-none">
-                                                                    <i className="fab fa-x-twitter fa-lg swift-text-green"></i>
-                                                                </a>
-                                                               
-                                                               
-                                                                <a href={item.linkedin} target='_blank'  className="me-3 text-decoration-none">
-                                                                    <i className="fab fa-linkedin-in fa-lg swift-text-green"></i>
-                                                                </a>
-
-                                                                <a href={item.youtube} target='_blank' className="me-3 text-decoration-none">
-                                                                    <i className="fab fa-youtube fa-lg swift-text-green"></i>
-                                                                </a>
-
-                                                            </div>
-
-                                                        ))
-                                                    }
-
-                                                    
-                                                </div>
-
-
-                                            </div>
-
-                                            {/* ✅ Colonne 2 */}
-                                            <div className="col-lg-4">
-                                                <div className="mega-category border-end">
-                                                    <h5><i className="fas fa-gift me-2 swift-text-green"></i> Promotions & Offres</h5>
-                                                    <div className="list-group">
-                                                        <Link to="/code-promo" className="list-group-item list-group-item-action">
-                                                            <i className="fas fa-ticket-alt swift-text-green"></i> Codes promo
-                                                        </Link>
-                                                        <Link to="/offre-promotion" className="list-group-item list-group-item-action">
-                                                            <i className="fas fa-tags swift-text-green"></i> Offres spéciales
-                                                        </Link>
-
-                                                        <Link to="/how-it-works" className="list-group-item list-group-item-action">
-                                                            <i className="fas fa-question-circle swift-text-green"></i> Comment ça marche
-                                                        </Link>
-                                                        <Link to="/faq" className="list-group-item list-group-item-action">
-                                                            <i className="fas fa-info-circle swift-text-green"></i> FAQ
-                                                        </Link>
-                                                        <Link to="/contact" className="list-group-item list-group-item-action">
-                                                            <i className="fas fa-envelope swift-text-green"></i> Contact
-                                                        </Link>
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-12">
-
-                                                    <div className="mega-category mt-1 border-end border-top">
-                                                        <h5><i className="fas fa-info me-2 swift-text-green"></i> Infos</h5>
-                                                        <div className="list-group">
-                                                            <Link to="/works" className="list-group-item list-group-item-action">
-                                                                <i className="fas fa-briefcase swift-text-green"></i> Ce que nous faisons
-                                                            </Link>
-                                                            <Link to="/about" className="list-group-item list-group-item-action">
-                                                                <i className="fas fa-info-circle swift-text-green"></i> À propos de nous
-                                                            </Link>
-                                                            <Link to="/blogs" className="list-group-item list-group-item-action">
-                                                                <i className="fas fa-newspaper swift-text-green"></i> Articles
-                                                            </Link>
-                                                            <Link to="/team" className="list-group-item list-group-item-action">
-                                                                <i className="fas fa-users swift-text-green"></i> Équipe
-                                                            </Link>
-                                                            <Link to="/structure-gestion" className="list-group-item list-group-item-action">
-                                                                <i className="fas fa-sitemap swift-text-green"></i> Structure de gestion
-                                                            </Link>
-                                                            <Link to="/partenariat-ship" className="list-group-item list-group-item-action">
-                                                                <i className="fas fa-handshake swift-text-green"></i> Partenariat
-                                                            </Link>
-                                                            <Link to="/don" className="list-group-item list-group-item-action">
-                                                                <i className="fas fa-donate swift-text-green"></i> Nous faire un don
-                                                            </Link>
-                                                            <Link to="/financement" className="list-group-item list-group-item-action">
-                                                                <i className="fas fa-piggy-bank swift-text-green"></i> Financement
-                                                            </Link>
-                                                            <Link to="/secteur" className="list-group-item list-group-item-action">
-                                                                <i className="fas fa-layer-group swift-text-green"></i> Secteur
-                                                            </Link>
-
-                                                            <Link to="/vacancy" className="list-group-item list-group-item-action">
-                                                                <i className="fas fa-folder swift-text-green"></i> Offre d'emploi
-                                                            </Link>
-
-                                                            <Link to="/galery" className="list-group-item list-group-item-action">
-                                                                <i className="fas fa-camera swift-text-green"></i> Galérie photo
-                                                            </Link>
-
-                                                            <Link to="/video" className="list-group-item list-group-item-action">
-                                                                <i className="fas fa-video swift-text-green"></i> Vidéos
-                                                            </Link>
-
-
-
-
-                                                        </div>
-                                                    </div>
-
-
-
-                                                </div>
-
-
-                                            </div>
-
-                                            {/* ✅ Colonne 3 : Vidéo conservée telle quelle */}
-                                            <div className="col-lg-4">
-                                                {/* ✅ Découvrir SwiftRide */}
-                                                
-                                                <VideoPub />
-
-                                                {/* ✅ Catégories d'articles */}
-                                                <div className="mega-category mt-4 border-top border-end">
-                                                    <h5><i className="fas fa-folder-open me-2 swift-text-green"></i> Catégories d’articles</h5>
-                                                    <div className="chip-list d-flex flex-wrap gap-2">
-                                                        {
-                                                            categories.map((item, index) => (
-
-                                                                <div key={index}>
-                                                                    <Link to={'/category/' + item.slug} className="chip">
-                                                                        <i className="fas fa-newspaper me-1 swift-text-green"></i> {item.titre}
-                                                                    </Link>
-
-                                                                </div>
-
-                                                            ))
-                                                        }
-
-                                                        
-                                                       
-                                                    </div>
-
-                                                </div>
-
-
-                                                <div className="col-md-12">
-
-                                                    {/* ✅ Boutons de téléchargement */}
-                                                    <div className="mt-auto pt-3 border-top border-end">
-                                                        <h5><i className="fas fa-download me-2 swift-text-green"></i> Téléchargez l'application SwiftRide</h5>
-
-                                                        <div className="text-start mb-3 text-muted fst-italic">
-                                                            Votre mobilité, plus simple et plus sûre. Disponible sur:
-                                                        </div>
-                                                        <div className="d-flex justify-content-start flex-wrap">
-                                                            <a style={{ textDecoration: 'none' }} href='https://play.google.com/store/apps/details?id=com.dreamofdrc.liftiapp' target='_blank' className="download-btn me-2 mb-2">
-                                                                <i className="fab fa-google-play me-2"></i> Android
-                                                            </a>
-                                                            <a style={{ textDecoration: 'none' }} href='#' className="download-btn mb-2">
-                                                                <i className="fab fa-apple me-2"></i> iOS
-                                                            </a>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </ul>
-                            </li>
-
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/faq">
-                                    <i className="fas fa-question-circle"></i> FAQ
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/contact">
-                                    <i className="fas fa-envelope"></i> Contact
-                                </Link>
-                            </li>
-
-
-
-
-
-
-                        </ul>
-
-                        {/* Actions (Connexion + Thème) */}
-                        <div className="d-flex align-items-center">
-
-                            <a className="nav-link me-2" href="#!" role="button" onClick={toggleTheme}>
-                                <i className={`fas ${theme === 'light' ? 'fa-moon' : 'fa-sun'} fa-fw`}></i>
-                            </a>
-
-                            <div className="dropdown me-3">
-                                <GoogleTranslate />
                             </div>
 
-                            <a className="btn btn-outline-success me-3" href="#login"> <i className='fas fa-sign-in-alt'></i> Connexion</a>
-                        </div>
+                        ))
+                    }
 
-
-                    </div>
-
-                    {/* Bouton menu mobile */}
-                    <button
-                        className="navbar-toggle btn btn-dark d-lg-none"
-                        type="button"
-                        data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasMenu"
-                        aria-controls="offcanvasMenu"
-                    >
-                        <i className="fas fa-bars text-white"></i>
-                    </button>
-                    {/* fin autre */}
 
                 </div>
-            </nav>
-        </div>
+            </div>
+            {/*// TopStrip \\*/}
+
+            {/*// MainSection \\*/}
+            <div className="sportsmagazine-main-header">
+                <div className="container">
+                    <div className="row">
+                        <aside className="col-md-3">
+                            <Link to="/" className="sportsmagazine-logo">
+                                <img src={logoApp} alt="Eubabu Logo" />
+                                <span className="logo-text">EUBABU</span>
+                            </Link>
+                        </aside>
+                        <div className="col-md-9">
+                            <div className="sportsmagazine-right-section">
+                                <nav className="navbar navbar-default">
+                                    <div className="navbar-header">
+                                        <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="true">
+                                            <span className="sr-only">Toggle navigation</span>
+                                            <span className="icon-bar"></span>
+                                            <span className="icon-bar"></span>
+                                            <span className="icon-bar"></span>
+                                        </button>
+                                    </div>
+                                    <div className="collapse navbar-collapse" id="navbar-collapse-1">
+                                        <ul className="nav navbar-nav">
+                                            <li className="active"><Link to="/">Accueil</Link></li>
+
+                                            <li className="sportsmagazine-megamenu-li"><a href="#">ORGANISATION</a>
+                                                <ul className="sportsmagazine-megamenu">
+                                                    <li className="row">
+                                                        <div className="col-md-4">
+                                                            <h4>À propos</h4>
+                                                            <ul className="sportsmagazine-megalist">
+                                                                <li><Link to="/about">Notre histoire</Link></li>
+                                                                <li><Link to="/work">Mission & Valeurs</Link></li>
+                                                                <li><Link to="/services">Nos services</Link></li>
+                                                                <li><Link to="/team">Notre équipe</Link></li>
+                                                                <li><Link to="/donation">Faire un don</Link></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div className="col-md-4">
+                                                            <h4>Gouvernance</h4>
+                                                            <ul className="sportsmagazine-megalist">
+                                                                <li><Link to="/structure">Structure organisationnelle</Link></li>
+                                                                <li><Link to="/conseil-administration">Conseil d'administration</Link></li>
+                                                                <li><Link to="/work">Ce que nous faisons</Link></li>
+                                                                <li><Link to="/rapports">Rapports annuels</Link></li>
+
+                                                                <li>
+                                                                    <GoogleTranslate />
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div className="col-md-4">
+                                                            <h4>Partenariats</h4>
+                                                            <ul className="sportsmagazine-megalist">
+                                                                <li><Link to="/partnariat">Nos partenaires</Link></li>
+                                                                <li><Link to="/secteur">Secteur d'activité</Link></li>
+                                                                <li><Link to="/projects">Projets en cours</Link></li>
+                                                                <li><Link to="/resalisations">Réalisations</Link></li>
+                                                                <li><Link to="/financement">Financement</Link></li>
+
+
+                                                            </ul>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+                                            <li className="sportsmagazine-megamenu-li"><a href="#">Basketball</a>
+                                                <ul className="sportsmagazine-megamenu">
+                                                    <li className="row">
+                                                        <div className="col-md-4">
+                                                            <h4>Équipes</h4>
+                                                            <ul className="sportsmagazine-megalist">
+                                                                <li><Link to="#">Équipes Séniors</Link></li>
+                                                                <li><Link to="#">Équipes Jeunes</Link></li>
+                                                                <li><Link to="#">Équipes Féminines</Link></li>
+                                                                <li><Link to="#">Effectifs & Staff</Link></li>
+                                                            </ul>
+
+                                                            <h4>Compétitions</h4>
+                                                            <ul className="sportsmagazine-megalist">
+                                                                <li><Link to="#">Calendrier des matchs</Link></li>
+                                                                <li><Link to="#">Résultats</Link></li>
+                                                                <li><Link to="#">Classements</Link></li>
+                                                                <li><Link to="#">Palmarès</Link></li>
+                                                            </ul>
+                                                        </div>
+
+                                                        <div className="col-md-4">
+                                                            <h4>Programmes</h4>
+                                                            <ul className="sportsmagazine-megalist">
+                                                                <li><Link to="#">Formation des jeunes</Link></li>
+                                                                <li><Link to="#">Écoles de basket</Link></li>
+                                                                <li><Link to="#">Développement</Link></li>
+                                                                <li><Link to="#">Événements spéciaux</Link></li>
+                                                            </ul>
+
+                                                            <h4>CONTACTEZ NOUS</h4>
+                                                            <ul className="sportsmagazine-megalist">
+                                                                <li><Link to="/contact">Formulaire de contact</Link></li>
+                                                                <li><Link to="/contact">Nous localiser</Link></li>
+                                                                <li><Link to="/faq">FAQ</Link></li>
+                                                                <li><Link to="#">Aide & Support</Link></li>
+                                                            </ul>
+                                                        </div>
+
+                                                        <div className="col-md-4">
+                                                            <div className="row">
+                                                                {
+                                                                    sites.map((item, index) => (
+
+                                                                        <div className="col-12 mb-3" key={index}>
+                                                                            <h4>Réseaux Sociaux</h4>
+                                                                            <ul className="sportsmagazine-megalist">
+                                                                                <li><a href={item.facebook} target='_blank' rel="noopener noreferrer">Facebook</a></li>
+                                                                                <li><a href={item.twitter} target='_blank' rel="noopener noreferrer">Twitter</a></li>
+                                                                                <li><a href={item.linkedin} target='_blank' rel="noopener noreferrer">LinkedIn</a></li>
+                                                                                <li><a href={item.youtube} target='_blank' rel="noopener noreferrer">YouTube</a></li>
+                                                                            </ul>
+                                                                        </div>
+
+
+                                                                    ))
+                                                                }
+
+
+                                                                <div className="col-12">
+                                                                    <h4>CE QUOI EUBABU ?</h4>
+                                                                    <div className="ratio ratio-16x9">
+                                                                        {/* <iframe
+                                                                                src="https://www.youtube.com/embed/RMe5LYEnfy8?si=mAjwpHOWjxakGwzG"
+                                                                                title="YouTube video player"
+                                                                                frameBorder="0"
+                                                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                                                allowFullScreen
+                                                                                style={{ borderRadius: '5px' }}>
+                                                                            </iframe> */}
+
+                                                                        <VideoPub />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+                                            <li className="sportsmagazine-megamenu-li"><a href="#">ACTUALITÉS</a>
+                                                <ul className="sportsmagazine-megamenu">
+                                                    <li className="row">
+                                                        <div className="col-md-4">
+                                                            <h4>Nouvelles</h4>
+                                                            <ul className="sportsmagazine-megalist">
+                                                                <li><Link to="/blogs">Toutes les actualités</Link></li>
+                                                                <li><Link to="/realisations">Réalisation</Link></li>
+                                                                <li><Link to="#">Communiqués</Link></li>
+                                                                <li><Link to="#">Agenda</Link></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div className="col-md-4">
+                                                            <h4>Médias</h4>
+                                                            <ul className="sportsmagazine-megalist">
+                                                                <li><Link to="/galery">Galerie photos</Link></li>
+                                                                <li><Link to="/videos">Vidéos</Link></li>
+                                                                <li><Link to="#">Interviews</Link></li>
+                                                                <li><Link to="#">Revue de presse</Link></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div className="col-md-4">
+                                                            <h4>Catégorie des Blogs</h4>
+                                                            <div className="col-md-12">
+                                                                <div className="row g-2">
+
+                                                                    {
+                                                                        categories.map((item, index) => (
+
+
+                                                                            <div className="col-6 mb-2" key={index}>
+                                                                                <Link to={'/category/' + item.slug} className="badge bg-primary text-decoration-none w-100 text-center p-2 d-block">
+                                                                                    {item.titre}
+                                                                                </Link>
+                                                                            </div>
+
+
+
+                                                                        ))
+                                                                    }
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+                                            <li>
+                                                <Link to="/contact">CONTACTEZ-NOUS</Link>
+
+                                            </li>
+
+                                           
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/*// MainSection \\*/}
+
+        </header>
     )
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { fetchListItems } from '../../../../../hooks/useCrud';
 import LoaderAndError from '../../../../../components/LoaderAndError';
 import DOMPurify from 'dompurify';
+import Chiffre from '../../../Pages/Chiffre';
 interface UiBasic {
   id?: number;
   apropos?: string;
@@ -83,126 +84,78 @@ export default function About() {
   }, []);
   return (
 
-
-
-    <div className='col-md-12 col-lg-12 col-sm-12 col-12'>
-
-      {
-        basic.length === 0 ? (
-          <LoaderAndError
-            loading={loading}
-            error={error}
-            onClearError={() => setError(null)}
-          />
-        ) : (
-          basic.map((item, index) => (
-
-            <div className="col-md-12" key={index}>
-              {/* Hero Section */}
-              <div className="row g-0 align-items-center">
-                <div className="col-lg-12 p-5 p-lg-12">
-                  <h2 className="display-4 fw-bold mb-4">
-                    <span className="text-success">Notre Histoire</span> et Notre Ambition
-                  </h2>
-                  <div className="lead mb-4 text-justify ">
-                    <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.apropos ?? '') }} />
-                  </div>
-
-                </div>
+    <div className="about-page-wrapper">
+      {basic.length === 0 ? (
+        <LoaderAndError
+          loading={loading}
+          error={error}
+          onClearError={() => setError(null)}
+        />
+      ) : (
+        basic.map((item, index) => (
+          <div key={index}>
+            {/* Hero Section */}
+            <section className="about-hero">
+              <h2 className="about-hero-title">
+                <span className="text-success">Notre Histoire</span> et Notre Ambition
+              </h2>
+              <div className="about-hero-text">
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(item.apropos ?? ""),
+                  }}
+                />
               </div>
+            </section>
 
-              {/* Chiffres Clés */}
-              <div className="container py-5 my-4 bg-white rounded-4 shadow-sm">
-                <div className="row g-4 text-center">
-                  <div className="col-md-3">
-                    <div className="display-4 fw-bold text-success">2+</div>
-                    <p className="text-muted">Villes couvertes</p>
-                  </div>
-                  <div className="col-md-3">
-                    <div className="display-4 fw-bold text-success">5K+</div>
-                    <p className="text-muted">Chauffeurs partenaires</p>
-                  </div>
-                  <div className="col-md-3">
-                    <div className="display-4 fw-bold text-success">1M+</div>
-                    <p className="text-muted">Utilisateurs actifs</p>
-                  </div>
-                  <div className="col-md-3">
-                    <div className="display-4 fw-bold text-success">98%</div>
-                    <p className="text-muted">Satisfaction clients</p>
-                  </div>
-                </div>
-              </div>
+            {/* Chiffres Clés */}
+            <Chiffre />
 
-              {/* Objectifs & Missions */}
-              <div className="col-md-12 py-6">
-
-                {
-                  sites.length === 0 ? (
-                    <LoaderAndError
-                      loading={loading}
-                      error={error}
-                      onClearError={() => setError(null)}
-                    />
-                  ) : (
-                    sites.map((site, index2) => (
-
-                      <div className="row g-5" key={index2}>
-                        {/* Objectifs */}
-                        <div className="col-lg-6">
-                          <div className="card border-0 bg-white rounded-4 shadow-sm h-100">
-                            <div className="card-body p-5 position-relative">
-
-                              <h2 className="fw-bold mb-4 text-success">
-                                <i className="fas fa-crosshairs me-3"></i> Nos Objectifs
-                              </h2>
-                              <div className="list-unstyled">
-
-                                <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(site.objectif ?? '') }} />
-                               
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Missions */}
-                        <div className="col-lg-6">
-                          <div className="card border-0 bg-white rounded-4 shadow-sm h-100">
-                            <div className="card-body p-5">
-                              <h2 className="fw-bold mb-4 text-success">
-                                <i className="fas fa-hand-holding-heart me-3"></i> Notre Mission
-                              </h2>
-                              <div className="d-flex mb-4">
-
-                                <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(site.mission ?? '') }} />
-                                
-                             
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+            {/* Objectifs & Missions */}
+            {sites.length === 0 ? (
+              <LoaderAndError
+                loading={loading}
+                error={error}
+                onClearError={() => setError(null)}
+              />
+            ) : (
+              sites.map((site, index2) => (
+                <section className="about-section mt-4" key={index2}>
+                  <div className="about-grid">
+                    {/* Nos Objectifs */}
+                    <div className="about-card">
+                      <div className="about-card-icon">
+                        <i className="fas fa-crosshairs"></i>
                       </div>
+                      <h3 className="about-card-title">Nos Objectifs</h3>
+                      <div
+                        className="about-card-content"
+                        dangerouslySetInnerHTML={{
+                          __html: DOMPurify.sanitize(site.objectif ?? ""),
+                        }}
+                      />
+                    </div>
 
-
-
-
-                    ))
-                  )
-                }
-
-
-
-
-
-
-              </div>
-            </div >
-
-          ))
-
-        )
-      }
-
-
+                    {/* Notre Mission */}
+                    <div className="about-card">
+                      <div className="about-card-icon">
+                        <i className="fas fa-hand-holding-heart"></i>
+                      </div>
+                      <h3 className="about-card-title">Notre Mission</h3>
+                      <div
+                        className="about-card-content"
+                        dangerouslySetInnerHTML={{
+                          __html: DOMPurify.sanitize(site.mission ?? ""),
+                        }}
+                      />
+                    </div>
+                  </div>
+                </section>
+              ))
+            )}
+          </div>
+        ))
+      )}
     </div>
 
   )

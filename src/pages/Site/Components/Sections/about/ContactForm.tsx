@@ -51,12 +51,12 @@ export default function ContactFormulaire() {
             {error && <div className="alert alert-danger">{error}</div>}
 
             <form onSubmit={handleSubmit}>
-                <div className="row g-3">
-                    <div className="col-md-6">
+                <div className="row">
+                    <div className="col-6">
                         <label htmlFor="name" className="form-label">Nom complet</label>
                         <input
                             type="text"
-                            className="form-control py-3"
+                            className="form-control"
                             id="name"
                             name="name"
                             placeholder="Votre nom"
@@ -65,11 +65,11 @@ export default function ContactFormulaire() {
                             required
                         />
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-6">
                         <label htmlFor="email" className="form-label">Email</label>
                         <input
                             type="email"
-                            className="form-control py-3"
+                            className="form-control"
                             id="email"
                             name="email"
                             placeholder="exemple@email.com"
@@ -78,11 +78,11 @@ export default function ContactFormulaire() {
                             required
                         />
                     </div>
-                    <div className="col-md-12">
+                    <div className="col-12">
                         <label htmlFor="telephone" className="form-label">N° de Téléphone</label>
                         <input
                             type="tel"
-                            className="form-control py-3"
+                            className="form-control"
                             id="telephone"
                             name="telephone"
                             placeholder="243..."
@@ -94,7 +94,7 @@ export default function ContactFormulaire() {
                     <div className="col-12">
                         <label htmlFor="subject" className="form-label">Sujet</label>
                         <select
-                            className="form-select py-3"
+                            className="form-select"
                             id="subject"
                             name="subject"
                             value={formData.subject || ''}
@@ -112,7 +112,7 @@ export default function ContactFormulaire() {
                     <div className="col-12">
                         <label htmlFor="message" className="form-label">Message</label>
                         <textarea
-                            className="form-control py-3"
+                            className="form-control"
                             id="message"
                             name="message"
                             value={formData.message || ''}
@@ -122,7 +122,7 @@ export default function ContactFormulaire() {
                             required
                         ></textarea>
                     </div>
-                    <div className="col-12">
+                    <div className="col-12 mt-2">
                         <button
                             type="submit"
                             className="btn btn-success btn-lg w-100 rounded-pill py-3"
