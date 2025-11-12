@@ -33,9 +33,9 @@ export default function Sidebar() {
 
                 <a className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                     <div className="sidebar-brand-icon rotate-n-0">
-                        <i className="fas fa-taxi"></i>
+                        <i className="fas fa-basketball-ball"></i>
                     </div>
-                    <div className="sidebar-brand-text mx-3">Ui-Admin <sup>1</sup></div>
+                    <div className="sidebar-brand-text mx-3">Ui-Eubabu <sup>1</sup></div>
                 </a>
 
                 <hr className="sidebar-divider my-0" />
@@ -74,7 +74,7 @@ export default function Sidebar() {
                                     <i className="fas fa-tag"></i> {t('sideBar_blog') ?? ''}
                                 </Link>
                             </li>
-                            
+
                         </ul>
                     )}
                 </li>
@@ -88,11 +88,11 @@ export default function Sidebar() {
                     {openMenus.utilities && (
                         <ul className="pl-3 list-unstyled">
                             <li><Link className="nav-link py-1" to="/valeur"><i className="fas fa-rocket"></i> Valeur</Link></li>
-                            <li><Link className="nav-link py-1" to="/fonctionality"><i className="fab fa-accusoft"></i> Fonctionalité</Link></li>
+                            <li><Link className="nav-link py-1" to="/fonctionality"><i className="fab fa-accusoft"></i> Faire un don</Link></li>
                             <li><Link className="nav-link py-1" to="/service"><i className="fas fa-palette"></i> Service</Link></li>
-                            <li><Link className="nav-link py-1" to="/choice"><i className="fas fa-border-style"></i> Choix</Link></li>
+                            <li><Link className="nav-link py-1" to="/choice"><i className="fas fa-border-style"></i> Raisons</Link></li>
                             <li><Link className="nav-link py-1" to="/carousel"><i className="fas fa-magic"></i> Carousel</Link></li>
-                            
+
                             {/* configuration */}
                             <li>
                                 <a className="nav-link" href="#!" onClick={() => toggleMenu('basicConfig')}>
@@ -126,7 +126,7 @@ export default function Sidebar() {
                                                 <i className="fas fa-tag"></i> Partenaire
                                             </Link>
                                         </li>
-                                       
+
                                         <li>
                                             <Link className="nav-link py-1" to="/secteur">
                                                 <i className="fas fa-tag"></i> Secteur
@@ -153,7 +153,7 @@ export default function Sidebar() {
                                 </a>
                                 {openMenus.infoPageConfig && (
                                     <ul className="pl-4 list-unstyled">
-                                       
+
                                         <li>
                                             <Link className="nav-link py-1" to="/faq">
                                                 <i className="fas fa-question"></i> Faq
@@ -174,7 +174,75 @@ export default function Sidebar() {
                         </ul>
                     )}
                 </li>
-                
+
+                {/* pour le tournois */}
+                <li className={`nav-item py-1 ${openMenus.config_tournois ? 'active' : ''}`}>
+                    <a className="nav-link" href="#!" onClick={() => toggleMenu('config_tournois')}>
+                        <i className="fas fa-folder"></i>
+                        <span>Tournois</span>
+                        <i className={`fas fa-angle-${openMenus.config_tournois ? 'down' : 'right'} float-right`}></i>
+                    </a>
+                    {openMenus.config_tournois && (
+                        <ul className="pl-3 list-unstyled">
+                          
+
+                            <li>
+                                <Link className="nav-link py-1" to="/tournois">
+                                    <i className="fas fa-trophy"></i> Tournois
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className="nav-link py-1" to="/equipes">
+                                    <i className="fas fa-users"></i> Équipes
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className="nav-link py-1" to="/joueurs">
+                                    <i className="fas fa-user"></i> Joueurs
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className="nav-link py-1" to="/matchs">
+                                    <i className="fas fa-basketball-ball"></i> Matchs
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className="nav-link py-1" to="/arbitres">
+                                    <i className="fas fa-user"></i> Arbitres
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className="nav-link py-1" to="/statistiques">
+                                    <i className="fas fa-chart-bar"></i> Statistiques
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className="nav-link py-1" to="/participations">
+                                    <i className="fas fa-calendar-alt"></i> Participations
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className="nav-link py-1" to="/arbitrages">
+                                    <i className="fas fa-table"></i> Arbitrages
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className="nav-link py-1" to="/classements">
+                                    <i className="fas fa-medal"></i> Classements
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className="nav-link py-1" to="/rapports">
+                                    <i className="fas fa-file-alt"></i> Rapports
+                                </Link>
+                            </li>
+
+
+
+                        </ul>
+                    )}
+                </li>
+
 
                 <li className={`nav-item ${openMenus.settings ? 'active' : ''}`}>
                     <a className="nav-link" href="#!" onClick={() => toggleMenu('settings')}>

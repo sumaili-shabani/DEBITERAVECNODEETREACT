@@ -43,6 +43,12 @@ import VideoPage from './pages/Site/Pages/VideoPage';
 import ImagePage from './pages/Site/Pages/ImagePage';
 import FaqPage from './pages/Site/Pages/FaqPage';
 import FonctionalitePage from './pages/Site/Pages/FonctionalitePage';
+import TournoiPage from './pages/admin/pages/BasketBall/Tournois';
+import EquipePage from './pages/admin/pages/BasketBall/EquipePage';
+import JoueurPage from './pages/admin/pages/BasketBall/JoueurPage';
+import MatchPage from './pages/admin/pages/BasketBall/MatchPage';
+import ArbitrePage from './pages/admin/pages/BasketBall/ArbitrePage';
+import ArbitragePage from './pages/admin/pages/BasketBall/ArbitragePage';
 
 
 
@@ -88,6 +94,81 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/forgot" element={<Forgot />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
+
+
+          {/* basketball */}
+
+          <Route
+            path="/tournois"
+            element={
+              <PrivateRoute>
+                <TournoiPage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/equipes"
+            element={
+              <PrivateRoute>
+                <EquipePage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/joueurs"
+            element={
+              <PrivateRoute>
+                <JoueurPage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/matchs"
+            element={
+              <PrivateRoute>
+                <MatchPage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/arbitres"
+            element={
+              <PrivateRoute>
+                <ArbitrePage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/arbitrages"
+            element={
+              <PrivateRoute>
+                <ArbitragePage />
+              </PrivateRoute>
+            }
+          />
+
+          
+
+          
+          
+
+          
+
+          
+          
+
+          {/* basketball */}
+
+
+
+
+
+
 
           {/* Fin Authentification (pas besoin de protection) */}
 

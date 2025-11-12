@@ -127,7 +127,7 @@ export default function ChoicePage() {
 
     return (
         <div className="container mt-4">
-            <h4 className="mb-3">Liste des raisons de nous choisir</h4>
+            <h4 className="mb-3">Pourquoi nous soutenir?</h4>
             {/* loading component */}
             <LoaderAndError
                 loading={loading}

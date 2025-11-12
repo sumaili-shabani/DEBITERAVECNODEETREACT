@@ -127,7 +127,7 @@ export default function FonctionalitePage() {
 
     return (
         <div className="container mt-4">
-            <h4 className="mb-3">Liste des valeurs</h4>
+            <h4 className="mb-3">Comment faire un don?</h4>
             {/* loading component */}
             <LoaderAndError
                 loading={loading}
